@@ -45,3 +45,24 @@
   width: 100%;
   justify-content: center;
 }
+
+.filter_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.dialog_button {
+  display: flex;
+  min-width: 50px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.table_cell {
+  justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
