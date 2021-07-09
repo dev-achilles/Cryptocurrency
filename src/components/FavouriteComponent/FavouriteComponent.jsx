@@ -18,8 +18,8 @@ const FavouriteComponent = () => {
   }
 
   return (
-    <div className={s.wrapper}>
-      <div className={s.title}>Favourite Table</div>
+    <div className="table-wrapper">
+      <div className="table-title">Favourite Table</div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
