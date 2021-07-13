@@ -25,7 +25,7 @@ const tableReducer = (state = initialState, action) => {
       };
     }
     case SORT_TABLE: {
-      const data = state.tableData.sort(byField(action.payload.field, action.payload.type));
+      const data = [...state.tableData.sort(byField(action.payload.field, action.payload.type))];
       return {
         ...state,
         tableData: data,
