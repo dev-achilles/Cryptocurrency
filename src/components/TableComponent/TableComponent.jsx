@@ -136,9 +136,9 @@ const TableComponent = (props) => {
             {item.name}
             {setActiveIcon(item.name) === sortConfig.key ? (
               sortConfig.direction === 'ascending' ? (
-                <ArrowUpwardIcon />
+                <ArrowUpwardIcon color="primary" />
               ) : (
-                <ArrowDownwardIcon />
+                <ArrowDownwardIcon color="primary" />
               )
             ) : null}
           </div>
