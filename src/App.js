@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomeComponent from './components/HomeComponent/index';
 import TableContainer from './containers/TableContainer';
 import NavigationComponent from './components/NavigationComponent/index';
-import FavouriteComponent from './components/FavouriteComponent/index';
 import NotFoundComponent from './components/NotFoundComponent/index';
 
 const App = () => (
@@ -20,7 +19,7 @@ const App = () => (
         </Route>
         <Route path="/favourite">
           <NavigationComponent />
-          <FavouriteComponent />
+          <TableContainer favourite={true} />
         </Route>
         <Route path="*">
           <NotFoundComponent />
