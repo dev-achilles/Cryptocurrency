@@ -8,6 +8,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { SET_TABLE_DATA } from '../../constants';
 import { setTableData, sortTable } from '../../actions/TableData';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
@@ -29,6 +31,7 @@ const TableComponent = ({ dispatch, tableData }) => {
       { name: 'Price (USD)', value: 'metrics', isChecked: true },
     ],
   });
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -51,14 +54,23 @@ const TableComponent = ({ dispatch, tableData }) => {
   const handleSort = (event) => {
     switch (event.target.innerText) {
       case 'ID':
-        return dispatch(sortTable({ field: 'id', type: 'string' }));
+        return requestSort({ key: 'id', type: 'string' });
       case 'Slug':
-        return dispatch(sortTable({ field: 'slug', type: 'string' }));
+        return requestSort({ key: 'slug', type: 'string' });
       case 'Symbol':
-        return dispatch(sortTable({ field: 'symbol', type: 'string' }));
+        return requestSort({ key: 'symbol', type: 'string' });
       case 'Price (USD)':
-        return dispatch(sortTable({ field: 'metrics', type: 'number' }));
+        return requestSort({ key: 'metrics', type: 'number' });
     }
+  };
+
+  const requestSort = (data) => {
+    let direction = 'ascending';
+    if (sortConfig.key === data.key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ ...data, direction: direction });
+    dispatch(sortTable({ ...data, direction: direction }));
   };
 
   const handleCheckChieldElement = (event) => {
@@ -69,13 +81,35 @@ const TableComponent = ({ dispatch, tableData }) => {
     setCheck({ fields: fields });
   };
 
+  const setActiveIcon = (name) => {
+    switch (name) {
+      case 'ID':
+        return 'id';
+      case 'Slug':
+        return 'slug';
+      case 'Symbol':
+        return 'symbol';
+      case 'Price (USD)':
+        return 'metrics';
+    }
+  };
+
   const setTableCells = () => {
     const cells = check.fields;
     return cells
       .filter((item) => item.isChecked === true)
       .map((item) => (
         <StyledTableCell align="center" onClick={handleSort}>
-          <div className={s.table_cell}>{item.name}</div>
+          <div className={s.table_cell}>
+            {item.name}
+            {setActiveIcon(item.name) === sortConfig.key ? (
+              sortConfig.direction === 'ascending' ? (
+                <ArrowUpwardIcon />
+              ) : (
+                <ArrowDownwardIcon />
+              )
+            ) : null}
+          </div>
         </StyledTableCell>
       ));
   };
