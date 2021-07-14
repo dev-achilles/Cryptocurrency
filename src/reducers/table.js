@@ -1,14 +1,5 @@
 import { SET_TABLE_DATA, SORT_TABLE } from '../constants';
 
-const byField = (field, type) => {
-  if (type === 'string') {
-    return (a, b) => (a[field] > b[field] ? 1 : -1);
-  }
-  if (type === 'number') {
-    return (a, b) => (a[field] > b[field] ? 1 : -1);
-  }
-};
-
 const initialState = {
   tableData: [],
 };
@@ -25,7 +16,36 @@ const tableReducer = (state = initialState, action) => {
       };
     }
     case SORT_TABLE: {
-      const data = [...state.tableData.sort(byField(action.payload.field, action.payload.type))];
+      const data = [...state.tableData];
+      if (action.payload.type === 'string') {
+        data.sort((a, b) => {
+          if (a[action.payload.key] < b[action.payload.key]) {
+            return action.payload.direction === 'ascending' ? -1 : 1;
+          }
+          if (a[action.payload.key] > b[action.payload.key]) {
+            return action.payload.direction === 'ascending' ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+
+      if (action.payload.type === 'number') {
+        data.sort((a, b) => {
+          if (action.payload.direction === 'descending') {
+            return (
+              b[action.payload.key].market_data.price_usd -
+              a[action.payload.key].market_data.price_usd
+            );
+          }
+          if (action.payload.direction === 'ascending') {
+            return (
+              a[action.payload.key].market_data.price_usd -
+              b[action.payload.key].market_data.price_usd
+            );
+          }
+        });
+      }
+
       return {
         ...state,
         tableData: data,
