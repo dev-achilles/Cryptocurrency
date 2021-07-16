@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import s from './NotFoundComponent.module.scss';
+import s from './NotFound.module.scss';
 
-const NotFoundComponent = () => {
+const NotFound = () => {
   const styles = {
     textDecoration: 'none',
     marginTop: '60px',
@@ -22,4 +22,4 @@ const NotFoundComponent = () => {
   );
 };
 
-export default NotFoundComponent;
+export default NotFound;
