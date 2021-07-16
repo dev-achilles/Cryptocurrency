@@ -1,11 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { SET_TABLE_DATA } from '../../constants';
-import { setTableData } from '../../actions/TableData';
+import { setTableData, sortTable } from '../../actions/TableData';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
 import s from './TableComponent.module.scss';
 
@@ -15,6 +21,25 @@ const TableComponent = ({ dispatch, tableData }) => {
   useEffect(() => {
     dispatch(setTableData({ type: SET_TABLE_DATA }));
   }, []);
+
+  const [open, setOpen] = useState(false);
+  const [check, setCheck] = useState({
+    fields: [
+      { name: 'ID', value: 'id', isChecked: true },
+      { name: 'Slug', value: 'slug', isChecked: true },
+      { name: 'Symbol', value: 'symbol', isChecked: true },
+      { name: 'Price (USD)', value: 'metrics', isChecked: true },
+    ],
+  });
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const checkBoxHandler = (event) => {
     const target = event.target;
@@ -26,46 +51,162 @@ const TableComponent = ({ dispatch, tableData }) => {
     }
   };
 
+  const handleSort = (event) => {
+    switch (event.target.innerText) {
+      case 'ID':
+        return requestSort({ key: 'id', type: 'string' });
+      case 'Slug':
+        return requestSort({ key: 'slug', type: 'string' });
+      case 'Symbol':
+        return requestSort({ key: 'symbol', type: 'string' });
+      case 'Price (USD)':
+        return requestSort({ key: 'metrics', type: 'number' });
+    }
+  };
+
+  const requestSort = (data) => {
+    let direction = 'ascending';
+    if (sortConfig.key === data.key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ ...data, direction: direction });
+    dispatch(sortTable({ ...data, direction: direction }));
+  };
+
+  const handleCheckChieldElement = (event) => {
+    const fields = check.fields;
+    fields.forEach((fields) => {
+      if (fields.value === event.target.value) fields.isChecked = event.target.checked;
+    });
+    setCheck({ fields: fields });
+  };
+
+  const setActiveIcon = (name) => {
+    switch (name) {
+      case 'ID':
+        return 'id';
+      case 'Slug':
+        return 'slug';
+      case 'Symbol':
+        return 'symbol';
+      case 'Price (USD)':
+        return 'metrics';
+    }
+  };
+
+  const setTableCells = () => {
+    const cells = check.fields;
+    return cells
+      .filter((item) => item.isChecked === true)
+      .map((item) => (
+        <StyledTableCell align="center" onClick={handleSort}>
+          <div className={s.table_cell}>
+            {item.name}
+            {setActiveIcon(item.name) === sortConfig.key ? (
+              sortConfig.direction === 'ascending' ? (
+                <ArrowUpwardIcon />
+              ) : (
+                <ArrowDownwardIcon />
+              )
+            ) : null}
+          </div>
+        </StyledTableCell>
+      ));
+  };
+
+  const actualCells = () => {
+    let fields = check.fields;
+    const data = JSON.parse(JSON.stringify(tableData));
+    fields = fields.filter((item) => item.isChecked === false).map((item) => item.value);
+    Object.keys(data).forEach((elem) => {
+      for (let key of Object.keys(data[elem])) {
+        fields.includes(key) && delete data[elem][key];
+      }
+    });
+
+    return (
+      <>
+        {Object.keys(data).map((row) => (
+          <StyledTableRow key={row}>
+            {data[row].id && (
+              <StyledTableCell align="center">
+                <div className={s.table_cell}>
+                  <div className={s.star_checkbox}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        defaultChecked={localStorage.getItem(data[row].id)}
+                        value={JSON.stringify(data[row])}
+                        name={data[row].id}
+                        onChange={checkBoxHandler}
+                      />
+                    </label>
+                  </div>
+                  <div className={s.table_id}>{data[row].id}</div>
+                </div>
+              </StyledTableCell>
+            )}
+            {data[row].slug && <StyledTableCell align="center">{data[row].slug}</StyledTableCell>}
+            {data[row].symbol && (
+              <StyledTableCell align="center">{data[row].symbol}</StyledTableCell>
+            )}
+            {data[row].metrics && (
+              <StyledTableCell align="center">
+                {data[row].metrics.market_data.price_usd}
+              </StyledTableCell>
+            )}
+          </StyledTableRow>
+        ))}
+      </>
+    );
+  };
+
   return (
     <div className={s.wrapper}>
       <div className={s.title}>Cryptocurrency</div>
+
       <TableContainer component={Paper}>
+        <div className={s.filter_wrapper}>
+          <Button
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            variant="contained"
+            color="primary"
+            onClick={handleClickOpen}>
+            Open Filter
+          </Button>
+        </div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          max-width="lg">
+          <DialogTitle>Please Select Columns</DialogTitle>
+          {check.fields.map((item) => {
+            return (
+              <div>
+                <Checkbox
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                  onChange={handleCheckChieldElement}
+                  value={item.value}
+                  checked={item.isChecked}
+                />
+                {item.name}
+              </div>
+            );
+          })}
+          <div className={s.dialog_button}>
+            <Button onClick={handleClose} variant="contained" color="primary">
+              Close
+            </Button>
+          </div>
+        </Dialog>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
-            <StyledTableRow>
-              <StyledTableCell align="center">ID</StyledTableCell>
-              <StyledTableCell align="center">Slug</StyledTableCell>
-              <StyledTableCell align="center">Symbol</StyledTableCell>
-              <StyledTableCell align="center">Price (USD)</StyledTableCell>
-            </StyledTableRow>
+            <StyledTableRow>{setTableCells()}</StyledTableRow>
           </TableHead>
-          <TableBody>
-            {Object.keys(tableData).map((row) => (
-              <StyledTableRow key={row}>
-                <StyledTableCell align="center">
-                  <div className={s.table_cell}>
-                    <div className={s.star_checkbox}>
-                      <label>
-                        <input
-                          type="checkbox"
-                          defaultChecked={localStorage.getItem(tableData[row].id)}
-                          value={JSON.stringify(tableData[row])}
-                          name={tableData[row].id}
-                          onChange={checkBoxHandler}
-                        />
-                      </label>
-                    </div>
-                    <div className={s.table_id}> {tableData[row].id}</div>
-                  </div>
-                </StyledTableCell>
-                <StyledTableCell align="center">{tableData[row].slug}</StyledTableCell>
-                <StyledTableCell align="center">{tableData[row].symbol}</StyledTableCell>
-                <StyledTableCell align="center">
-                  {tableData[row].metrics.market_data.price_usd}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
+          <TableBody>{actualCells()}</TableBody>
         </Table>
       </TableContainer>
     </div>

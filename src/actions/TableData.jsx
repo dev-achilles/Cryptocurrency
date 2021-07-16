@@ -1,4 +1,4 @@
-import { SET_TABLE_DATA } from '../constants';
+import { SET_TABLE_DATA, SORT_TABLE } from '../constants';
 import axios from 'axios';
 
 export const setTableData = () => {
@@ -19,6 +19,15 @@ const setData = (res) => {
     type: SET_TABLE_DATA,
     payload: {
       ...res.data,
+    },
+  };
+};
+
+export const sortTable = (data) => {
+  return {
+    type: SORT_TABLE,
+    payload: {
+      ...data,
     },
   };
 };
