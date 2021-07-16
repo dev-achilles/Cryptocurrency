@@ -11,18 +11,25 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { SET_TABLE_DATA } from '../../constants';
-import { setTableData, sortTable } from '../../actions/TableData';
+import { setTableData } from '../../actions/TableData';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
 import s from './TableComponent.module.scss';
 
-const TableComponent = ({ dispatch, tableData }) => {
+const TableComponent = (props) => {
+  console.log(props);
   const classes = useStyles();
-
-  useEffect(() => {
-    dispatch(setTableData({ type: SET_TABLE_DATA }));
-  }, []);
+  let tableData = [];
+  if (props.favourite) {
+    for (let i = 0; i < localStorage.length; i++) {
+      const list = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      tableData.push(list);
+    }
+  } else {
+    tableData = [...props.tableData];
+  }
 
   const [open, setOpen] = useState(false);
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
   const [check, setCheck] = useState({
     fields: [
       { name: 'ID', value: 'id', isChecked: true },
@@ -31,7 +38,10 @@ const TableComponent = ({ dispatch, tableData }) => {
       { name: 'Price (USD)', value: 'metrics', isChecked: true },
     ],
   });
-  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
+
+  useEffect(() => {
+    props.dispatch(setTableData({ type: SET_TABLE_DATA }));
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,15 +51,28 @@ const TableComponent = ({ dispatch, tableData }) => {
     setOpen(false);
   };
 
-  const checkBoxHandler = (event) => {
-    const target = event.target;
-    const name = target.name;
-    if (target.checked) {
-      localStorage.setItem(name, target.value);
-    } else {
-      localStorage.removeItem(name);
-    }
-  };
+  if (sortConfig.type === 'string') {
+    tableData.sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return sortConfig.direction === 'ascending' ? -1 : 1;
+      }
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return sortConfig.direction === 'ascending' ? 1 : -1;
+      }
+      return 0;
+    });
+  }
+
+  if (sortConfig.type === 'number') {
+    tableData.sort((a, b) => {
+      if (sortConfig.direction === 'descending') {
+        return b[sortConfig.key].market_data.price_usd - a[sortConfig.key].market_data.price_usd;
+      }
+      if (sortConfig.direction === 'ascending') {
+        return a[sortConfig.key].market_data.price_usd - b[sortConfig.key].market_data.price_usd;
+      }
+    });
+  }
 
   const handleSort = (event) => {
     switch (event.target.innerText) {
@@ -70,15 +93,6 @@ const TableComponent = ({ dispatch, tableData }) => {
       direction = 'descending';
     }
     setSortConfig({ ...data, direction: direction });
-    dispatch(sortTable({ ...data, direction: direction }));
-  };
-
-  const handleCheckChieldElement = (event) => {
-    const fields = check.fields;
-    fields.forEach((fields) => {
-      if (fields.value === event.target.value) fields.isChecked = event.target.checked;
-    });
-    setCheck({ fields: fields });
   };
 
   const setActiveIcon = (name) => {
@@ -94,6 +108,24 @@ const TableComponent = ({ dispatch, tableData }) => {
     }
   };
 
+  const checkBoxHandler = (event) => {
+    const target = event.target;
+    const name = target.name;
+    if (target.checked) {
+      localStorage.setItem(name, target.value);
+    } else {
+      localStorage.removeItem(name);
+    }
+  };
+
+  const handleCheckChieldElement = (event) => {
+    const fields = check.fields;
+    fields.forEach((fields) => {
+      if (fields.value === event.target.value) fields.isChecked = event.target.checked;
+    });
+    setCheck({ fields: fields });
+  };
+
   const setTableCells = () => {
     const cells = check.fields;
     return cells
@@ -104,9 +136,9 @@ const TableComponent = ({ dispatch, tableData }) => {
             {item.name}
             {setActiveIcon(item.name) === sortConfig.key ? (
               sortConfig.direction === 'ascending' ? (
-                <ArrowUpwardIcon />
+                <ArrowUpwardIcon color="primary" />
               ) : (
-                <ArrowDownwardIcon />
+                <ArrowDownwardIcon color="primary" />
               )
             ) : null}
           </div>
