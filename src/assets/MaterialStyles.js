@@ -14,7 +14,7 @@ export const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-export const StyledTableRow = withStyles((theme) => ({
+export const StyledTableRow = withStyles(() => ({
   root: {
     '&:hover': {
       backgroundColor: '#e0f2f1 !important',

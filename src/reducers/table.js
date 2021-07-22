@@ -7,12 +7,9 @@ const initialState = {
 const tableReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_TABLE_DATA: {
-      const data = [];
-      Object.keys(action.payload).forEach((item) => data.push(action.payload[item]));
-      Array.from(data);
       return {
         ...state,
-        tableData: data,
+        tableData: action.payload,
       };
     }
     default:

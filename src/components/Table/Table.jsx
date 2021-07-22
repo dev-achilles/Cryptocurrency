@@ -13,19 +13,15 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { SET_TABLE_DATA } from '../../constants';
 import { setTableData } from '../../actions/TableData';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
-import s from './TableComponent.module.scss';
+import s from './Table.module.scss';
 
-const TableComponent = (props) => {
-  console.log(props);
+const TableOfCurrency = (props) => {
   const classes = useStyles();
   let tableData = [];
   if (props.favourite) {
-    for (let i = 0; i < localStorage.length; i++) {
-      const list = JSON.parse(localStorage.getItem(localStorage.key(i)));
-      tableData.push(list);
-    }
+    tableData = JSON.parse(localStorage.getItem('favourites'));
   } else {
-    tableData = [...props.tableData];
+    tableData = props.tableData;
   }
 
   const [open, setOpen] = useState(false);
@@ -42,14 +38,6 @@ const TableComponent = (props) => {
   useEffect(() => {
     props.dispatch(setTableData({ type: SET_TABLE_DATA }));
   }, []);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   if (sortConfig.type === 'string') {
     tableData.sort((a, b) => {
@@ -92,7 +80,7 @@ const TableComponent = (props) => {
     if (sortConfig.key === data.key && sortConfig.direction === 'ascending') {
       direction = 'descending';
     }
-    setSortConfig({ ...data, direction: direction });
+    setSortConfig({ ...data, direction });
   };
 
   const setActiveIcon = (name) => {
@@ -111,27 +99,41 @@ const TableComponent = (props) => {
   const checkBoxHandler = (event) => {
     const target = event.target;
     const name = target.name;
+    const favourites = JSON.parse(localStorage.getItem('favourites'));
+
     if (target.checked) {
-      localStorage.setItem(name, target.value);
+      const data = favourites || [];
+      if (data.length === 0 || favourites) {
+        data.push(JSON.parse(event.target.value));
+      }
+      localStorage.setItem('favourites', JSON.stringify(data));
     } else {
-      localStorage.removeItem(name);
+      const data = favourites;
+      const foundFavourite = data.find((item) => item.id === name);
+      if (foundFavourite) {
+        data.splice(data.indexOf(foundFavourite), 1);
+        localStorage.setItem('favourites', JSON.stringify(data));
+      }
     }
   };
+
+  const defaultChecked = (id) =>
+    JSON.parse(localStorage.getItem('favourites')).find((item) => item.id === id);
 
   const handleCheckChieldElement = (event) => {
     const fields = check.fields;
     fields.forEach((fields) => {
       if (fields.value === event.target.value) fields.isChecked = event.target.checked;
     });
-    setCheck({ fields: fields });
+    setCheck({ fields });
   };
 
   const setTableCells = () => {
     const cells = check.fields;
     return cells
-      .filter((item) => item.isChecked === true)
+      .filter((item) => item.isChecked)
       .map((item) => (
-        <StyledTableCell align="center" onClick={handleSort}>
+        <StyledTableCell key={item.id} align="center" onClick={handleSort}>
           <div className={s.table_cell}>
             {item.name}
             {setActiveIcon(item.name) === sortConfig.key ? (
@@ -149,7 +151,7 @@ const TableComponent = (props) => {
   const actualCells = () => {
     let fields = check.fields;
     const data = JSON.parse(JSON.stringify(tableData));
-    fields = fields.filter((item) => item.isChecked === false).map((item) => item.value);
+    fields = fields.filter((item) => !item.isChecked).map((item) => item.value);
     Object.keys(data).forEach((elem) => {
       for (let key of Object.keys(data[elem])) {
         fields.includes(key) && delete data[elem][key];
@@ -167,7 +169,7 @@ const TableComponent = (props) => {
                     <label>
                       <input
                         type="checkbox"
-                        defaultChecked={localStorage.getItem(data[row].id)}
+                        defaultChecked={defaultChecked(data[row].id)}
                         value={JSON.stringify(data[row])}
                         name={data[row].id}
                         onChange={checkBoxHandler}
@@ -204,20 +206,20 @@ const TableComponent = (props) => {
             aria-haspopup="true"
             variant="contained"
             color="primary"
-            onClick={handleClickOpen}>
+            onClick={() => setOpen(true)}>
             Open Filter
           </Button>
         </div>
         <Dialog
           open={open}
-          onClose={handleClose}
+          onClose={() => setOpen(false)}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
           max-width="lg">
           <DialogTitle>Please Select Columns</DialogTitle>
           {check.fields.map((item) => {
             return (
-              <div>
+              <div key={item.id}>
                 <Checkbox
                   inputProps={{ 'aria-label': 'primary checkbox' }}
                   onChange={handleCheckChieldElement}
@@ -229,7 +231,7 @@ const TableComponent = (props) => {
             );
           })}
           <div className={s.dialog_button}>
-            <Button onClick={handleClose} variant="contained" color="primary">
+            <Button onClick={() => setOpen(false)} variant="contained" color="primary">
               Close
             </Button>
           </div>
@@ -245,4 +247,4 @@ const TableComponent = (props) => {
   );
 };
 
-export default TableComponent;
+export default TableOfCurrency;

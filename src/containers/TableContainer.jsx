@@ -1,13 +1,11 @@
 import { connect } from 'react-redux';
-import TableComponent from '../components/TableComponent/index';
+import TableOfCurrency from '../components/Table/index';
 
-const mapStateToProps = (store, ownProps) => {
-  return {
-    tableData: store.table.tableData,
-    favourite: ownProps.favourite,
-  };
-};
+const mapStateToProps = (store, ownProps) => ({
+  tableData: store.table.tableData,
+  favourite: ownProps.favourite,
+});
 
-const TableContainer = connect(mapStateToProps)(TableComponent);
+const TableContainer = connect(mapStateToProps)(TableOfCurrency);
 
 export default TableContainer;

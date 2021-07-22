@@ -1,28 +1,28 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import HomeComponent from './components/HomeComponent/index';
+import Home from './components/Home/index';
 import TableContainer from './containers/TableContainer';
-import NavigationComponent from './components/NavigationComponent/index';
-import NotFoundComponent from './components/NotFoundComponent/index';
+import Navigation from './components/Navigation/index';
+import NotFound from './components/NotFound/index';
 
 const App = () => (
   <div className="wrapper">
     <Router>
       <Switch>
         <Route exact path="/">
-          <NavigationComponent />
-          <HomeComponent />
+          <Navigation />
+          <Home />
         </Route>
         <Route path="/table">
-          <NavigationComponent />
+          <Navigation />
           <TableContainer />
         </Route>
         <Route path="/favourite">
-          <NavigationComponent />
+          <Navigation />
           <TableContainer favourite={true} />
         </Route>
         <Route path="*">
-          <NotFoundComponent />
+          <NotFound />
         </Route>
       </Switch>
     </Router>
