@@ -214,41 +214,67 @@ const Home = () => {
         }
       }
     }
-    return Data;
   };
 
-  const returnActualCategory = () => {
-    const start = '2021-07-26T09:00:00';
-    const end = '2021-07-26T22:00:00';
+  const start = '2021-07-26T09:00:00';
+  const end = '2021-07-26T22:00:00';
 
-    data.forEach((item) => {
-      setCategoryColumn(start, end, item);
-    });
-  };
+  data.forEach((item) => setCategoryColumn(start, end, item));
 
-  returnActualCategory();
+  let filteredColumns = data.map((item) => item.column);
+  filteredColumns = Array.from(new Set(filteredColumns.reverse()));
 
   return (
     <div className={s.wrapper} id="container" onClick={setClass}>
       <div className={s.container}>
-        <div className={s.column_container}>
-          <div className={s.title}>Active</div>
-          <div className={s.content}>
-            {data.filter((key) => key.column === 'Active').map((item) => returnColumns(item))}
-          </div>
-        </div>
-        <div className={s.column_container}>
-          <div className={s.title}>Upcoming</div>
-          <div className={s.content}>
-            {data.filter((key) => key.column === 'Upcoming').map((item) => returnColumns(item))}
-          </div>
-        </div>
-        <div className={s.column_container}>
-          <div className={s.title}>Ended</div>
-          <div className={s.content}>
-            {data.filter((key) => key.column === 'Ended').map((item) => returnColumns(item))}
-          </div>
-        </div>
+        {filteredColumns.map((item) => {
+          let columnName = '';
+          if (item === 'Active') {
+            columnName = 'Active';
+            return (
+              <>
+                <div className={s.column_container}>
+                  <div className={s.title}>{columnName}</div>
+                  <div className={s.content}>
+                    {data
+                      .filter((key) => key.column === columnName)
+                      .map((item) => returnColumns(item))}
+                  </div>
+                </div>
+              </>
+            );
+          }
+          if (item === 'Upcoming') {
+            columnName = 'Upcoming';
+            return (
+              <>
+                <div className={s.column_container}>
+                  <div className={s.title}>{columnName}</div>
+                  <div className={s.content}>
+                    {data
+                      .filter((key) => key.column === columnName)
+                      .map((item) => returnColumns(item))}
+                  </div>
+                </div>
+              </>
+            );
+          }
+          if (item === 'Ended') {
+            columnName = 'Ended';
+            return (
+              <>
+                <div className={s.column_container}>
+                  <div className={s.title}>{columnName}</div>
+                  <div className={s.content}>
+                    {data
+                      .filter((key) => key.column === columnName)
+                      .map((item) => returnColumns(item))}
+                  </div>
+                </div>
+              </>
+            );
+          }
+        })}
       </div>
       <div className={s.footer_container}>
         <div className={s.footer_content}>
