@@ -1,3 +1,12 @@
+@mixin links() {
+  margin-left: 25px !important;
+  color: beige;
+  text-decoration: none;
+  &:hover {
+    color: rgb(108, 108, 185);
+  }
+}
+
 .wrapper {
   display: flex;
   width: 100%;
@@ -8,14 +17,18 @@
     padding-top: 2px;
     padding-bottom: 2px;
   }
-  a {
-    margin-left: 25px !important;
-    color: beige;
-    text-decoration: none;
-    &:hover {
-      color: rgb(108, 108, 185);
-    }
-  }
+}
+
+.home_link {
+  @include links();
+}
+
+.table_link {
+  @include links();
+}
+
+.favourite_link {
+  @include links();
 }
 
 .container {

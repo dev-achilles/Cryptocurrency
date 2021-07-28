@@ -26,13 +26,19 @@ const Navigation = () => {
           </div>
           <div className={s.links}>
             <Typography variant="h6" color="inherit">
-              <Link to="/">Home</Link>
+              <Link className={s.home_link} to="/">
+                Home
+              </Link>
             </Typography>
             <Typography variant="h6" color="inherit">
-              <Link to="/table">Table</Link>
+              <Link className={s.table_link} to="/table">
+                Table
+              </Link>
             </Typography>
             <Typography variant="h6" color="inherit">
-              <Link to="/favourite">Favourite</Link>
+              <Link className={s.favourite_link} to="/favourite">
+                Favourite
+              </Link>
             </Typography>
           </div>
         </div>
