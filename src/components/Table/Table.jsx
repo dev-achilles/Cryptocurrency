@@ -117,8 +117,14 @@ const TableOfCurrency = (props) => {
     }
   };
 
-  const defaultChecked = (id) =>
-    JSON.parse(localStorage.getItem('favourites')).find((item) => item.id === id);
+  const defaultChecked = (id) => {
+    const data = JSON.parse(localStorage.getItem('favourites'));
+    if (data) {
+      return data.find((item) => item.id === id);
+    } else {
+      return false;
+    }
+  };
 
   const handleCheckChieldElement = (event) => {
     const fields = check.fields;
@@ -151,12 +157,16 @@ const TableOfCurrency = (props) => {
   const actualCells = () => {
     let fields = check.fields;
     const data = JSON.parse(JSON.stringify(tableData));
-    fields = fields.filter((item) => !item.isChecked).map((item) => item.value);
-    Object.keys(data).forEach((elem) => {
-      for (let key of Object.keys(data[elem])) {
-        fields.includes(key) && delete data[elem][key];
-      }
-    });
+    if (data) {
+      fields = fields.filter((item) => !item.isChecked).map((item) => item.value);
+      Object.keys(data).forEach((elem) => {
+        for (let key of Object.keys(data[elem])) {
+          fields.includes(key) && delete data[elem][key];
+        }
+      });
+    } else {
+      return null;
+    }
 
     return (
       <>
@@ -197,19 +207,21 @@ const TableOfCurrency = (props) => {
 
   return (
     <div className={s.wrapper}>
-      <div className={s.title}>Cryptocurrency</div>
+      <div className={s.title}>{props.favourite ? 'Favourite' : 'Cryptocurrency'}</div>
 
       <TableContainer component={Paper}>
-        <div className={s.filter_wrapper}>
-          <Button
-            aria-controls="customized-menu"
-            aria-haspopup="true"
-            variant="contained"
-            color="primary"
-            onClick={() => setOpen(true)}>
-            Open Filter
-          </Button>
-        </div>
+        {tableData && (
+          <div className={s.filter_wrapper}>
+            <Button
+              aria-controls="customized-menu"
+              aria-haspopup="true"
+              variant="contained"
+              color="primary"
+              onClick={() => setOpen(true)}>
+              Open Filter
+            </Button>
+          </div>
+        )}
         <Dialog
           open={open}
           onClose={() => setOpen(false)}
@@ -236,12 +248,24 @@ const TableOfCurrency = (props) => {
             </Button>
           </div>
         </Dialog>
-        <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-            <StyledTableRow>{setTableCells()}</StyledTableRow>
-          </TableHead>
-          <TableBody>{actualCells()}</TableBody>
-        </Table>
+        {tableData ? (
+          tableData.length !== 0 ? (
+            <Table className={classes.table} aria-label="customized table">
+              <TableHead>
+                <StyledTableRow>{setTableCells()}</StyledTableRow>
+              </TableHead>
+              <TableBody>{actualCells()}</TableBody>
+            </Table>
+          ) : props.favourite ? (
+            <div className={s.data_not_exist}>No Favourite Columns</div>
+          ) : (
+            <div className={s.data_not_exist}>No Data For Columns</div>
+          )
+        ) : props.favourite ? (
+          <div className={s.data_not_exist}>No Favourite Columns</div>
+        ) : (
+          <div className={s.data_not_exist}>No Data For Columns</div>
+        )}
       </TableContainer>
     </div>
   );
