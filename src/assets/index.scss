@@ -1,13 +1,15 @@
 body {
   display: block;
   margin: 0 auto;
+  height: 100%;
 }
 
 .wrapper {
-  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  justify-self: center;
-  flex-direction: column;
+  height: 100%;
 }
 
 .table-wrapper {
