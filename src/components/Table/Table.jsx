@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import Paper from '@material-ui/core/Paper';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import { SET_TABLE_DATA } from '../../constants';
-import { setTableData } from '../../actions/TableData';
-import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { GET_TABLE_DATA } from '../../constants';
+import { getTableData } from '../../actions/TableData';
+import {
+  StyledTableCell,
+  StyledTableRow,
+  useStyles,
+  StyledPaper,
+} from '../../assets/MaterialStyles';
 import s from './Table.module.scss';
 
 const TableOfCurrency = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   let tableData = [];
   if (props.favourite) {
     tableData = JSON.parse(localStorage.getItem('favourites'));
@@ -36,7 +44,7 @@ const TableOfCurrency = (props) => {
   });
 
   useEffect(() => {
-    props.dispatch(setTableData({ type: SET_TABLE_DATA }));
+    props.dispatch(getTableData({ type: GET_TABLE_DATA }));
   }, []);
 
   if (tableData !== null) {
@@ -156,6 +164,11 @@ const TableOfCurrency = (props) => {
       ));
   };
 
+  const metricsHandler = (event) => {
+    const slug = event.currentTarget.id;
+    history.push(`/metrics/:${slug}`);
+  };
+
   const actualCells = () => {
     let fields = check.fields;
     const data = JSON.parse(JSON.stringify(tableData));
@@ -173,7 +186,7 @@ const TableOfCurrency = (props) => {
     return (
       <>
         {Object.keys(data).map((row) => (
-          <StyledTableRow key={row}>
+          <StyledTableRow key={row} onClick={metricsHandler} id={data[row].slug}>
             {data[row].id && (
               <StyledTableCell align="center">
                 <div className={s.table_cell}>
@@ -211,7 +224,8 @@ const TableOfCurrency = (props) => {
     <div className={s.wrapper}>
       <div className={s.title}>{props.favourite ? 'Favourite' : 'Cryptocurrency'}</div>
 
-      <TableContainer component={Paper}>
+      <TableContainer
+        component={tableData ? (tableData.length !== 0 ? Paper : StyledPaper) : StyledPaper}>
         {tableData && (
           <div className={s.filter_wrapper}>
             <Button
@@ -261,12 +275,16 @@ const TableOfCurrency = (props) => {
           ) : props.favourite ? (
             <div className={s.data_not_exist}>No Favourite Columns</div>
           ) : (
-            <div className={s.data_not_exist}>No Data For Columns</div>
+            <div className={s.data_not_exist}>
+              <CircularProgress />
+            </div>
           )
         ) : props.favourite ? (
           <div className={s.data_not_exist}>No Favourite Columns</div>
         ) : (
-          <div className={s.data_not_exist}>No Data For Columns</div>
+          <div className={s.data_not_exist}>
+            <CircularProgress />
+          </div>
         )}
       </TableContainer>
     </div>
