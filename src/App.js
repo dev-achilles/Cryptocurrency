@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/Home/index';
 import TableContainer from './containers/TableContainer';
+import MetricsContainer from './containers/MetricsContainer';
 import Navigation from './components/Navigation/index';
 import NotFound from './components/NotFound/index';
 
@@ -20,6 +21,10 @@ const App = () => (
         <Route path="/favourite">
           <Navigation />
           <TableContainer favourite={true} />
+        </Route>
+        <Route path="/metrics/:slug">
+          <Navigation />
+          <MetricsContainer />
         </Route>
         <Route path="*">
           <NotFound />
