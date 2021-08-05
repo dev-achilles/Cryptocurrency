@@ -39,27 +39,29 @@ const TableOfCurrency = (props) => {
     props.dispatch(setTableData({ type: SET_TABLE_DATA }));
   }, []);
 
-  if (sortConfig.type === 'string') {
-    tableData.sort((a, b) => {
-      if (a[sortConfig.key] < b[sortConfig.key]) {
-        return sortConfig.direction === 'ascending' ? -1 : 1;
-      }
-      if (a[sortConfig.key] > b[sortConfig.key]) {
-        return sortConfig.direction === 'ascending' ? 1 : -1;
-      }
-      return 0;
-    });
-  }
+  if (tableData !== null) {
+    if (sortConfig.type === 'string') {
+      tableData.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
 
-  if (sortConfig.type === 'number') {
-    tableData.sort((a, b) => {
-      if (sortConfig.direction === 'descending') {
-        return b[sortConfig.key].market_data.price_usd - a[sortConfig.key].market_data.price_usd;
-      }
-      if (sortConfig.direction === 'ascending') {
-        return a[sortConfig.key].market_data.price_usd - b[sortConfig.key].market_data.price_usd;
-      }
-    });
+    if (sortConfig.type === 'number') {
+      tableData.sort((a, b) => {
+        if (sortConfig.direction === 'descending') {
+          return b[sortConfig.key].market_data.price_usd - a[sortConfig.key].market_data.price_usd;
+        }
+        if (sortConfig.direction === 'ascending') {
+          return a[sortConfig.key].market_data.price_usd - b[sortConfig.key].market_data.price_usd;
+        }
+      });
+    }
   }
 
   const handleSort = (event) => {
