@@ -1,5 +1,6 @@
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 export const StyledTableCell = withStyles((theme) => ({
@@ -21,6 +22,12 @@ export const StyledTableRow = withStyles(() => ({
     },
   },
 }))(TableRow);
+
+export const StyledPaper = withStyles(() => ({
+  root: {
+    height: '150px',
+  },
+}))(Paper);
 
 export const useStyles = makeStyles({
   table: {
