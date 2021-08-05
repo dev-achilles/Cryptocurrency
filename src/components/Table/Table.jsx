@@ -113,8 +113,8 @@ const TableOfCurrency = (props) => {
       const data = favourites;
       const foundFavourite = data.find((item) => item.id === name);
       if (foundFavourite) {
-        data.splice(data.indexOf(foundFavourite), 1);
-        localStorage.setItem('favourites', JSON.stringify(data));
+        const filtered = data.filter((item) => item.id !== foundFavourite.id);
+        localStorage.setItem('favourites', JSON.stringify(filtered));
       }
     }
   };
