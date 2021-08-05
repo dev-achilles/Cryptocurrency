@@ -1,0 +1,13 @@
+.wrapper {
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 25px;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
