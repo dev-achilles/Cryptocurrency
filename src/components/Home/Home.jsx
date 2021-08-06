@@ -150,8 +150,8 @@ const Home = () => {
   const [active, setActive] = useState(null);
 
   const setClass = (event) => {
-    if (event.target.id !== active) {
-      setActive(event.target.id);
+    if (event.currentTarget.id !== active) {
+      setActive(event.currentTarget.id);
     }
     if (event.target.id === 'container') {
       setActive(null);
@@ -166,12 +166,12 @@ const Home = () => {
           id={item.name}
           onClick={setClass}>
           <CardContent id={item.name} className={classes.content}>
-            <div id={item.name}>{item.name}</div>
-            <div id={item.name}>{item.category}</div>
-            <div id={item.name}>{item.goal}</div>
-            <div id={item.name} className={s.info}>
-              <div id={item.name}>{item.interest}</div>
-              <div id={item.name}>{item.dateActive}</div>
+            <div>{item.name}</div>
+            <div>{item.category}</div>
+            <div>{item.goal}</div>
+            <div className={s.info}>
+              <div>{item.interest}</div>
+              <div>{item.dateActive}</div>
             </div>
           </CardContent>
         </Card>
