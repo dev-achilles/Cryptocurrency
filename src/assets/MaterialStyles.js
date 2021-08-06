@@ -19,6 +19,7 @@ export const StyledTableRow = withStyles(() => ({
   root: {
     '&:hover': {
       backgroundColor: '#e0f2f1 !important',
+      cursor: 'pointer',
     },
   },
 }))(TableRow);
