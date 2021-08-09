@@ -17,8 +17,6 @@ const Metrics = (props) => {
     props.dispatch(getMetricsData(slug.substr(1)));
   }, []);
 
-  console.log(props.metricsData.name);
-
   return (
     <div className={s.wrapper}>
       <div className={s.title}>{props.metricsData.name}</div>
