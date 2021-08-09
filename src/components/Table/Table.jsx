@@ -165,8 +165,10 @@ const TableOfCurrency = (props) => {
   };
 
   const metricsHandler = (event) => {
-    const slug = event.currentTarget.id;
-    history.push(`/metrics/:${slug}`);
+    if (!event.target.name) {
+      const slug = event.currentTarget.id;
+      history.push(`/metrics/:${slug}`);
+    }
   };
 
   const actualCells = () => {
