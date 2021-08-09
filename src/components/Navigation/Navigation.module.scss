@@ -75,10 +75,12 @@
     width: 100%;
     min-width: 315px;
   }
+}
+
+@media screen and(max-width: 991.98px) {
   .burger {
     display: flex;
   }
-
   .links {
     display: none;
   }
