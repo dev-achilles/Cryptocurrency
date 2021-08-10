@@ -17,6 +17,7 @@ export const StyledTableCell = withStyles((theme) => ({
 
 export const StyledTableRow = withStyles(() => ({
   root: {
+    backgroundColor: 'white',
     '&:hover': {
       backgroundColor: '#e0f2f1 !important',
       cursor: 'pointer',
@@ -34,5 +35,9 @@ export const useStyles = makeStyles({
   table: {
     minWidth: 600,
     marginTop: '30px',
+  },
+  container: {
+    overflowX: 'visible',
+    marginBottom: '20px',
   },
 });
