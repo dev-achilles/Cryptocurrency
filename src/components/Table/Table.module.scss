@@ -1,7 +1,6 @@
 .wrapper {
   margin-top: 20px;
   display: flex;
-  width: 100%;
   align-items: center;
   flex-direction: column;
 }
@@ -47,10 +46,8 @@
 }
 
 .filter_wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
   margin-top: 20px;
+  text-align: right;
 }
 
 .dialog_button {
@@ -77,4 +74,5 @@
   color: red;
   text-align: center;
   padding-top: 40px;
+  height: 100%;
 }
