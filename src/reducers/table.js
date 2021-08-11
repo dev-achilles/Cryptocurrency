@@ -1,4 +1,4 @@
-import { GET_TABLE_DATA, GET_METRICS_DATA } from '../constants';
+import { GET_TABLE_DATA, GET_METRICS_DATA, SET_CHECKED_DATA } from '../constants';
 
 const initialState = {
   tableData: [],
@@ -28,6 +28,19 @@ const tableReducer = (state = initialState, action) => {
       return {
         ...state,
         metricsData: action.payload,
+      };
+    }
+    case SET_CHECKED_DATA: {
+      const data = [...state.tableData];
+      const { id, value } = action.payload;
+      data.find((item) => {
+        if (item.id === id) {
+          item.checked = value;
+        }
+      });
+      return {
+        ...state,
+        tableData: [...data],
       };
     }
     default:
