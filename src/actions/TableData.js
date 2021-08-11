@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_TABLE_DATA, GET_METRICS_DATA } from '../constants';
+import { GET_TABLE_DATA, GET_METRICS_DATA, SET_CHECKED_DATA } from '../constants';
 
 export const getTableData = () => async (dispatch) => {
   try {
@@ -32,5 +32,12 @@ const setMetricsData = (res) => {
   return {
     type: GET_METRICS_DATA,
     payload: res.data,
+  };
+};
+
+export const setCheckedData = (id, value) => {
+  return {
+    type: SET_CHECKED_DATA,
+    payload: { id, value },
   };
 };
