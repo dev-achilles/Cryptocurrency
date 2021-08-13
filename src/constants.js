@@ -1,1 +1,3 @@
-export const SET_TABLE_DATA = 'SET_TABLE_DATA';
+export const GET_TABLE_DATA = 'GET_TABLE_DATA';
+export const GET_METRICS_DATA = 'GET_METRICS_DATA';
+export const SET_CHECKED_DATA = 'SET_CHECKED_DATA';

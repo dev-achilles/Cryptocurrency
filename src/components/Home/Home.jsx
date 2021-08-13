@@ -142,6 +142,7 @@ const useStyles = makeStyles({
   },
   content: {
     '&:last-child': { paddingBottom: '16px' },
+    lineHeight: 1.35,
   },
 });
 
@@ -166,12 +167,16 @@ const Home = () => {
           id={item.name}
           onClick={setClass}>
           <CardContent id={item.name} className={classes.content}>
-            <div id={item.name}>{item.name}</div>
+            <div className={s.item_name} id={item.name}>
+              {item.name}
+            </div>
             <div id={item.name}>{item.category}</div>
             <div id={item.name}>{item.goal}</div>
             <div id={item.name} className={s.info}>
               <div id={item.name}>{item.interest}</div>
-              <div id={item.name}>{item.dateActive}</div>
+              <div className={s.date_active} id={item.name}>
+                {item.dateActive}
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -277,36 +282,37 @@ const Home = () => {
             }
           })}
         </div>
-      </div>
-      <div className={s.footer_container}>
-        <div className={s.footer_row}>
-          <div className={s.footer_content}>
-            <div className={s.footer_title}>Name Company</div>
-            <div className={s.footer_description}>
-              ICO Drops is an independent ICO (Token Sale) database and is not affiliated with any
-              ICO project or company. Our Interest Level does not constitute financial or investment
-              advice.
+
+        <div className={s.footer_container}>
+          <div className={s.footer_row}>
+            <div className={s.footer_content}>
+              <div className={s.footer_title}>Name Company</div>
+              <div className={s.footer_description}>
+                ICO Drops is an independent ICO (Token Sale) database and is not affiliated with any
+                ICO project or company. Our Interest Level does not constitute financial or
+                investment advice.
+              </div>
+              <div className={s.footer_copyright}>© 2021 ICO Drops.</div>
             </div>
-            <div className={s.footer_copyright}>© 2021 ICO Drops.</div>
-          </div>
-          <div className={s.footer_columnInfo}>
-            <a href="#">Active ICO</a>
-            <a href="#">Upcoming ICO</a>
-            <a href="#">Ended ICO</a>
-            <a href="#">Bounty List</a>
-            <a href="#">SandBox </a>
-          </div>
-          <div className={s.footer_companyInfo}>
-            <a href="#">Dropstab</a>
-            <a href="#">Dropsearn</a>
-            <a href="#">Portfolio</a>
-            <a href="#">Ico calendar</a>
-          </div>
-          <div className={s.footer_mediaLink}>
-            <a href="#">Email</a>
-            <a href="#">Twitter</a>
-            <a href="#">Telegram</a>
-            <a href="#">Instagram</a>
+            <div className={s.footer_columnInfo}>
+              <a href="#">Active ICO</a>
+              <a href="#">Upcoming ICO</a>
+              <a href="#">Ended ICO</a>
+              <a href="#">Bounty List</a>
+              <a href="#">SandBox </a>
+            </div>
+            <div className={s.footer_companyInfo}>
+              <a href="#">Dropstab</a>
+              <a href="#">Dropsearn</a>
+              <a href="#">Portfolio</a>
+              <a href="#">Ico calendar</a>
+            </div>
+            <div className={s.footer_mediaLink}>
+              <a href="#">Email</a>
+              <a href="#">Twitter</a>
+              <a href="#">Telegram</a>
+              <a href="#">Instagram</a>
+            </div>
           </div>
         </div>
       </div>

@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import Paper from '@material-ui/core/Paper';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import { SET_TABLE_DATA } from '../../constants';
-import { setTableData } from '../../actions/TableData';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { GET_TABLE_DATA } from '../../constants';
+import { getTableData, setCheckedData } from '../../actions/TableData';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
 import s from './Table.module.scss';
 
 const TableOfCurrency = (props) => {
   const classes = useStyles();
-  let tableData = [];
-  if (props.favourite) {
-    tableData = JSON.parse(localStorage.getItem('favourites'));
-  } else {
-    tableData = props.tableData;
-  }
+  const history = useHistory();
+  const { tableData } = props;
 
   const [open, setOpen] = useState(false);
   const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
@@ -36,7 +33,7 @@ const TableOfCurrency = (props) => {
   });
 
   useEffect(() => {
-    props.dispatch(setTableData({ type: SET_TABLE_DATA }));
+    props.dispatch(getTableData({ type: GET_TABLE_DATA }));
   }, []);
 
   if (tableData !== null) {
@@ -101,7 +98,10 @@ const TableOfCurrency = (props) => {
   const checkBoxHandler = (event) => {
     const target = event.target;
     const name = target.name;
+    const checked = target.checked;
     const favourites = JSON.parse(localStorage.getItem('favourites'));
+
+    props.dispatch(setCheckedData(name, checked));
 
     if (target.checked) {
       const data = favourites || [];
@@ -116,15 +116,6 @@ const TableOfCurrency = (props) => {
         const filtered = data.filter((item) => item.id !== foundFavourite.id);
         localStorage.setItem('favourites', JSON.stringify(filtered));
       }
-    }
-  };
-
-  const defaultChecked = (id) => {
-    const data = JSON.parse(localStorage.getItem('favourites'));
-    if (data) {
-      return data.find((item) => item.id === id);
-    } else {
-      return false;
     }
   };
 
@@ -156,53 +147,90 @@ const TableOfCurrency = (props) => {
       ));
   };
 
-  const actualCells = () => {
-    let fields = check.fields;
-    const data = JSON.parse(JSON.stringify(tableData));
-    if (data) {
-      fields = fields.filter((item) => !item.isChecked).map((item) => item.value);
-      Object.keys(data).forEach((elem) => {
-        for (let key of Object.keys(data[elem])) {
-          fields.includes(key) && delete data[elem][key];
-        }
-      });
-    } else {
-      return null;
+  const metricsHandler = (event) => {
+    if (!event.target.name) {
+      const slug = event.currentTarget.id;
+      history.push(`/metrics/:${slug}`);
     }
+  };
+
+  const actualCells = () => {
+    const selectColumns = (value) => {
+      const field = check.fields.find((item) => item.value === value);
+      return field.isChecked;
+    };
 
     return (
       <>
-        {Object.keys(data).map((row) => (
-          <StyledTableRow key={row}>
-            {data[row].id && (
-              <StyledTableCell align="center">
-                <div className={s.table_cell}>
-                  <div className={s.star_checkbox}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        defaultChecked={defaultChecked(data[row].id)}
-                        value={JSON.stringify(data[row])}
-                        name={data[row].id}
-                        onChange={checkBoxHandler}
-                      />
-                    </label>
-                  </div>
-                  <div className={s.table_id}>{data[row].id}</div>
-                </div>
-              </StyledTableCell>
-            )}
-            {data[row].slug && <StyledTableCell align="center">{data[row].slug}</StyledTableCell>}
-            {data[row].symbol && (
-              <StyledTableCell align="center">{data[row].symbol}</StyledTableCell>
-            )}
-            {data[row].metrics && (
-              <StyledTableCell align="center">
-                {data[row].metrics.market_data.price_usd}
-              </StyledTableCell>
-            )}
-          </StyledTableRow>
-        ))}
+        {props.favourite
+          ? tableData
+              .filter((item) => item.checked === true)
+              .map((row) => (
+                <StyledTableRow key={row} onClick={metricsHandler} id={row.slug}>
+                  {row.id && selectColumns('id') ? (
+                    <StyledTableCell align="center">
+                      <div className={s.table_cell}>
+                        <div className={s.star_checkbox}>
+                          <label>
+                            <input
+                              type="checkbox"
+                              checked={row.checked}
+                              value={JSON.stringify(row)}
+                              name={row.id}
+                              onChange={checkBoxHandler}
+                            />
+                          </label>
+                        </div>
+                        <div className={s.table_id}>{row.id}</div>
+                      </div>
+                    </StyledTableCell>
+                  ) : null}
+                  {row.slug && selectColumns('slug') ? (
+                    <StyledTableCell align="center">{row.slug}</StyledTableCell>
+                  ) : null}
+                  {row.symbol && selectColumns('symbol') ? (
+                    <StyledTableCell align="center">{row.symbol}</StyledTableCell>
+                  ) : null}
+                  {row.metrics && selectColumns('metrics') ? (
+                    <StyledTableCell align="center">
+                      {row.metrics.market_data.price_usd}
+                    </StyledTableCell>
+                  ) : null}
+                </StyledTableRow>
+              ))
+          : tableData.map((row) => (
+              <StyledTableRow key={row} onClick={metricsHandler} id={row.slug}>
+                {row.id && selectColumns('id') ? (
+                  <StyledTableCell align="center">
+                    <div className={s.table_cell}>
+                      <div className={s.star_checkbox}>
+                        <label>
+                          <input
+                            type="checkbox"
+                            checked={row.checked}
+                            value={JSON.stringify(row)}
+                            name={row.id}
+                            onChange={checkBoxHandler}
+                          />
+                        </label>
+                      </div>
+                      <div className={s.table_id}>{row.id}</div>
+                    </div>
+                  </StyledTableCell>
+                ) : null}
+                {row.slug && selectColumns('slug') ? (
+                  <StyledTableCell align="center">{row.slug}</StyledTableCell>
+                ) : null}
+                {row.symbol && selectColumns('symbol') ? (
+                  <StyledTableCell align="center">{row.symbol}</StyledTableCell>
+                ) : null}
+                {row.metrics && selectColumns('metrics') ? (
+                  <StyledTableCell align="center">
+                    {row.metrics.market_data.price_usd}
+                  </StyledTableCell>
+                ) : null}
+              </StyledTableRow>
+            ))}
       </>
     );
   };
@@ -210,65 +238,77 @@ const TableOfCurrency = (props) => {
   return (
     <div className={s.wrapper}>
       <div className={s.title}>{props.favourite ? 'Favourite' : 'Cryptocurrency'}</div>
-
-      <TableContainer component={Paper}>
-        {tableData && (
-          <div className={s.filter_wrapper}>
-            <Button
-              aria-controls="customized-menu"
-              aria-haspopup="true"
-              variant="contained"
-              color="primary"
-              onClick={() => setOpen(true)}>
-              Open Filter
-            </Button>
-          </div>
-        )}
-        <Dialog
-          open={open}
-          onClose={() => setOpen(false)}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          max-width="lg">
-          <DialogTitle>Please Select Columns</DialogTitle>
-          {check.fields.map((item) => {
-            return (
-              <div key={item.id}>
-                <Checkbox
-                  inputProps={{ 'aria-label': 'primary checkbox' }}
-                  onChange={handleCheckChieldElement}
-                  value={item.value}
-                  checked={item.isChecked}
-                />
-                {item.name}
+      <div className="container">
+        <TableContainer className={classes.container}>
+          {tableData && (
+            <div className={s.filter_wrapper}>
+              <Button
+                aria-controls="customized-menu"
+                aria-haspopup="true"
+                variant="contained"
+                color="primary"
+                onClick={() => setOpen(true)}>
+                Open Filter
+              </Button>
+            </div>
+          )}
+          <Dialog
+            open={open}
+            onClose={() => setOpen(false)}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            max-width="lg">
+            <DialogTitle>Please Select Columns</DialogTitle>
+            {check.fields.map((item) => {
+              return (
+                <div key={item.id}>
+                  <Checkbox
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                    onChange={handleCheckChieldElement}
+                    value={item.value}
+                    checked={item.isChecked}
+                  />
+                  {item.name}
+                </div>
+              );
+            })}
+            <div className={s.dialog_button}>
+              <Button onClick={() => setOpen(false)} variant="contained" color="primary">
+                Close
+              </Button>
+            </div>
+          </Dialog>
+          {tableData ? (
+            props.favourite ? (
+              tableData.filter((item) => item.checked).length !== 0 ? (
+                <Table className={classes.table} aria-label="customized table">
+                  <TableHead>
+                    <StyledTableRow>{setTableCells()}</StyledTableRow>
+                  </TableHead>
+                  <TableBody>{actualCells()}</TableBody>
+                </Table>
+              ) : (
+                <div className={s.data_not_exist}>No Favourite Columns</div>
+              )
+            ) : tableData.length === 0 ? (
+              <div className={s.data_not_exist}>
+                <CircularProgress />
               </div>
-            );
-          })}
-          <div className={s.dialog_button}>
-            <Button onClick={() => setOpen(false)} variant="contained" color="primary">
-              Close
-            </Button>
-          </div>
-        </Dialog>
-        {tableData ? (
-          tableData.length !== 0 ? (
-            <Table className={classes.table} aria-label="customized table">
-              <TableHead>
-                <StyledTableRow>{setTableCells()}</StyledTableRow>
-              </TableHead>
-              <TableBody>{actualCells()}</TableBody>
-            </Table>
-          ) : props.favourite ? (
-            <div className={s.data_not_exist}>No Favourite Columns</div>
+            ) : (
+              <Table className={classes.table} aria-label="customized table">
+                <TableHead>
+                  <StyledTableRow>{setTableCells()}</StyledTableRow>
+                </TableHead>
+                <TableBody>{actualCells()}</TableBody>
+              </Table>
+            )
           ) : (
-            <div className={s.data_not_exist}>No Data For Columns</div>
-          )
-        ) : props.favourite ? (
-          <div className={s.data_not_exist}>No Favourite Columns</div>
-        ) : (
-          <div className={s.data_not_exist}>No Data For Columns</div>
-        )}
-      </TableContainer>
+            <div className={s.data_not_exist}>
+              <CircularProgress />
+            </div>
+          )}
+        </TableContainer>
+      </div>
     </div>
   );
 };
