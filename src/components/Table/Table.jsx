@@ -150,7 +150,7 @@ const TableOfCurrency = (props) => {
   const metricsHandler = (event) => {
     if (!event.target.name) {
       const slug = event.currentTarget.id;
-      history.push(`/metrics/:${slug}`);
+      history.push(`/metrics/${slug}`);
     }
   };
 

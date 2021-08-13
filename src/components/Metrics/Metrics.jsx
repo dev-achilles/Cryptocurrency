@@ -13,7 +13,7 @@ const Metrics = (props) => {
   const { slug } = useParams();
 
   useEffect(() => {
-    props.dispatch(getMetricsData(slug.substr(1)));
+    props.dispatch(getMetricsData(slug));
   }, []);
 
   return (
