@@ -1,34 +1,34 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './components/Home/index';
 import TableContainer from './containers/TableContainer';
 import MetricsContainer from './containers/MetricsContainer';
-import Navigation from './components/Navigation/index';
 import NotFound from './components/NotFound/index';
-import Login from './components/Login/index';
+import LoginContainer from './containers/LoginContainer';
+import NavigationContainer from './containers/NavigationContainer';
+import HomeContainer from './containers/HomeContainer';
 
 const App = () => (
   <div className="wrapper">
     <Router>
       <Switch>
         <Route exact path="/">
-          <Navigation />
-          <Home />
+          <NavigationContainer />
+          <HomeContainer />
         </Route>
         <Route path="/table">
-          <Navigation />
+          <NavigationContainer />
           <TableContainer />
         </Route>
         <Route path="/favourite">
-          <Navigation />
+          <NavigationContainer />
           <TableContainer favourite={true} />
         </Route>
         <Route path="/login">
-          <Navigation />
-          <Login />
+          <NavigationContainer />
+          <LoginContainer />
         </Route>
         <Route path="/metrics/:slug">
-          <Navigation />
+          <NavigationContainer />
           <MetricsContainer />
         </Route>
         <Route path="*">
