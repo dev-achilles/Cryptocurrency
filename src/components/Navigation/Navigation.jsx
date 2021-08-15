@@ -40,7 +40,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Navigation = () => {
+const Navigation = (props) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -69,13 +69,19 @@ const Navigation = () => {
                   Favourite
                 </Link>
               </Typography>
-              <Typography variant="h6" color="inherit">
-                <Link className={s.login_link} to="/login">
-                  <Button className={classes.button} variant="outlined" color="primary">
-                    Login
-                  </Button>
-                </Link>
-              </Typography>
+              {props.user.isLoggedIn ? (
+                <Typography variant="h6" color="inherit">
+                  <div className={s.favourite_link}>{props.user.name}</div>
+                </Typography>
+              ) : (
+                <Typography variant="h6" color="inherit">
+                  <Link className={s.login_link} to="/login">
+                    <Button className={classes.button} variant="outlined" color="primary">
+                      Login
+                    </Button>
+                  </Link>
+                </Typography>
+              )}
             </div>
             <div className={s.burger}>
               <IconButton onClick={() => setOpen(true)}>
