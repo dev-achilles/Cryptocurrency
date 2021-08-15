@@ -110,9 +110,9 @@ const data = {
     },
   ],
   users: [
-    { name: 'Yevhenii', email: 'yevhenii@gmail.com', password: 1234, role: 'admin' },
-    { name: 'Roman', email: 'roman@gmail.com', password: 12345, role: 'admin' },
-    { name: 'Vladimir', email: 'vova@gmail.com', password: 123456, role: 'user' },
+    { name: 'Yevhenii', email: 'yevhenii@gmail.com', password: '1234', role: 'admin' },
+    { name: 'Roman', email: 'roman@gmail.com', password: '12345', role: 'admin' },
+    { name: 'Vladimir', email: 'vova@gmail.com', password: '123456', role: 'user' },
   ],
 };
 
