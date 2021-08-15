@@ -4,121 +4,13 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
+import db from '../../db';
 
 const moment = extendMoment(Moment);
 
 import s from './Home.module.scss';
 
-const data = [
-  {
-    name: 'MyCryptoCheckout',
-    category: 'Payments',
-    goal: '$240,000',
-    interest: 'Sponsored',
-    dateActive: '3d left',
-    column: 'none',
-    date: '2021-07-26T23:35:00',
-  },
-  {
-    name: 'Coin98 Labs',
-    category: 'Platform',
-    goal: '$3,750,000',
-    interest: 'Not Rated',
-    dateActive: '4d left',
-    column: 'none',
-    date: '2021-07-29T13:35:00',
-  },
-  {
-    name: 'Hi',
-    category: 'Blockchain Service',
-    goal: 'NOT SET',
-    interest: 'Not Rated',
-    dateActive: 'TBA',
-    column: 'none',
-    date: '2021-07-27T13:35:00',
-  },
-  {
-    name: 'Altair',
-    category: 'Blockchain Service',
-    goal: 'NOT SET',
-    interest: 'Not Rated',
-    dateActive: 'TBA',
-    column: 'none',
-    date: '2021-07-20T13:35:00',
-  },
-  {
-    name: 'PolkaCipher',
-    category: 'Blockchain Service',
-    goal: '$2,020,000',
-    interest: 'Not Rated',
-    dateActive: 'in 16h',
-    column: 'none',
-    date: '2021-07-26T08:35:00',
-  },
-  {
-    name: 'Scaleswap',
-    category: 'Blockchain Service',
-    goal: '$2,500,000',
-    interest: 'Not Rated',
-    dateActive: 'in 41h',
-    column: 'none',
-    date: '2021-07-30T13:35:00',
-  },
-  {
-    name: 'Vent Finance',
-    category: 'DeFi',
-    goal: '$1,020,000',
-    interest: 'Not Rated',
-    dateActive: '22 Jul',
-    column: 'none',
-    date: '2021-07-19T13:35:00',
-  },
-  {
-    name: 'DeRace',
-    category: 'Blockchain Service',
-    goal: '1,700,000',
-    interest: 'Not Rated',
-    dateActive: '26 Jul',
-    column: 'none',
-    date: '2021-06-19T17:35:00',
-  },
-  {
-    name: 'CryptoArt.Ai',
-    category: 'Marketplace',
-    goal: '$1,120,000',
-    interest: 'Not Rated',
-    dateActive: '18 Jul',
-    column: 'none',
-    date: '2021-07-26T15:35:00',
-  },
-  {
-    name: 'Glimpse',
-    category: 'Marketplace',
-    goal: '$1,300,000',
-    interest: 'Not Rated',
-    dateActive: '16 Jul',
-    column: 'none',
-    date: '2021-07-26T11:35:00',
-  },
-  {
-    name: 'Omni',
-    category: 'Dapp',
-    goal: '$200,000',
-    interest: 'Not Rated',
-    dateActive: '16 Jul',
-    column: 'none',
-    date: '2021-08-28T22:35:00',
-  },
-  {
-    name: 'YOLOrekt',
-    category: 'Blockchain Service',
-    goal: '$320,000',
-    interest: 'Not Rated',
-    dateActive: '16 Jul',
-    column: 'none',
-    date: '2021-07-26T13:35:00',
-  },
-];
+const data = db.cryptocurrency;
 
 const useStyles = makeStyles({
   root: {
