@@ -5,6 +5,7 @@ import TableContainer from './containers/TableContainer';
 import MetricsContainer from './containers/MetricsContainer';
 import Navigation from './components/Navigation/index';
 import NotFound from './components/NotFound/index';
+import Login from './components/Login/index';
 
 const App = () => (
   <div className="wrapper">
@@ -21,6 +22,10 @@ const App = () => (
         <Route path="/favourite">
           <Navigation />
           <TableContainer favourite={true} />
+        </Route>
+        <Route path="/login">
+          <Navigation />
+          <Login />
         </Route>
         <Route path="/metrics/:slug">
           <Navigation />
