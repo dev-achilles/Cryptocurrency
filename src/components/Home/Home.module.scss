@@ -68,6 +68,12 @@
   justify-content: space-between;
 }
 
+.item_name_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .item_name {
   font-size: 20px;
   font-weight: bold;
