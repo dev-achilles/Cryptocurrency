@@ -31,6 +31,11 @@
   @include links();
 }
 
+.login_link {
+  margin-left: 25px !important;
+  text-decoration: none;
+}
+
 .container {
   display: flex;
   align-items: center;

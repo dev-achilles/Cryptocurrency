@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HomeIcon from '@material-ui/icons/Home';
@@ -28,6 +29,14 @@ const useStyles = makeStyles(() => ({
   },
   list: {
     width: 150,
+  },
+  button: {
+    color: 'white',
+    borderColor: '#00000042',
+    backgroundColor: '#ffffff17',
+    '&:hover': {
+      border: '1px solid white',
+    },
   },
 }));
 
@@ -58,6 +67,13 @@ const Navigation = () => {
               <Typography variant="h6" color="inherit">
                 <Link className={s.favourite_link} to="/favourite">
                   Favourite
+                </Link>
+              </Typography>
+              <Typography variant="h6" color="inherit">
+                <Link className={s.login_link} to="/login">
+                  <Button className={classes.button} variant="outlined" color="primary">
+                    Login
+                  </Button>
                 </Link>
               </Typography>
             </div>
