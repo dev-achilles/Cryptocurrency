@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import EditIcon from '@material-ui/icons/Edit';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/TextField';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 import db from '../../db';
@@ -9,8 +16,6 @@ import db from '../../db';
 const moment = extendMoment(Moment);
 
 import s from './Home.module.scss';
-
-const data = db.cryptocurrency;
 
 const useStyles = makeStyles({
   root: {
@@ -36,12 +41,26 @@ const useStyles = makeStyles({
     '&:last-child': { paddingBottom: '16px' },
     lineHeight: 1.35,
   },
+  dialogContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    minWidth: '350px',
+    minHeight: '200px',
+    justifyContent: 'space-between',
+  },
 });
 
-const Home = () => {
+const Home = (props) => {
   const classes = useStyles();
   const [active, setActive] = useState(null);
+  const [data, setData] = useState([...db.cryptocurrency]);
+  const [dialog, setDialog] = useState({
+    open: false,
+    role: '',
+  });
+  const [dialogValues, setDialogValues] = useState(null);
 
+  const { isLoggedIn } = props.user;
   const setClass = (event) => {
     if (event.target.id !== active) {
       setActive(event.target.id);
@@ -49,6 +68,69 @@ const Home = () => {
     if (event.target.id === 'container') {
       setActive(null);
     }
+  };
+
+  const editItemHandle = (name) => {
+    setDialog({ open: true, role: 'edit' });
+    const items = data.find((item) => item.name === name);
+    setDialogValues({ ...items });
+  };
+
+  const deleteItemHandle = (name) => {
+    data.forEach((item) => {
+      if (item.name === name) {
+        const items = [...data];
+        const index = items.indexOf(item);
+        items.splice(index, 1);
+        setData([...items]);
+      }
+    });
+  };
+
+  const dialogForm = () => {
+    return (
+      <Dialog
+        open={dialog.open}
+        onClose={() => setDialog({ open: false })}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description">
+        <DialogTitle id="alert-dialog-title">Change fields for {dialog.role}</DialogTitle>
+        <DialogContent className={classes.dialogContent}>
+          <TextField
+            label="Name"
+            id="outlined-size-small"
+            value={dialogValues.name}
+            variant="outlined"
+            size="small"
+            onChange={handleDialogValueChange}
+          />
+          <TextField
+            label="Category"
+            id="outlined-size-small"
+            value={dialogValues.category}
+            variant="outlined"
+            size="small"
+            onChange={handleDialogValueChange}
+          />
+          <TextField
+            label="Goal"
+            id="outlined-size-small"
+            value={dialogValues.goal}
+            variant="outlined"
+            size="small"
+            onChange={handleDialogValueChange}
+          />
+          <TextField
+            label="Interest"
+            id="outlined-size-small"
+            value={dialogValues.interest}
+            variant="outlined"
+            size="small"
+            onChange={handleDialogValueChange}
+          />
+        </DialogContent>
+      </Dialog>
+    );
   };
 
   const returnColumns = (item) => {
@@ -59,9 +141,22 @@ const Home = () => {
           id={item.name}
           onClick={setClass}>
           <CardContent id={item.name} className={classes.content}>
-            <div className={s.item_name} id={item.name}>
-              {item.name}
+            <div className={s.item_name_container}>
+              <div className={s.item_name} id={item.name}>
+                {item.name}
+              </div>
+              {!isLoggedIn && (
+                <div>
+                  <IconButton size="small" onClick={() => editItemHandle(item.name)}>
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton size="small" onClick={() => deleteItemHandle(item.name)}>
+                    <HighlightOffIcon />
+                  </IconButton>
+                </div>
+              )}
             </div>
+
             <div id={item.name}>{item.category}</div>
             <div id={item.name}>{item.goal}</div>
             <div id={item.name} className={s.info}>
@@ -124,6 +219,7 @@ const Home = () => {
   return (
     <div className={s.wrapper} id="container" onClick={setClass}>
       <div className={s.container}>
+        {dialogForm()}
         <div className={s.content}>
           {filteredColumns.map((item) => {
             let columnName = '';
