@@ -3,8 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import EditIcon from '@material-ui/icons/Edit';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -57,6 +59,7 @@ const Home = (props) => {
   const [dialog, setDialog] = useState({
     open: false,
     role: '',
+    name: '',
   });
   const [dialogValues, setDialogValues] = useState(null);
 
@@ -70,8 +73,13 @@ const Home = (props) => {
     }
   };
 
+  const addItemHandle = () => {
+    setDialog({ open: true, role: 'add', name: '' });
+    setDialogValues(null);
+  };
+
   const editItemHandle = (name) => {
-    setDialog({ open: true, role: 'edit' });
+    setDialog({ open: true, role: 'edit', name: name });
     const items = data.find((item) => item.name === name);
     setDialogValues({ ...items });
   };
@@ -87,6 +95,31 @@ const Home = (props) => {
     });
   };
 
+  const handleDialogValueChange = (event) => {
+    const { name, value } = event.target;
+    setDialogValues({ ...dialogValues, [name]: value });
+  };
+
+  const dialogHandle = () => {
+    if (dialog.role !== 'add') {
+      setDialog({ open: false });
+      data.forEach((item) => {
+        if (item.name === dialog.name) {
+          const itemsData = [...data];
+          const index = itemsData.indexOf(item);
+          itemsData[index] = { ...dialogValues };
+          setData([...itemsData]);
+        }
+      });
+    } else {
+      const items = [...data];
+      const date = new Date();
+      setData([...items, dialogValues, { date: date }]);
+    }
+  };
+
+  console.log(data);
+
   const dialogForm = () => {
     return (
       <Dialog
@@ -98,37 +131,59 @@ const Home = (props) => {
         <DialogContent className={classes.dialogContent}>
           <TextField
             label="Name"
+            name="name"
             id="outlined-size-small"
-            value={dialogValues.name}
+            value={dialogValues && dialogValues.name}
             variant="outlined"
             size="small"
             onChange={handleDialogValueChange}
           />
           <TextField
             label="Category"
+            name="category"
             id="outlined-size-small"
-            value={dialogValues.category}
+            value={dialogValues && dialogValues.category}
             variant="outlined"
             size="small"
             onChange={handleDialogValueChange}
           />
           <TextField
             label="Goal"
+            name="goal"
             id="outlined-size-small"
-            value={dialogValues.goal}
+            value={dialogValues && dialogValues.goal}
             variant="outlined"
             size="small"
             onChange={handleDialogValueChange}
           />
           <TextField
             label="Interest"
+            name="interest"
             id="outlined-size-small"
-            value={dialogValues.interest}
+            value={dialogValues && dialogValues.interest}
             variant="outlined"
             size="small"
             onChange={handleDialogValueChange}
           />
         </DialogContent>
+        <div className={s.dialog_buttons}>
+          <Button
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            variant="contained"
+            color="primary"
+            onClick={() => setDialog({ open: false })}>
+            Close
+          </Button>
+          <Button
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            variant="contained"
+            color="primary"
+            onClick={dialogHandle}>
+            Accept
+          </Button>
+        </div>
       </Dialog>
     );
   };
@@ -270,7 +325,12 @@ const Home = (props) => {
             }
           })}
         </div>
-
+        <div className={s.add_button}>
+          Add new column
+          <IconButton color="primary" size="medium" onClick={addItemHandle}>
+            <AddBoxIcon fontSize="large" />
+          </IconButton>
+        </div>
         <div className={s.footer_container}>
           <div className={s.footer_row}>
             <div className={s.footer_content}>
