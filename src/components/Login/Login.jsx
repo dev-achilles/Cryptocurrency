@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+import { loginUser, resetError } from '../../actions/User';
+
+import db from '../../db';
 
 import s from './Login.module.scss';
 
@@ -15,8 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -32,8 +37,43 @@ const Login = () => {
   };
 
   const loginHandle = (email, password) => {
-    console.log(email);
-    console.log(password);
+    const user = db.users.find((item) => item.email === email);
+    if (user) {
+      if (user.password === password) {
+        props.dispatch(
+          loginUser({
+            name: user.name,
+            isLoggedIn: true,
+            role: user.role,
+            error: false,
+          }),
+        );
+        history.push('/');
+      } else {
+        props.dispatch(
+          loginUser({
+            name: null,
+            isLoggedIn: false,
+            role: null,
+            error: true,
+          }),
+        );
+      }
+    } else {
+      props.dispatch(
+        loginUser({
+          name: null,
+          isLoggedIn: false,
+          role: null,
+          error: true,
+        }),
+      );
+    }
+  };
+
+  const resetData = () => {
+    setData({ ...data, email: '', password: '' });
+    props.dispatch(resetError(false));
   };
 
   return (
@@ -52,6 +92,8 @@ const Login = () => {
                 autoComplete="current-email"
                 width="300px"
                 onChange={handleInputChange}
+                error={props.user.error}
+                helperText={props.user.error ? 'Incorrect login' : null}
               />
             </div>
             <div className={s.password}>
@@ -63,6 +105,8 @@ const Login = () => {
                 type="password"
                 autoComplete="current-password"
                 onChange={handleInputChange}
+                error={props.user.error}
+                helperText={props.user.error ? 'Incorrect password' : null}
               />
             </div>
           </form>
@@ -73,7 +117,7 @@ const Login = () => {
               variant="contained"
               color="primary"
               className={s.button_login}
-              onClick={() => setData({ ...data, email: '', password: '' })}>
+              onClick={resetData}>
               Reset
             </Button>
           </div>
