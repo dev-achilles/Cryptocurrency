@@ -8,3 +8,8 @@ export const SET_CHECKED_DATA = 'SET_CHECKED_DATA';
 
 export const LOGIN_USER = 'LOGIN_USER';
 export const RESET_ERROR = 'RESET_ERROR';
+
+// Home constants
+
+export const GET_HOME_DATA = 'GET_HOME_DATA';
+export const SET_HOME_DATA = 'SET_HOME_DATA';
