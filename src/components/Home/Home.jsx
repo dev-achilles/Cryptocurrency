@@ -115,12 +115,14 @@ const Home = (props) => {
             const index = itemsData.indexOf(item);
             itemsData[index] = { ...dialogValues };
             props.dispatch(setHomeData([...itemsData]));
+            setDialogValues(null);
           }
         });
       }
       if (dialog.role === 'add') {
         const items = [...data];
         props.dispatch(setHomeData([...items, dialogValues]));
+        setDialogValues(null);
       }
       setDialog({ open: false });
     } else {
