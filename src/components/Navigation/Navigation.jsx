@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
@@ -94,6 +95,23 @@ const Navigation = (props) => {
                   onClick={() => setOpen(false)}
                   onKeyDown={() => setOpen(false)}>
                   <List>
+                    {props.user.isLoggedIn ? (
+                      <ListItem button key="Home">
+                        <ListItemIcon>
+                          <AccountCircleIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={props.user.name} />
+                      </ListItem>
+                    ) : (
+                      <ListItem button key="Login">
+                        <Link className={s.burger_link} to="/login">
+                          <ListItemIcon>
+                            <AccountCircleIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Login" />
+                        </Link>
+                      </ListItem>
+                    )}
                     <ListItem button key="Home">
                       <Link className={s.burger_link} to="/">
                         <ListItemIcon>
