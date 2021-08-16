@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,11 +11,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
-import Moment from 'moment';
-import { extendMoment } from 'moment-range';
+import { getHomeData, setHomeData } from '../../actions/Home';
 import db from '../../db';
-
-const moment = extendMoment(Moment);
 
 import s from './Home.module.scss';
 
@@ -54,14 +51,19 @@ const useStyles = makeStyles({
 
 const Home = (props) => {
   const classes = useStyles();
+  const data = props.homeData;
   const [active, setActive] = useState(null);
-  const [data, setData] = useState([...db.cryptocurrency]);
+  const [error, setError] = useState(false);
   const [dialog, setDialog] = useState({
     open: false,
     role: '',
     name: '',
   });
   const [dialogValues, setDialogValues] = useState(null);
+
+  useEffect(() => {
+    props.dispatch(getHomeData([...db.cryptocurrency]));
+  }, []);
 
   const { isLoggedIn } = props.user;
   const setClass = (event) => {
@@ -74,8 +76,10 @@ const Home = (props) => {
   };
 
   const addItemHandle = () => {
+    const date = new Date();
     setDialog({ open: true, role: 'add', name: '' });
     setDialogValues(null);
+    setDialogValues({ ...dialogValues, ['date']: date });
   };
 
   const editItemHandle = (name) => {
@@ -90,7 +94,7 @@ const Home = (props) => {
         const items = [...data];
         const index = items.indexOf(item);
         items.splice(index, 1);
-        setData([...items]);
+        props.dispatch(setHomeData([...items]));
       }
     });
   };
@@ -101,24 +105,28 @@ const Home = (props) => {
   };
 
   const dialogHandle = () => {
-    if (dialog.role !== 'add') {
+    if (dialogValues.name !== undefined && dialogValues.name !== '') {
+      setError(false);
+      if (dialog.role === 'edit') {
+        setDialog({ open: false });
+        data.forEach((item) => {
+          if (item.name === dialog.name) {
+            const itemsData = [...data];
+            const index = itemsData.indexOf(item);
+            itemsData[index] = { ...dialogValues };
+            props.dispatch(setHomeData([...itemsData]));
+          }
+        });
+      }
+      if (dialog.role === 'add') {
+        const items = [...data];
+        props.dispatch(setHomeData([...items, dialogValues]));
+      }
       setDialog({ open: false });
-      data.forEach((item) => {
-        if (item.name === dialog.name) {
-          const itemsData = [...data];
-          const index = itemsData.indexOf(item);
-          itemsData[index] = { ...dialogValues };
-          setData([...itemsData]);
-        }
-      });
     } else {
-      const items = [...data];
-      const date = new Date();
-      setData([...items, dialogValues, { date: date }]);
+      setError(true);
     }
   };
-
-  console.log(data);
 
   const dialogForm = () => {
     return (
@@ -137,6 +145,8 @@ const Home = (props) => {
             variant="outlined"
             size="small"
             onChange={handleDialogValueChange}
+            error={error}
+            helperText={error && 'Write please name'}
           />
           <TextField
             label="Category"
@@ -200,7 +210,7 @@ const Home = (props) => {
               <div className={s.item_name} id={item.name}>
                 {item.name}
               </div>
-              {!isLoggedIn && (
+              {isLoggedIn && (
                 <div>
                   <IconButton size="small" onClick={() => editItemHandle(item.name)}>
                     <EditIcon />
@@ -226,50 +236,7 @@ const Home = (props) => {
     );
   };
 
-  const setCategoryColumn = (start, end, Data) => {
-    const current = Data.date;
-    const nowDate = moment(new Date());
-    const result = moment(current).isBetween(start, end, 'minutes');
-    if (result) {
-      Data.column = 'Active';
-      const duration = moment.duration(nowDate.diff(current));
-      const hours = duration.asHours();
-      if (hours < 1) {
-        Data.dateActive = '< 1h left';
-      } else {
-        Data.dateActive = `${Math.floor(hours)}h left`;
-      }
-    } else {
-      if (moment(current).isSameOrAfter(end)) {
-        Data.column = 'Upcoming';
-        const duration = moment.duration(moment(current).diff(nowDate));
-        const hours = duration.asHours();
-        if (hours < 25) {
-          Data.dateActive = `in ${Math.floor(hours)}h`;
-        } else {
-          Data.dateActive = `in ${moment(current).format('MMM Do')}`;
-        }
-      }
-      if (moment(current).isSameOrBefore(start)) {
-        Data.column = 'Ended';
-        const duration = moment.duration(nowDate.diff(current));
-        const hours = duration.asHours();
-        if (hours < 25) {
-          Data.dateActive = `Ended: ${Math.floor(hours)}h left`;
-        } else {
-          Data.dateActive = `Ended: ${moment(current).format('MMM Do')}`;
-        }
-      }
-    }
-  };
-
-  const start = '2021-07-26T09:00:00';
-  const end = '2021-07-26T22:00:00';
-
-  data.forEach((item) => setCategoryColumn(start, end, item));
-
-  let filteredColumns = data.map((item) => item.column);
-  filteredColumns = Array.from(new Set(filteredColumns.reverse()));
+  const filteredColumns = ['Active', 'Upcoming', 'Ended'];
 
   return (
     <div className={s.wrapper} id="container" onClick={setClass}>
@@ -325,12 +292,14 @@ const Home = (props) => {
             }
           })}
         </div>
-        <div className={s.add_button}>
-          Add new column
-          <IconButton color="primary" size="medium" onClick={addItemHandle}>
-            <AddBoxIcon fontSize="large" />
-          </IconButton>
-        </div>
+        {isLoggedIn && (
+          <div className={s.add_button}>
+            Add new column
+            <IconButton color="primary" size="medium" onClick={addItemHandle}>
+              <AddBoxIcon fontSize="large" />
+            </IconButton>
+          </div>
+        )}
         <div className={s.footer_container}>
           <div className={s.footer_row}>
             <div className={s.footer_content}>
