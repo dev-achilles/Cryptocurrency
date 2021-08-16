@@ -71,7 +71,7 @@ const Navigation = (props) => {
               </Typography>
               {props.user.isLoggedIn ? (
                 <Typography variant="h6" color="inherit">
-                  <div className={s.favourite_link}>{props.user.name}</div>
+                  <div className={s.user_name}>{props.user.name}</div>
                 </Typography>
               ) : (
                 <Typography variant="h6" color="inherit">
