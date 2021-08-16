@@ -47,6 +47,12 @@ const useStyles = makeStyles({
     minHeight: '200px',
     justifyContent: 'space-between',
   },
+  deleteIcon: {
+    color: 'red',
+  },
+  editIcon: {
+    color: 'green',
+  },
 });
 
 const Home = (props) => {
@@ -214,10 +220,16 @@ const Home = (props) => {
               </div>
               {isLoggedIn && (
                 <div>
-                  <IconButton size="small" onClick={() => editItemHandle(item.name)}>
+                  <IconButton
+                    className={classes.editIcon}
+                    size="small"
+                    onClick={() => editItemHandle(item.name)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton size="small" onClick={() => deleteItemHandle(item.name)}>
+                  <IconButton
+                    className={classes.deleteIcon}
+                    size="small"
+                    onClick={() => deleteItemHandle(item.name)}>
                     <HighlightOffIcon />
                   </IconButton>
                 </div>
