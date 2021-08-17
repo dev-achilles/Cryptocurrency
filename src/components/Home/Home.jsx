@@ -93,11 +93,11 @@ const Home = (props) => {
   const addItemHandle = () => {
     const date = moment(new Date()).format('YYYY-MM-DDTHH:mm');
     setDialog({ open: true, role: 'add', name: '' });
-    setDialogValues({ ...dialogValues, ['date']: date });
+    setDialogValues({ ...dialogValues, date });
   };
 
   const editItemHandle = (name) => {
-    setDialog({ open: true, role: 'edit', name: name });
+    setDialog({ open: true, role: 'edit', name });
     const items = data.find((item) => item.name === name);
     setDialogValues({ ...items });
   };
