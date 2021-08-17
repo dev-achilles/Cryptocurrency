@@ -208,8 +208,6 @@ const Home = (props) => {
     );
   };
 
-  console.log(props);
-
   const returnColumns = (item) => {
     return (
       <>
