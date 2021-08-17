@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,10 +12,13 @@ import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
+import { getUser, exitUser } from '../../actions/User';
+
 import logo from '../../assets/images/logo.jpg';
 import s from './Navigation.module.scss';
 
@@ -39,12 +42,29 @@ const useStyles = makeStyles(() => ({
       border: '1px solid white',
     },
   },
+  exitIcon: {
+    color: 'white',
+  },
 }));
 
 const Navigation = (props) => {
   const classes = useStyles();
-
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    props.dispatch(getUser());
+  }, []);
+
+  const exitHandle = () => {
+    const userData = {
+      name: null,
+      isLoggedIn: false,
+      role: null,
+      error: false,
+    };
+    localStorage.setItem('user', JSON.stringify(userData));
+    props.dispatch(exitUser({ name: null, isLoggedIn: false, role: null, error: false }));
+  };
 
   return (
     <div className={s.wrapper}>
@@ -72,7 +92,14 @@ const Navigation = (props) => {
               </Typography>
               {props.user.isLoggedIn ? (
                 <Typography variant="h6" color="inherit">
-                  <div className={s.user_name}>{props.user.name}</div>
+                  <div className={s.user_container}>
+                    <div className={s.user_name}>{props.user.name}</div>
+                    <div>
+                      <IconButton className={classes.exitIcon} onClick={exitHandle}>
+                        <ExitToAppIcon />
+                      </IconButton>
+                    </div>
+                  </div>
                 </Typography>
               ) : (
                 <Typography variant="h6" color="inherit">
@@ -136,6 +163,14 @@ const Navigation = (props) => {
                         <ListItemText primary="Favourite" />
                       </Link>
                     </ListItem>
+                    {props.user.isLoggedIn && (
+                      <ListItem onClick={exitHandle}>
+                        <ListItemIcon>
+                          <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Exit" />
+                      </ListItem>
+                    )}
                   </List>
                 </div>
               </Drawer>
