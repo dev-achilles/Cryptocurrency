@@ -1,15 +1,21 @@
-import { LOGIN_USER, RESET_ERROR } from '../constants';
+import { SET_ERROR, GET_USER, EXIT_USER } from '../constants';
 
-export const loginUser = (data) => {
+export const getUser = () => {
   return {
-    type: LOGIN_USER,
-    payload: data,
+    type: GET_USER,
   };
 };
 
-export const resetError = (error) => {
+export const setError = (error) => {
   return {
-    type: RESET_ERROR,
+    type: SET_ERROR,
     payload: error,
+  };
+};
+
+export const exitUser = (data) => {
+  return {
+    type: EXIT_USER,
+    payload: data,
   };
 };
