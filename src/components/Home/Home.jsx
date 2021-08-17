@@ -11,10 +11,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
-import { getHomeData, setHomeData } from '../../actions/Home';
-import { getUser } from '../../actions/User';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
+import { getHomeData, setHomeData } from '../../actions/Home';
+import { getUser } from '../../actions/User';
 import db from '../../db';
 
 import s from './Home.module.scss';
