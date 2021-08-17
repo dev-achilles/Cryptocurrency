@@ -6,8 +6,9 @@ export const SET_CHECKED_DATA = 'SET_CHECKED_DATA';
 
 // User constants
 
-export const LOGIN_USER = 'LOGIN_USER';
-export const RESET_ERROR = 'RESET_ERROR';
+export const GET_USER = 'GET_USER';
+export const SET_ERROR = 'SET_ERROR';
+export const EXIT_USER = 'EXIT_USER';
 
 // Home constants
 
