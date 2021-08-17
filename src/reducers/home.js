@@ -3,8 +3,8 @@ import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 const moment = extendMoment(Moment);
 
-const start = '2021-07-26T09:00:00';
-const end = '2021-07-26T22:00:00';
+const start = '2021-08-17T09:00:00';
+const end = '2021-08-17T22:00:00';
 
 const initialState = {
   homeData: [],
