@@ -1,4 +1,4 @@
-import { LOGIN_USER, RESET_ERROR } from '../constants';
+import { GET_USER, SET_ERROR, EXIT_USER } from '../constants';
 
 const initialState = {
   name: null,
@@ -9,16 +9,26 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_USER: {
+    case GET_USER: {
+      const data =
+        JSON.parse(localStorage.getItem('user')) !== null
+          ? JSON.parse(localStorage.getItem('user'))
+          : { name: '', isLoggedIn: '', role: '', error: false };
       return {
         ...state,
-        ...action.payload,
+        ...data,
       };
     }
-    case RESET_ERROR: {
+    case SET_ERROR: {
       return {
         ...state,
         error: action.payload,
+      };
+    }
+    case EXIT_USER: {
+      return {
+        ...state,
+        ...action.payload,
       };
     }
     default:
