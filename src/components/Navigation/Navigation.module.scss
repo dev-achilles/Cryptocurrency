@@ -64,6 +64,13 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.user_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .burger {
