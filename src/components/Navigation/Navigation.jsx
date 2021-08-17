@@ -164,7 +164,7 @@ const Navigation = (props) => {
                       </Link>
                     </ListItem>
                     {props.user.isLoggedIn && (
-                      <ListItem onClick={exitHandle}>
+                      <ListItem button key="Exit" onClick={exitHandle}>
                         <ListItemIcon>
                           <ExitToAppIcon />
                         </ListItemIcon>
