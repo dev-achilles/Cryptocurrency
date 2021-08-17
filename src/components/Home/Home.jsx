@@ -208,6 +208,8 @@ const Home = (props) => {
     );
   };
 
+  console.log(props);
+
   const returnColumns = (item) => {
     return (
       <>
@@ -220,7 +222,7 @@ const Home = (props) => {
               <div className={s.item_name} id={item.name}>
                 {item.name}
               </div>
-              {isLoggedIn && (
+              {isLoggedIn && props.user.role === 'admin' && (
                 <div>
                   <IconButton
                     className={classes.editIcon}
@@ -308,7 +310,7 @@ const Home = (props) => {
             }
           })}
         </div>
-        {isLoggedIn && (
+        {isLoggedIn && props.user.role === 'admin' && (
           <div className={s.add_button}>
             Add new column
             <IconButton color="primary" size="medium" onClick={addItemHandle}>
