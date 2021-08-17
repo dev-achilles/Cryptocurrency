@@ -84,7 +84,6 @@ const Home = (props) => {
   const addItemHandle = () => {
     const date = new Date();
     setDialog({ open: true, role: 'add', name: '' });
-    setDialogValues(null);
     setDialogValues({ ...dialogValues, ['date']: date });
   };
 
@@ -121,26 +120,29 @@ const Home = (props) => {
             const index = itemsData.indexOf(item);
             itemsData[index] = { ...dialogValues };
             props.dispatch(setHomeData([...itemsData]));
-            setDialogValues(null);
           }
         });
       }
       if (dialog.role === 'add') {
         const items = [...data];
         props.dispatch(setHomeData([...items, dialogValues]));
-        setDialogValues(null);
       }
-      setDialog({ open: false });
+      handleDialogClose();
     } else {
       setError(true);
     }
+  };
+
+  const handleDialogClose = () => {
+    setDialog({ open: false });
+    setDialogValues(null);
   };
 
   const dialogForm = () => {
     return (
       <Dialog
         open={dialog.open}
-        onClose={() => setDialog({ open: false })}
+        onClose={handleDialogClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">Change fields for {dialog.role}</DialogTitle>
@@ -190,7 +192,7 @@ const Home = (props) => {
             aria-haspopup="true"
             variant="contained"
             color="primary"
-            onClick={() => setDialog({ open: false })}>
+            onClick={handleDialogClose}>
             Close
           </Button>
           <Button
