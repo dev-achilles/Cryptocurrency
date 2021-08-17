@@ -92,7 +92,6 @@ const Home = (props) => {
 
   const addItemHandle = () => {
     const date = moment(new Date()).format('YYYY-MM-DDTHH:mm');
-    console.log(date);
     setDialog({ open: true, role: 'add', name: '' });
     setDialogValues({ ...dialogValues, ['date']: date });
   };
