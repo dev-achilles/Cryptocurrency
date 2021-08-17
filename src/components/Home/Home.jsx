@@ -12,9 +12,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import { getHomeData, setHomeData } from '../../actions/Home';
+import { getUser } from '../../actions/User';
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
 import db from '../../db';
 
 import s from './Home.module.scss';
+
+const moment = extendMoment(Moment);
 
 const useStyles = makeStyles({
   root: {
@@ -44,7 +49,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     minWidth: '350px',
-    minHeight: '200px',
+    minHeight: '300px',
     justifyContent: 'space-between',
   },
   deleteIcon: {
@@ -71,6 +76,10 @@ const Home = (props) => {
     props.dispatch(getHomeData([...db.cryptocurrency]));
   }, []);
 
+  useEffect(() => {
+    props.dispatch(getUser());
+  }, []);
+
   const { isLoggedIn } = props.user;
   const setClass = (event) => {
     if (event.target.id !== active) {
@@ -82,7 +91,8 @@ const Home = (props) => {
   };
 
   const addItemHandle = () => {
-    const date = new Date();
+    const date = moment(new Date()).format('YYYY-MM-DDTHH:mm');
+    console.log(date);
     setDialog({ open: true, role: 'add', name: '' });
     setDialogValues({ ...dialogValues, ['date']: date });
   };
@@ -183,6 +193,16 @@ const Home = (props) => {
             value={dialogValues && dialogValues.interest}
             variant="outlined"
             size="small"
+            onChange={handleDialogValueChange}
+          />
+          <TextField
+            id="datetime-local"
+            label="Next appointment"
+            type="datetime-local"
+            variant="outlined"
+            size="small"
+            name="date"
+            value={dialogValues && dialogValues.date}
             onChange={handleDialogValueChange}
           />
         </DialogContent>
