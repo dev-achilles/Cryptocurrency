@@ -52,6 +52,9 @@
 .logo {
   display: flex;
   justify-content: flex-start;
+  img {
+    border-radius: 5px;
+  }
 }
 
 .links_container {
