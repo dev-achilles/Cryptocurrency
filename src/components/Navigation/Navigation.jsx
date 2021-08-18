@@ -15,6 +15,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
+import Avatar from '@material-ui/core/Avatar';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
 import { getUser, exitUser } from '../../actions/User';
@@ -125,7 +126,9 @@ const Navigation = (props) => {
                     {props.user.isLoggedIn ? (
                       <ListItem button key="Home">
                         <ListItemIcon>
-                          <AccountCircleIcon />
+                          <Avatar style={{ 'background-color': '#3f51b5' }}>
+                            {props.user.name.substr(0, 1).toUpperCase()}
+                          </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={props.user.name} />
                       </ListItem>
@@ -166,7 +169,7 @@ const Navigation = (props) => {
                     {props.user.isLoggedIn && (
                       <ListItem button key="Exit" onClick={exitHandle}>
                         <ListItemIcon>
-                          <ExitToAppIcon />
+                          <ExitToAppIcon style={{ color: '#009688' }} />
                         </ListItemIcon>
                         <ListItemText primary="Exit" />
                       </ListItem>
