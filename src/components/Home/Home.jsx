@@ -160,7 +160,7 @@ const Home = (props) => {
             label="Name"
             name="name"
             id="outlined-size-small"
-            value={dialogValues && dialogValues.name}
+            value={(dialogValues && dialogValues.name) || ''}
             variant="outlined"
             size="small"
             onChange={handleDialogValueChange}
@@ -171,7 +171,7 @@ const Home = (props) => {
             label="Category"
             name="category"
             id="outlined-size-small"
-            value={dialogValues && dialogValues.category}
+            value={(dialogValues && dialogValues.category) || ''}
             variant="outlined"
             size="small"
             onChange={handleDialogValueChange}
@@ -180,7 +180,7 @@ const Home = (props) => {
             label="Goal"
             name="goal"
             id="outlined-size-small"
-            value={dialogValues && dialogValues.goal}
+            value={(dialogValues && dialogValues.goal) || ''}
             variant="outlined"
             size="small"
             onChange={handleDialogValueChange}
@@ -189,7 +189,7 @@ const Home = (props) => {
             label="Interest"
             name="interest"
             id="outlined-size-small"
-            value={dialogValues && dialogValues.interest}
+            value={(dialogValues && dialogValues.interest) || ''}
             variant="outlined"
             size="small"
             onChange={handleDialogValueChange}
@@ -201,7 +201,7 @@ const Home = (props) => {
             variant="outlined"
             size="small"
             name="date"
-            value={dialogValues && dialogValues.date}
+            value={(dialogValues && dialogValues.date) || ''}
             onChange={handleDialogValueChange}
           />
         </DialogContent>
@@ -229,7 +229,7 @@ const Home = (props) => {
 
   const returnColumns = (item) => {
     return (
-      <>
+      <React.Fragment key={item.name}>
         <Card
           className={active === item.name ? classes.rootActive : classes.root}
           id={item.name}
@@ -267,7 +267,7 @@ const Home = (props) => {
             </div>
           </CardContent>
         </Card>
-      </>
+      </React.Fragment>
     );
   };
 
@@ -283,7 +283,7 @@ const Home = (props) => {
             if (item === 'Active') {
               columnName = 'Active';
               return (
-                <>
+                <React.Fragment key={item}>
                   <div className={s.column_container}>
                     <div className={s.title}>{columnName}</div>
                     <div className={s.column_content}>
@@ -292,13 +292,13 @@ const Home = (props) => {
                         .map((item) => returnColumns(item))}
                     </div>
                   </div>
-                </>
+                </React.Fragment>
               );
             }
             if (item === 'Upcoming') {
               columnName = 'Upcoming';
               return (
-                <>
+                <React.Fragment key={item}>
                   <div className={s.column_container}>
                     <div className={s.title}>{columnName}</div>
                     <div className={s.column_content}>
@@ -307,13 +307,13 @@ const Home = (props) => {
                         .map((item) => returnColumns(item))}
                     </div>
                   </div>
-                </>
+                </React.Fragment>
               );
             }
             if (item === 'Ended') {
               columnName = 'Ended';
               return (
-                <>
+                <React.Fragment key={item}>
                   <div className={s.column_container}>
                     <div className={s.title}>{columnName}</div>
                     <div className={s.column_content}>
@@ -322,7 +322,7 @@ const Home = (props) => {
                         .map((item) => returnColumns(item))}
                     </div>
                   </div>
-                </>
+                </React.Fragment>
               );
             }
           })}
