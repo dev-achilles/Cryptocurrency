@@ -13,7 +13,7 @@ export const setError = (error) => {
   };
 };
 
-export const exitUser = (data) => {
+export const logoutUser = (data) => {
   return {
     type: EXIT_USER,
     payload: data,

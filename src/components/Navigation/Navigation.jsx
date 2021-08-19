@@ -18,7 +18,7 @@ import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import Avatar from '@material-ui/core/Avatar';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
-import { getUser, exitUser } from '../../actions/User';
+import { getUser, logoutUser } from '../../actions/User';
 
 import logo from '../../assets/images/logo.jpg';
 import s from './Navigation.module.scss';
@@ -56,7 +56,7 @@ const Navigation = (props) => {
     props.dispatch(getUser());
   }, []);
 
-  const exitHandle = () => {
+  const logoutHandle = () => {
     const userData = {
       name: null,
       isLoggedIn: false,
@@ -64,7 +64,7 @@ const Navigation = (props) => {
       error: false,
     };
     localStorage.setItem('user', JSON.stringify(userData));
-    props.dispatch(exitUser({ name: null, isLoggedIn: false, role: null, error: false }));
+    props.dispatch(logoutUser({ name: null, isLoggedIn: false, role: null, error: false }));
   };
 
   return (
@@ -96,7 +96,7 @@ const Navigation = (props) => {
                   <div className={s.user_container}>
                     <div className={s.user_name}>{props.user.name}</div>
                     <div>
-                      <IconButton className={classes.exitIcon} onClick={exitHandle}>
+                      <IconButton className={classes.exitIcon} onClick={logoutHandle}>
                         <ExitToAppIcon />
                       </IconButton>
                     </div>
@@ -167,7 +167,7 @@ const Navigation = (props) => {
                       </Link>
                     </ListItem>
                     {props.user.isLoggedIn && (
-                      <ListItem button key="Exit" onClick={exitHandle}>
+                      <ListItem button key="Exit" onClick={logoutHandle}>
                         <ListItemIcon>
                           <ExitToAppIcon style={{ color: '#009688' }} />
                         </ListItemIcon>
