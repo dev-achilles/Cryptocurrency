@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.error {
+  display: flex;
+  font-size: 200px;
+  color: rgb(179, 14, 14);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.title {
+  display: flex;
+  font-size: 50px;
+}
