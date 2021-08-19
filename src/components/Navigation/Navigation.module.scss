@@ -36,6 +36,11 @@
   text-decoration: none;
 }
 
+.user_name {
+  margin-left: 25px !important;
+  text-transform: uppercase;
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -47,6 +52,9 @@
 .logo {
   display: flex;
   justify-content: flex-start;
+  img {
+    border-radius: 5px;
+  }
 }
 
 .links_container {
@@ -59,6 +67,13 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.user_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .burger {
@@ -70,6 +85,7 @@
   width: 100%;
   text-decoration: none;
   color: black;
+  align-items: center;
   &::after {
     color: black;
   }

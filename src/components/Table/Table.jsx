@@ -278,34 +278,28 @@ const TableOfCurrency = (props) => {
               </Button>
             </div>
           </Dialog>
-          {tableData ? (
-            props.favourite ? (
-              tableData.filter((item) => item.checked).length !== 0 ? (
-                <Table className={classes.table} aria-label="customized table">
-                  <TableHead>
-                    <StyledTableRow>{setTableCells()}</StyledTableRow>
-                  </TableHead>
-                  <TableBody>{actualCells()}</TableBody>
-                </Table>
-              ) : (
-                <div className={s.data_not_exist}>No Favourite Columns</div>
-              )
-            ) : tableData.length === 0 ? (
-              <div className={s.data_not_exist}>
-                <CircularProgress />
-              </div>
-            ) : (
+          {tableData.length === 0 ? (
+            <div className={s.data_not_exist}>
+              <CircularProgress />
+            </div>
+          ) : props.favourite ? (
+            tableData.filter((item) => item.checked).length !== 0 ? (
               <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                   <StyledTableRow>{setTableCells()}</StyledTableRow>
                 </TableHead>
                 <TableBody>{actualCells()}</TableBody>
               </Table>
+            ) : (
+              <div className={s.data_not_exist}>No Favourite Columns</div>
             )
           ) : (
-            <div className={s.data_not_exist}>
-              <CircularProgress />
-            </div>
+            <Table className={classes.table} aria-label="customized table">
+              <TableHead>
+                <StyledTableRow>{setTableCells()}</StyledTableRow>
+              </TableHead>
+              <TableBody>{actualCells()}</TableBody>
+            </Table>
           )}
         </TableContainer>
       </div>

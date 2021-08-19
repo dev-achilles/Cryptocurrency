@@ -7,7 +7,7 @@ const data = {
       interest: 'Sponsored',
       dateActive: '3d left',
       column: 'none',
-      date: '2021-07-26T23:35:00',
+      date: '2021-08-17T23:35:00',
     },
     {
       name: 'Coin98 Labs',
@@ -16,7 +16,7 @@ const data = {
       interest: 'Not Rated',
       dateActive: '4d left',
       column: 'none',
-      date: '2021-07-29T13:35:00',
+      date: '2021-08-17T09:35:00',
     },
     {
       name: 'Hi',
@@ -25,7 +25,7 @@ const data = {
       interest: 'Not Rated',
       dateActive: 'TBA',
       column: 'none',
-      date: '2021-07-27T13:35:00',
+      date: '2021-08-17T15:35:00',
     },
     {
       name: 'Altair',
@@ -34,7 +34,7 @@ const data = {
       interest: 'Not Rated',
       dateActive: 'TBA',
       column: 'none',
-      date: '2021-07-20T13:35:00',
+      date: '2021-08-17T11:35:00',
     },
     {
       name: 'PolkaCipher',
@@ -43,7 +43,7 @@ const data = {
       interest: 'Not Rated',
       dateActive: 'in 16h',
       column: 'none',
-      date: '2021-07-26T08:35:00',
+      date: '2021-08-24T09:35:00',
     },
     {
       name: 'Scaleswap',
@@ -52,7 +52,7 @@ const data = {
       interest: 'Not Rated',
       dateActive: 'in 41h',
       column: 'none',
-      date: '2021-07-30T13:35:00',
+      date: '2021-08-26T09:35:00',
     },
     {
       name: 'Vent Finance',
@@ -110,9 +110,9 @@ const data = {
     },
   ],
   users: [
-    { name: 'Yevhenii', email: 'yevhenii@gmail.com', password: 1234, role: 'admin' },
-    { name: 'Roman', email: 'roman@gmail.com', password: 12345, role: 'admin' },
-    { name: 'Vladimir', email: 'vova@gmail.com', password: 123456, role: 'user' },
+    { name: 'Yevhenii', email: 'yevhenii@gmail.com', password: '1234', role: 'admin' },
+    { name: 'Roman', email: 'roman@gmail.com', password: '12345', role: 'admin' },
+    { name: 'Vladimir', email: 'vova@gmail.com', password: '123456', role: 'user' },
   ],
 };
 
