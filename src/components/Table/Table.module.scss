@@ -67,12 +67,22 @@
 
 .data_not_exist {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 30px;
+  flex-direction: column;
+  align-items: center;
+  font-family: roboto, sans-serif;
+  font-size: 20px;
   font-weight: bold;
-  color: red;
-  text-align: center;
   padding-top: 40px;
-  height: 100%;
+}
+
+.not_found_image {
+  display: flex;
+}
+
+.not_found_name {
+  padding-top: 20px;
+}
+
+.not_found_button {
+  padding-top: 20px;
 }

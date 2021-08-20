@@ -14,6 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { GET_TABLE_DATA } from '../../constants';
 import { getTableData, setCheckedData } from '../../actions/TableData';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
+import notFoundIcon from '../../assets/images/favourite.svg';
 import s from './Table.module.scss';
 
 const TableOfCurrency = (props) => {
@@ -235,6 +236,10 @@ const TableOfCurrency = (props) => {
     );
   };
 
+  const redirectToTable = () => {
+    history.push('/table');
+  };
+
   return (
     <div className={s.wrapper}>
       <div className={s.title}>{props.favourite ? 'Favourite' : 'Cryptocurrency'}</div>
@@ -291,7 +296,17 @@ const TableOfCurrency = (props) => {
                 <TableBody>{actualCells()}</TableBody>
               </Table>
             ) : (
-              <div className={s.data_not_exist}>No Favourite Columns</div>
+              <div className={s.data_not_exist}>
+                <div className={s.not_found_image}>
+                  <img src={notFoundIcon}></img>
+                </div>
+                <div className={s.not_found_name}> No Favourite Columns</div>
+                <div className={s.not_found_button}>
+                  <Button variant="contained" color="primary" onClick={redirectToTable}>
+                    Add
+                  </Button>
+                </div>
+              </div>
             )
           ) : (
             <Table className={classes.table} aria-label="customized table">
