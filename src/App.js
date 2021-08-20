@@ -6,6 +6,7 @@ import NotFound from './components/NotFound/index';
 import LoginContainer from './containers/LoginContainer';
 import NavigationContainer from './containers/NavigationContainer';
 import HomeContainer from './containers/HomeContainer';
+import TokenInfoContainer from './containers/TokenInfoContainer';
 
 const App = () => (
   <div className="wrapper">
@@ -30,6 +31,10 @@ const App = () => (
         <Route path="/metrics/:slug">
           <NavigationContainer />
           <MetricsContainer />
+        </Route>
+        <Route path="/info/:info">
+          <NavigationContainer />
+          <TokenInfoContainer />
         </Route>
         <Route path="*">
           <NotFound />
