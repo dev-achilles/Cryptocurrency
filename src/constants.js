@@ -14,3 +14,7 @@ export const EXIT_USER = 'EXIT_USER';
 
 export const GET_HOME_DATA = 'GET_HOME_DATA';
 export const SET_HOME_DATA = 'SET_HOME_DATA';
+
+// InfoConstants
+
+export const GET_INFO_DATA = 'GET_INFO_DATA';
