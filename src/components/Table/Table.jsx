@@ -138,9 +138,9 @@ const TableOfCurrency = (props) => {
             {item.name}
             {setActiveIcon(item.name) === sortConfig.key ? (
               sortConfig.direction === 'ascending' ? (
-                <ArrowUpwardIcon color="primary" />
+                <ArrowUpwardIcon style={{ color: 'white' }} />
               ) : (
-                <ArrowDownwardIcon color="primary" />
+                <ArrowDownwardIcon style={{ color: 'white' }} />
               )
             ) : null}
           </div>
@@ -166,8 +166,8 @@ const TableOfCurrency = (props) => {
         {props.favourite
           ? tableData
               .filter((item) => item.checked === true)
-              .map((row) => (
-                <StyledTableRow key={row} onClick={metricsHandler} id={row.slug}>
+              .map((row, index) => (
+                <StyledTableRow key={index} onClick={metricsHandler} id={row.slug}>
                   {row.id && selectColumns('id') ? (
                     <StyledTableCell align="center">
                       <div className={s.table_cell}>
@@ -199,8 +199,8 @@ const TableOfCurrency = (props) => {
                   ) : null}
                 </StyledTableRow>
               ))
-          : tableData.map((row) => (
-              <StyledTableRow key={row} onClick={metricsHandler} id={row.slug}>
+          : tableData.map((row, index) => (
+              <StyledTableRow key={index} onClick={metricsHandler} id={row.slug}>
                 {row.id && selectColumns('id') ? (
                   <StyledTableCell align="center">
                     <div className={s.table_cell}>
@@ -264,19 +264,17 @@ const TableOfCurrency = (props) => {
             aria-describedby="alert-dialog-description"
             max-width="lg">
             <DialogTitle>Please Select Columns</DialogTitle>
-            {check.fields.map((item) => {
-              return (
-                <div key={item.id}>
-                  <Checkbox
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                    onChange={handleCheckChieldElement}
-                    value={item.value}
-                    checked={item.isChecked}
-                  />
-                  {item.name}
-                </div>
-              );
-            })}
+            {check.fields.map((item) => (
+              <div key={item.id}>
+                <Checkbox
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                  onChange={handleCheckChieldElement}
+                  value={item.value}
+                  checked={item.isChecked}
+                />
+                {item.name}
+              </div>
+            ))}
             <div className={s.dialog_button}>
               <Button onClick={() => setOpen(false)} variant="contained" color="primary">
                 Close

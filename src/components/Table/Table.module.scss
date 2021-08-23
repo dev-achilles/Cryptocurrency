@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  user-select: none;
 }
 
 .star_checkbox {
@@ -43,6 +44,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
+  user-select: none;
 }
 
 .filter_wrapper {
