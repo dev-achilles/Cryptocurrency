@@ -27,6 +27,7 @@ const useStyles = makeStyles({
   root: {
     borderBottom: '1px solid rgb(119, 118, 118)',
     marginBottom: '10px',
+    fontFamily: 'roboto, sans-serif',
     '&:last-child': {
       marginBottom: '0px',
     },
