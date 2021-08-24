@@ -124,9 +124,9 @@ const Navigation = (props) => {
                   onKeyDown={() => setOpen(false)}>
                   <List>
                     {props.user.isLoggedIn ? (
-                      <ListItem button key="Home">
+                      <ListItem button key="Avatar">
                         <ListItemIcon>
-                          <Avatar style={{ 'background-color': '#3f51b5' }}>
+                          <Avatar style={{ backgroundColor: '#3f51b5' }}>
                             {props.user.name.substr(0, 1).toUpperCase()}
                           </Avatar>
                         </ListItemIcon>
