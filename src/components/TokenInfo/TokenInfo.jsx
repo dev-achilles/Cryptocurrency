@@ -50,7 +50,7 @@ const TokenInfo = (props) => {
                 <div className={s.token_name}>{tokenInfo.name}</div>
               </div>
               {tokenInfo.images.img === '' ? (
-                <>
+                <div className={s.video_container}>
                   <iframe
                     title={tokenInfo.name}
                     width="640"
@@ -64,9 +64,9 @@ const TokenInfo = (props) => {
                       <CircularProgress color="inherit" />
                     </Backdrop>
                   ) : null}
-                </>
+                </div>
               ) : (
-                <>
+                <div className={s.image_container}>
                   <img
                     width="640"
                     height="360"
@@ -77,7 +77,7 @@ const TokenInfo = (props) => {
                       <CircularProgress color="inherit" />
                     </Backdrop>
                   ) : null}
-                </>
+                </div>
               )}
             </div>
             <div className={s.container_info}>
