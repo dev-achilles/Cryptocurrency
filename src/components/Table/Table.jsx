@@ -14,6 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { GET_TABLE_DATA } from '../../constants';
 import { getTableData, setCheckedData } from '../../actions/TableData';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
+import notFoundIcon from '../../assets/images/favourite.svg';
 import s from './Table.module.scss';
 
 const TableOfCurrency = (props) => {
@@ -137,9 +138,9 @@ const TableOfCurrency = (props) => {
             {item.name}
             {setActiveIcon(item.name) === sortConfig.key ? (
               sortConfig.direction === 'ascending' ? (
-                <ArrowUpwardIcon color="primary" />
+                <ArrowUpwardIcon style={{ color: 'white' }} />
               ) : (
-                <ArrowDownwardIcon color="primary" />
+                <ArrowDownwardIcon style={{ color: 'white' }} />
               )
             ) : null}
           </div>
@@ -165,8 +166,8 @@ const TableOfCurrency = (props) => {
         {props.favourite
           ? tableData
               .filter((item) => item.checked === true)
-              .map((row) => (
-                <StyledTableRow key={row} onClick={metricsHandler} id={row.slug}>
+              .map((row, index) => (
+                <StyledTableRow key={index} onClick={metricsHandler} id={row.slug}>
                   {row.id && selectColumns('id') ? (
                     <StyledTableCell align="center">
                       <div className={s.table_cell}>
@@ -198,8 +199,8 @@ const TableOfCurrency = (props) => {
                   ) : null}
                 </StyledTableRow>
               ))
-          : tableData.map((row) => (
-              <StyledTableRow key={row} onClick={metricsHandler} id={row.slug}>
+          : tableData.map((row, index) => (
+              <StyledTableRow key={index} onClick={metricsHandler} id={row.slug}>
                 {row.id && selectColumns('id') ? (
                   <StyledTableCell align="center">
                     <div className={s.table_cell}>
@@ -235,6 +236,10 @@ const TableOfCurrency = (props) => {
     );
   };
 
+  const redirectToTable = () => {
+    history.push('/table');
+  };
+
   return (
     <div className={s.wrapper}>
       <div className={s.title}>{props.favourite ? 'Favourite' : 'Cryptocurrency'}</div>
@@ -259,19 +264,17 @@ const TableOfCurrency = (props) => {
             aria-describedby="alert-dialog-description"
             max-width="lg">
             <DialogTitle>Please Select Columns</DialogTitle>
-            {check.fields.map((item) => {
-              return (
-                <div key={item.id}>
-                  <Checkbox
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                    onChange={handleCheckChieldElement}
-                    value={item.value}
-                    checked={item.isChecked}
-                  />
-                  {item.name}
-                </div>
-              );
-            })}
+            {check.fields.map((item) => (
+              <div key={item.id}>
+                <Checkbox
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                  onChange={handleCheckChieldElement}
+                  value={item.value}
+                  checked={item.isChecked}
+                />
+                {item.name}
+              </div>
+            ))}
             <div className={s.dialog_button}>
               <Button onClick={() => setOpen(false)} variant="contained" color="primary">
                 Close
@@ -291,7 +294,17 @@ const TableOfCurrency = (props) => {
                 <TableBody>{actualCells()}</TableBody>
               </Table>
             ) : (
-              <div className={s.data_not_exist}>No Favourite Columns</div>
+              <div className={s.data_not_exist}>
+                <div className={s.not_found_image}>
+                  <img src={notFoundIcon}></img>
+                </div>
+                <div className={s.not_found_name}> No Favourite Columns</div>
+                <div className={s.not_found_button}>
+                  <Button variant="contained" color="primary" onClick={redirectToTable}>
+                    Add
+                  </Button>
+                </div>
+              </div>
             )
           ) : (
             <Table className={classes.table} aria-label="customized table">

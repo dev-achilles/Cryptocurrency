@@ -1,13 +1,14 @@
-import { GET_HOME_DATA, SET_HOME_DATA } from '../constants';
+import { GET_HOME_DATA, SET_HOME_DATA, GET_INFO_DATA } from '../constants';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 const moment = extendMoment(Moment);
 
 const start = '2021-08-17T09:00:00';
-const end = '2021-08-17T22:00:00';
+const end = '2021-08-25T22:00:00';
 
 const initialState = {
   homeData: [],
+  tokenInfo: {},
 };
 
 const homeReducer = (state = initialState, action) => {
@@ -26,6 +27,15 @@ const homeReducer = (state = initialState, action) => {
       return {
         ...state,
         homeData: [...items],
+      };
+    }
+    case GET_INFO_DATA: {
+      const { info, data } = action.payload;
+      const item = data.find((item) => item.name === info);
+      console.log(item);
+      return {
+        ...state,
+        tokenInfo: item,
       };
     }
     default:

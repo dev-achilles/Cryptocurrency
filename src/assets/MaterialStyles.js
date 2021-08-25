@@ -12,6 +12,7 @@ export const StyledTableCell = withStyles((theme) => ({
   },
   body: {
     fontSize: 14,
+    userSelect: 'none',
   },
 }))(TableCell);
 
