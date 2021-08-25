@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
@@ -20,7 +20,7 @@ import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
 import { getUser, logoutUser } from '../../actions/User';
 
-import logo from '../../assets/images/logo.jpg';
+import logo from '../../assets/images/logo.png';
 import s from './Navigation.module.scss';
 
 const useStyles = makeStyles(() => ({
@@ -50,11 +50,17 @@ const useStyles = makeStyles(() => ({
 
 const Navigation = (props) => {
   const classes = useStyles();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState();
 
   useEffect(() => {
     props.dispatch(getUser());
   }, []);
+
+  useEffect(() => {
+    setActiveLink(location.pathname);
+  }, [location]);
 
   const logoutHandle = () => {
     const userData = {
@@ -72,24 +78,32 @@ const Navigation = (props) => {
       <AppBar className={classes.root} position="relative">
         <div className={s.container}>
           <div className={s.logo}>
-            <img src={logo}></img>
+            <NavLink to="/">
+              <img src={logo}></img>
+            </NavLink>
           </div>
           <div className={s.links_container}>
             <div className={s.links}>
               <Typography variant="h6" color="inherit">
-                <Link className={s.home_link} to="/">
+                <NavLink className={activeLink === '/' ? s.active_home_link : s.home_link} to="/">
                   Home
-                </Link>
+                </NavLink>
               </Typography>
               <Typography variant="h6" color="inherit">
-                <Link className={s.table_link} to="/table">
+                <NavLink
+                  className={activeLink === '/table' ? s.active_table_link : s.table_link}
+                  to="/table">
                   Table
-                </Link>
+                </NavLink>
               </Typography>
               <Typography variant="h6" color="inherit">
-                <Link className={s.favourite_link} to="/favourite">
+                <NavLink
+                  className={
+                    activeLink === '/favourite' ? s.active_favourite_link : s.favourite_link
+                  }
+                  to="/favourite">
                   Favourite
-                </Link>
+                </NavLink>
               </Typography>
               {props.user.isLoggedIn ? (
                 <Typography variant="h6" color="inherit">
@@ -104,11 +118,11 @@ const Navigation = (props) => {
                 </Typography>
               ) : (
                 <Typography variant="h6" color="inherit">
-                  <Link className={s.login_link} to="/login">
+                  <NavLink className={s.login_link} to="/login">
                     <Button className={classes.button} variant="outlined" color="primary">
                       Login
                     </Button>
-                  </Link>
+                  </NavLink>
                 </Typography>
               )}
             </div>
@@ -134,37 +148,37 @@ const Navigation = (props) => {
                       </ListItem>
                     ) : (
                       <ListItem button key="Login">
-                        <Link className={s.burger_link} to="/login">
+                        <NavLink className={s.burger_link} to="/login">
                           <ListItemIcon>
                             <AccountCircleIcon />
                           </ListItemIcon>
                           <ListItemText primary="Login" />
-                        </Link>
+                        </NavLink>
                       </ListItem>
                     )}
                     <ListItem button key="Home">
-                      <Link className={s.burger_link} to="/">
+                      <NavLink className={s.burger_link} to="/">
                         <ListItemIcon>
                           <HomeIcon />
                         </ListItemIcon>
                         <ListItemText primary="Home" />
-                      </Link>
+                      </NavLink>
                     </ListItem>
                     <ListItem button key="Table">
-                      <Link className={s.burger_link} to="/table">
+                      <NavLink className={s.burger_link} to="/table">
                         <ListItemIcon>
                           <TableChartIcon />
                         </ListItemIcon>
                         <ListItemText primary="Table" />
-                      </Link>
+                      </NavLink>
                     </ListItem>
                     <ListItem button key="Favourite">
-                      <Link className={s.burger_link} to="/favourite">
+                      <NavLink className={s.burger_link} to="/favourite">
                         <ListItemIcon>
                           <LocalActivityIcon />
                         </ListItemIcon>
                         <ListItemText primary="Favourite" />
-                      </Link>
+                      </NavLink>
                     </ListItem>
                     {props.user.isLoggedIn && (
                       <ListItem button key="Exit" onClick={logoutHandle}>
