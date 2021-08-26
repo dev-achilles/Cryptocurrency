@@ -101,11 +101,13 @@ const TokenInfo = (props) => {
                   <AttachFileIcon className={classes.icons} />
                   <div>Links:</div>
                 </div>
-                {tokenInfo.links.map((item, index) => (
-                  <a href={item.link} key={index}>
-                    {item.name}
-                  </a>
-                ))}
+                <div className={s.links}>
+                  {tokenInfo.links.map((item, index) => (
+                    <a href={item.link} key={index}>
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
               </>
             )}
           </div>
