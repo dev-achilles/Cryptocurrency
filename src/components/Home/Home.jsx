@@ -67,6 +67,7 @@ const Home = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const data = props.homeData;
+  const { isLoggedIn } = props.user;
   const [error, setError] = useState(false);
   const [dialog, setDialog] = useState({
     open: false,
@@ -76,14 +77,10 @@ const Home = (props) => {
   const [dialogValues, setDialogValues] = useState(null);
 
   useEffect(() => {
-    props.dispatch(getHomeData([...db.cryptocurrency]));
-  }, []);
-
-  useEffect(() => {
+    props.dispatch(getHomeData(db.cryptocurrency));
     props.dispatch(getUser());
   }, []);
 
-  const { isLoggedIn } = props.user;
   const infoHandle = (event) => {
     if (
       event.target.localName !== 'svg' &&
@@ -108,14 +105,8 @@ const Home = (props) => {
   };
 
   const deleteItemHandle = (name) => {
-    data.forEach((item) => {
-      if (item.name === name) {
-        const items = [...data];
-        const index = items.indexOf(item);
-        items.splice(index, 1);
-        props.dispatch(setHomeData([...items]));
-      }
-    });
+    const filteredItems = data.filter((item) => item.name !== name);
+    props.dispatch(setHomeData(filteredItems));
   };
 
   const handleDialogValueChange = (event) => {
@@ -124,7 +115,7 @@ const Home = (props) => {
   };
 
   const dialogHandle = () => {
-    if (dialogValues.name !== undefined && dialogValues.name !== '') {
+    if (dialogValues.name) {
       setError(false);
       if (dialog.role === 'edit') {
         setDialog({ open: false });
@@ -138,8 +129,7 @@ const Home = (props) => {
         });
       }
       if (dialog.role === 'add') {
-        const items = [...data];
-        props.dispatch(setHomeData([...items, dialogValues]));
+        props.dispatch(setHomeData([...data, dialogValues]));
       }
       handleDialogClose();
     } else {
@@ -278,16 +268,14 @@ const Home = (props) => {
         {dialogForm()}
         <div className={s.content}>
           {filteredColumns.map((item) => {
-            let columnName = '';
             if (item === 'Active') {
-              columnName = 'Active';
               return (
                 <React.Fragment key={item}>
                   <div className={s.column_container}>
-                    <div className={s.title}>{columnName}</div>
+                    <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
                       {data
-                        .filter((key) => key.column === columnName)
+                        .filter((key) => key.column === item)
                         .map((item) => returnColumns(item))}
                     </div>
                   </div>
@@ -295,14 +283,13 @@ const Home = (props) => {
               );
             }
             if (item === 'Upcoming') {
-              columnName = 'Upcoming';
               return (
                 <React.Fragment key={item}>
                   <div className={s.column_container}>
-                    <div className={s.title}>{columnName}</div>
+                    <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
                       {data
-                        .filter((key) => key.column === columnName)
+                        .filter((key) => key.column === item)
                         .map((item) => returnColumns(item))}
                     </div>
                   </div>
@@ -310,14 +297,13 @@ const Home = (props) => {
               );
             }
             if (item === 'Ended') {
-              columnName = 'Ended';
               return (
                 <React.Fragment key={item}>
                   <div className={s.column_container}>
-                    <div className={s.title}>{columnName}</div>
+                    <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
                       {data
-                        .filter((key) => key.column === columnName)
+                        .filter((key) => key.column === item)
                         .map((item) => returnColumns(item))}
                     </div>
                   </div>
