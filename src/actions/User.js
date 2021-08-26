@@ -13,9 +13,9 @@ export const setError = (error) => {
   };
 };
 
-export const logoutUser = (data) => {
+export const logoutUser = () => {
   return {
     type: EXIT_USER,
-    payload: data,
+    payload: { name: null, isLoggedIn: false, role: null, error: false },
   };
 };
