@@ -1,4 +1,4 @@
-import { GET_HOME_DATA, SET_HOME_DATA } from '../constants';
+import { GET_HOME_DATA, SET_HOME_DATA, GET_INFO_DATA } from '../constants';
 
 export const getHomeData = (data) => {
   return {
@@ -8,8 +8,15 @@ export const getHomeData = (data) => {
 };
 
 export const setHomeData = (data) => {
-  return{
+  return {
     type: SET_HOME_DATA,
     payload: data,
-  }
-}
+  };
+};
+
+export const getInfoData = (info, data) => {
+  return {
+    type: GET_INFO_DATA,
+    payload: { info, data },
+  };
+};

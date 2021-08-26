@@ -1,10 +1,15 @@
 @mixin links() {
   margin-left: 25px !important;
-  color: beige;
+  color: white;
   text-decoration: none;
-  &:hover {
-    color: rgb(108, 108, 185);
-  }
+}
+
+@mixin activeLinks() {
+  margin-left: 25px !important;
+  color: white;
+  font-size: 26px;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
 .wrapper {
@@ -21,6 +26,18 @@
 
 .home_link {
   @include links();
+}
+
+.active_home_link {
+  @include activeLinks();
+}
+
+.active_table_link {
+  @include activeLinks();
+}
+
+.active_favourite_link {
+  @include activeLinks();
 }
 
 .table_link {

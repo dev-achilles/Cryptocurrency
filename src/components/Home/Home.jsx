@@ -13,6 +13,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
+import { useHistory } from 'react-router-dom';
+import Footer from '../Footer/index';
 import { getHomeData, setHomeData } from '../../actions/Home';
 import { getUser } from '../../actions/User';
 import db from '../../db';
@@ -25,6 +27,7 @@ const useStyles = makeStyles({
   root: {
     borderBottom: '1px solid rgb(119, 118, 118)',
     marginBottom: '10px',
+    fontFamily: 'roboto, sans-serif',
     '&:last-child': {
       marginBottom: '0px',
     },
@@ -62,8 +65,9 @@ const useStyles = makeStyles({
 
 const Home = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   const data = props.homeData;
-  const [active, setActive] = useState(null);
+  const { isLoggedIn } = props.user;
   const [error, setError] = useState(false);
   const [dialog, setDialog] = useState({
     open: false,
@@ -73,20 +77,18 @@ const Home = (props) => {
   const [dialogValues, setDialogValues] = useState(null);
 
   useEffect(() => {
-    props.dispatch(getHomeData([...db.cryptocurrency]));
-  }, []);
-
-  useEffect(() => {
+    props.dispatch(getHomeData(db.cryptocurrency));
     props.dispatch(getUser());
   }, []);
 
-  const { isLoggedIn } = props.user;
-  const setClass = (event) => {
-    if (event.target.id !== active) {
-      setActive(event.target.id);
-    }
-    if (event.target.id === 'container') {
-      setActive(null);
+  const infoHandle = (event) => {
+    if (
+      event.target.localName !== 'svg' &&
+      event.target.localName !== 'path' &&
+      event.target.localName !== 'button'
+    ) {
+      const info = event.currentTarget.id;
+      history.push(`/info/${info}`);
     }
   };
 
@@ -103,14 +105,8 @@ const Home = (props) => {
   };
 
   const deleteItemHandle = (name) => {
-    data.forEach((item) => {
-      if (item.name === name) {
-        const items = [...data];
-        const index = items.indexOf(item);
-        items.splice(index, 1);
-        props.dispatch(setHomeData([...items]));
-      }
-    });
+    const filteredItems = data.filter((item) => item.name !== name);
+    props.dispatch(setHomeData(filteredItems));
   };
 
   const handleDialogValueChange = (event) => {
@@ -119,7 +115,7 @@ const Home = (props) => {
   };
 
   const dialogHandle = () => {
-    if (dialogValues.name !== undefined && dialogValues.name !== '') {
+    if (dialogValues.name) {
       setError(false);
       if (dialog.role === 'edit') {
         setDialog({ open: false });
@@ -133,8 +129,7 @@ const Home = (props) => {
         });
       }
       if (dialog.role === 'add') {
-        const items = [...data];
-        props.dispatch(setHomeData([...items, dialogValues]));
+        props.dispatch(setHomeData([...data, dialogValues]));
       }
       handleDialogClose();
     } else {
@@ -230,40 +225,34 @@ const Home = (props) => {
   const returnColumns = (item) => {
     return (
       <React.Fragment key={item.name}>
-        <Card
-          className={active === item.name ? classes.rootActive : classes.root}
-          id={item.name}
-          onClick={setClass}>
-          <CardContent id={item.name} className={classes.content}>
+        <Card id={item.name} className={classes.root} onClick={infoHandle}>
+          <CardContent className={classes.content}>
             <div className={s.item_name_container}>
-              <div className={s.item_name} id={item.name}>
-                {item.name}
-              </div>
+              <div className={s.item_name}>{item.name}</div>
               {isLoggedIn && props.user.role === 'admin' && (
                 <div>
                   <IconButton
                     className={classes.editIcon}
                     size="small"
+                    id="icon"
                     onClick={() => editItemHandle(item.name)}>
                     <EditIcon />
                   </IconButton>
                   <IconButton
                     className={classes.deleteIcon}
                     size="small"
+                    id="icon"
                     onClick={() => deleteItemHandle(item.name)}>
                     <HighlightOffIcon />
                   </IconButton>
                 </div>
               )}
             </div>
-
-            <div id={item.name}>{item.category}</div>
-            <div id={item.name}>{item.goal}</div>
-            <div id={item.name} className={s.info}>
-              <div id={item.name}>{item.interest}</div>
-              <div className={s.date_active} id={item.name}>
-                {item.dateActive}
-              </div>
+            <div>{item.category}</div>
+            <div>{item.goal}</div>
+            <div className={s.info}>
+              <div>{item.interest}</div>
+              <div className={s.date_active}>{item.dateActive}</div>
             </div>
           </CardContent>
         </Card>
@@ -274,21 +263,19 @@ const Home = (props) => {
   const filteredColumns = ['Active', 'Upcoming', 'Ended'];
 
   return (
-    <div className={s.wrapper} id="container" onClick={setClass}>
+    <div className={s.wrapper}>
       <div className={s.container}>
         {dialogForm()}
         <div className={s.content}>
           {filteredColumns.map((item) => {
-            let columnName = '';
             if (item === 'Active') {
-              columnName = 'Active';
               return (
                 <React.Fragment key={item}>
                   <div className={s.column_container}>
-                    <div className={s.title}>{columnName}</div>
+                    <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
                       {data
-                        .filter((key) => key.column === columnName)
+                        .filter((key) => key.column === item)
                         .map((item) => returnColumns(item))}
                     </div>
                   </div>
@@ -296,14 +283,13 @@ const Home = (props) => {
               );
             }
             if (item === 'Upcoming') {
-              columnName = 'Upcoming';
               return (
                 <React.Fragment key={item}>
                   <div className={s.column_container}>
-                    <div className={s.title}>{columnName}</div>
+                    <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
                       {data
-                        .filter((key) => key.column === columnName)
+                        .filter((key) => key.column === item)
                         .map((item) => returnColumns(item))}
                     </div>
                   </div>
@@ -311,14 +297,13 @@ const Home = (props) => {
               );
             }
             if (item === 'Ended') {
-              columnName = 'Ended';
               return (
                 <React.Fragment key={item}>
                   <div className={s.column_container}>
-                    <div className={s.title}>{columnName}</div>
+                    <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
                       {data
-                        .filter((key) => key.column === columnName)
+                        .filter((key) => key.column === item)
                         .map((item) => returnColumns(item))}
                     </div>
                   </div>
@@ -335,38 +320,7 @@ const Home = (props) => {
             </IconButton>
           </div>
         )}
-        <div className={s.footer_container}>
-          <div className={s.footer_row}>
-            <div className={s.footer_content}>
-              <div className={s.footer_title}>Name Company</div>
-              <div className={s.footer_description}>
-                ICO Drops is an independent ICO (Token Sale) database and is not affiliated with any
-                ICO project or company. Our Interest Level does not constitute financial or
-                investment advice.
-              </div>
-              <div className={s.footer_copyright}>© 2021 ICO Drops.</div>
-            </div>
-            <div className={s.footer_columnInfo}>
-              <a href="#">Active ICO</a>
-              <a href="#">Upcoming ICO</a>
-              <a href="#">Ended ICO</a>
-              <a href="#">Bounty List</a>
-              <a href="#">SandBox </a>
-            </div>
-            <div className={s.footer_companyInfo}>
-              <a href="#">Dropstab</a>
-              <a href="#">Dropsearn</a>
-              <a href="#">Portfolio</a>
-              <a href="#">Ico calendar</a>
-            </div>
-            <div className={s.footer_mediaLink}>
-              <a href="#">Email</a>
-              <a href="#">Twitter</a>
-              <a href="#">Telegram</a>
-              <a href="#">Instagram</a>
-            </div>
-          </div>
-        </div>
+        <Footer />
       </div>
     </div>
   );
