@@ -10,14 +10,17 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER: {
-      const data =
-        JSON.parse(localStorage.getItem('user')) !== null
-          ? JSON.parse(localStorage.getItem('user'))
-          : { name: '', isLoggedIn: '', role: '', error: false };
-      return {
-        ...state,
-        ...data,
-      };
+      if (JSON.parse(localStorage.getItem('user')) !== null) {
+        const data = JSON.parse(localStorage.getItem('user'));
+        return {
+          ...state,
+          ...data,
+        };
+      } else {
+        return {
+          ...state,
+        };
+      }
     }
     case SET_ERROR: {
       return {

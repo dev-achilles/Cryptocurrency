@@ -46,7 +46,7 @@ const tableReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        tableData: [...data],
+        tableData: data,
       };
     }
     default:
