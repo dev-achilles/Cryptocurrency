@@ -28,7 +28,7 @@ const Login = (props) => {
   });
 
   useEffect(() => {
-    return function resetError() {
+    return () => {
       props.dispatch(setError(false));
     };
   }, []);
