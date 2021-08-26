@@ -75,12 +75,18 @@ const Login = (props) => {
   };
 
   const resetData = () => {
-    setData({ ...data, email: '', password: '' });
+    setData({ email: '', password: '' });
     props.dispatch(setError(false));
   };
 
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      loginHandle(data.email, data.password);
+    }
+  };
+
   return (
-    <div className={s.wrapper}>
+    <div className={s.wrapper} onKeyDown={handleKeyDown}>
       <div className="container" style={{ 'flex-direction': 'column' }}>
         <div className={s.title}>Login</div>
         <div className={s.login_container}>
