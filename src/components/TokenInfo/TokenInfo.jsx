@@ -29,17 +29,13 @@ const TokenInfo = (props) => {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-    props.dispatch(getInfoData(info, [...db.cryptocurrency]));
+    props.dispatch(getInfoData(info, db.cryptocurrency));
   }, []);
-
-  const handleLoader = () => {
-    setLoader(false);
-  };
 
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
-        {Object.keys(tokenInfo).length !== 0 && (
+        {tokenInfo && Object.keys(tokenInfo).length !== 0 && (
           <div className={s.content}>
             <div className={s.important}>{tokenInfo.important}</div>
             <div className={s.main_info}>
@@ -56,7 +52,7 @@ const TokenInfo = (props) => {
                     width="640"
                     height="360"
                     src={tokenInfo.images.video}
-                    onLoad={handleLoader}>
+                    onLoad={() => setLoader(false)}>
                     Video
                   </iframe>
                   {loader ? (
@@ -71,7 +67,7 @@ const TokenInfo = (props) => {
                     width="640"
                     height="360"
                     src={tokenInfo.images.img}
-                    onLoad={handleLoader}></img>
+                    onLoad={() => setLoader(false)}></img>
                   {loader ? (
                     <Backdrop className={classes.backdrop} open={loader}>
                       <CircularProgress color="inherit" />
@@ -85,16 +81,14 @@ const TokenInfo = (props) => {
                 <EventNoteIcon className={classes.icons} />
                 <div>Token Info:</div>
               </div>
-              {tokenInfo.ticker !== '' && <div>Ticker: {tokenInfo.ticker}</div>}
-              {tokenInfo.tokenType !== '' && <div>Token type: {tokenInfo.tokenType}</div>}
-              {tokenInfo.tokenPrice !== '' && <div>ICO Token Price: {tokenInfo.tokenPrice}</div>}
-              {tokenInfo.fundraisingGoal !== '' && (
+              {tokenInfo.ticker && <div>Ticker: {tokenInfo.ticker}</div>}
+              {tokenInfo.tokenType && <div>Token type: {tokenInfo.tokenType}</div>}
+              {tokenInfo.tokenPrice && <div>ICO Token Price: {tokenInfo.tokenPrice}</div>}
+              {tokenInfo.fundraisingGoal && (
                 <div>Fundraising Goal: {tokenInfo.fundraisingGoal}</div>
               )}
-              {tokenInfo.totalTokens !== '' && <div>Total Tokens: {tokenInfo.totalTokens}</div>}
-              {tokenInfo.tokenSale !== '' && (
-                <div>Available for Token Sale: {tokenInfo.tokenSale}</div>
-              )}
+              {tokenInfo.totalTokens && <div>Total Tokens: {tokenInfo.totalTokens}</div>}
+              {tokenInfo.tokenSale && <div>Available for Token Sale: {tokenInfo.tokenSale}</div>}
             </div>
             <div className={s.container_role}>
               <InfoOutlinedIcon className={classes.icons} />
