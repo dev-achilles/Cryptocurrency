@@ -70,7 +70,7 @@ const Navigation = (props) => {
       error: false,
     };
     localStorage.setItem('user', JSON.stringify(userData));
-    props.dispatch(logoutUser({ name: null, isLoggedIn: false, role: null, error: false }));
+    props.dispatch(logoutUser());
   };
 
   return (
