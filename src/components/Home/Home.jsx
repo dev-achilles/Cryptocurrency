@@ -23,7 +23,7 @@ import s from './Home.module.scss';
 
 const moment = extendMoment(Moment);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     borderBottom: '1px solid rgb(119, 118, 118)',
     marginBottom: '10px',
@@ -54,6 +54,9 @@ const useStyles = makeStyles({
     minWidth: '350px',
     minHeight: '300px',
     justifyContent: 'space-between',
+    [theme.breakpoints.down(575.98)]: {
+      minWidth: '0',
+    },
   },
   deleteIcon: {
     color: 'red',
@@ -61,7 +64,7 @@ const useStyles = makeStyles({
   editIcon: {
     color: 'green',
   },
-});
+}));
 
 const Home = (props) => {
   const classes = useStyles();
@@ -148,7 +151,8 @@ const Home = (props) => {
         open={dialog.open}
         onClose={handleDialogClose}
         aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description">
+        aria-describedby="alert-dialog-description"
+        className={classes.dialogRoot}>
         <DialogTitle id="alert-dialog-title">Change fields for {dialog.role}</DialogTitle>
         <DialogContent className={classes.dialogContent}>
           <TextField
@@ -274,9 +278,7 @@ const Home = (props) => {
                   <div className={s.column_container}>
                     <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
-                      {data
-                        .filter((key) => key.column === item)
-                        .map((item) => returnColumns(item))}
+                      {data.filter((key) => key.column === item).map((item) => returnColumns(item))}
                     </div>
                   </div>
                 </React.Fragment>
@@ -288,9 +290,7 @@ const Home = (props) => {
                   <div className={s.column_container}>
                     <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
-                      {data
-                        .filter((key) => key.column === item)
-                        .map((item) => returnColumns(item))}
+                      {data.filter((key) => key.column === item).map((item) => returnColumns(item))}
                     </div>
                   </div>
                 </React.Fragment>
@@ -302,9 +302,7 @@ const Home = (props) => {
                   <div className={s.column_container}>
                     <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
-                      {data
-                        .filter((key) => key.column === item)
-                        .map((item) => returnColumns(item))}
+                      {data.filter((key) => key.column === item).map((item) => returnColumns(item))}
                     </div>
                   </div>
                 </React.Fragment>
