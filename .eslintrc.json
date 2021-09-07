@@ -15,7 +15,9 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
         "react/prop-types": "off",
