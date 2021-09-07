@@ -4,7 +4,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import { getMetricsData } from '../../actions/TableData';
+import { TableActionCreator } from '../../actions/Table/index';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
 import s from './Metrics.module.scss';
 
@@ -13,7 +13,7 @@ const Metrics = (props) => {
   const { slug } = useParams();
 
   useEffect(() => {
-    props.dispatch(getMetricsData(slug));
+    props.dispatch(TableActionCreator.getMetricsData(slug));
   }, []);
 
   return (

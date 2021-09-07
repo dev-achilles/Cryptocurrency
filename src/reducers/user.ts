@@ -1,17 +1,18 @@
-import { GET_USER, SET_ERROR, EXIT_USER } from '../constants';
+import { UserEnum, UserState, UserAction } from '../actions/User/types';
 
-const initialState = {
+const initialState: UserState = {
   name: null,
   isLoggedIn: false,
   role: null,
   error: false,
 };
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action: UserAction) => {
   switch (action.type) {
-    case GET_USER: {
-      if (JSON.parse(localStorage.getItem('user')) !== null) {
-        const data = JSON.parse(localStorage.getItem('user'));
+    case UserEnum.GET_USER: {
+      const storedData = localStorage.getItem('user');
+      if (typeof storedData === 'string') {
+        const data = JSON.parse(storedData);
         return {
           ...state,
           ...data,
@@ -22,13 +23,13 @@ const userReducer = (state = initialState, action) => {
         };
       }
     }
-    case SET_ERROR: {
+    case UserEnum.SET_ERROR: {
       return {
         ...state,
         error: action.payload,
       };
     }
-    case EXIT_USER: {
+    case UserEnum.EXIT_USER: {
       return {
         ...state,
         ...action.payload,

@@ -11,8 +11,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { GET_TABLE_DATA } from '../../constants';
-import { getTableData, setCheckedData } from '../../actions/TableData';
+import { TableEnum } from '../../actions/Table/types';
+import { TableActionCreator } from '../../actions/Table/index';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
 import notFoundIcon from '../../assets/images/favourite.svg';
 import s from './Table.module.scss';
@@ -34,7 +34,7 @@ const TableOfCurrency = (props) => {
   });
 
   useEffect(() => {
-    props.dispatch(getTableData({ type: GET_TABLE_DATA }));
+    props.dispatch(TableActionCreator.getTableData({ type: TableEnum.GET_TABLE_DATA }));
   }, []);
 
   if (tableData !== null) {
@@ -102,7 +102,7 @@ const TableOfCurrency = (props) => {
     const checked = target.checked;
     const favourites = JSON.parse(localStorage.getItem('favourites'));
 
-    props.dispatch(setCheckedData(name, checked));
+    props.dispatch(TableActionCreator.setCheckedData(name, checked));
 
     if (target.checked) {
       const data = favourites || [];

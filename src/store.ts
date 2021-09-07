@@ -14,4 +14,7 @@ const reducers = combineReducers({
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(logger, thunk)));
 
+// export type RootState = ReturnType <typeof store.getState>
+export type AppDispatch = typeof store.dispatch;
+
 export default store;

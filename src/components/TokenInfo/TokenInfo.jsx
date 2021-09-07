@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getInfoData } from '../../actions/Home';
+import { HomeActionCreator } from '../../actions/Home/index';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
@@ -29,7 +29,7 @@ const TokenInfo = (props) => {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-    props.dispatch(getInfoData(info, db.cryptocurrency));
+    props.dispatch(HomeActionCreator.getInfoData(info, db.cryptocurrency));
   }, []);
 
   return (

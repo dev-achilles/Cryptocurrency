@@ -1,18 +1,20 @@
-import { GET_TABLE_DATA, GET_METRICS_DATA, SET_CHECKED_DATA } from '../constants';
+import { TableState, TableAction, TableEnum } from '../actions/Table/types';
 
-const initialState = {
+const initialState : TableState = {
   tableData: [],
   metricsData: [],
 };
 
-const tableReducer = (state = initialState, action) => {
+const tableReducer = (state = initialState, action: TableAction) => {
   switch (action.type) {
-    case GET_TABLE_DATA: {
-      const favourites = JSON.parse(localStorage.getItem('favourites'));
+    case TableEnum.GET_TABLE_DATA: {
 
-      if (favourites) {
-        const filteredData = action.payload.map((item) => {
-          const foundCrypto = favourites.find((favourite) => favourite.id === item.id);
+      const storedData = localStorage.getItem('favourites');
+
+      if (typeof storedData === 'string') {
+        const favourites = JSON.parse(storedData);
+        const filteredData = action.payload.map((item : any) => {
+          const foundCrypto = favourites.find((favourite : any) => favourite.id === item.id);
 
           return {
             ...item,
@@ -30,13 +32,13 @@ const tableReducer = (state = initialState, action) => {
         };
       }
     }
-    case GET_METRICS_DATA: {
+    case TableEnum.GET_METRICS_DATA: {
       return {
         ...state,
         metricsData: action.payload,
       };
     }
-    case SET_CHECKED_DATA: {
+    case TableEnum.SET_CHECKED_DATA: {
       const data = [...state.tableData];
       const { id, value } = action.payload;
       data.find((item) => {

@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
-import { setError } from '../../actions/User';
+import { UserActionCreator } from '../../actions/User/index';
 
 import db from '../../db';
 
@@ -29,7 +29,7 @@ const Login = (props) => {
 
   useEffect(() => {
     return () => {
-      props.dispatch(setError(false));
+      props.dispatch(UserActionCreator.setError(false));
     };
   }, []);
 
@@ -52,7 +52,7 @@ const Login = (props) => {
           role: user.role,
         };
         localStorage.setItem('user', JSON.stringify(userData));
-        props.dispatch(setError(false));
+        props.dispatch(UserActionCreator.setError(false));
         history.push('/');
       } else {
         const userData = {
@@ -61,7 +61,7 @@ const Login = (props) => {
           role: null,
         };
         localStorage.setItem('user', JSON.stringify(userData));
-        props.dispatch(setError(true));
+        props.dispatch(UserActionCreator.setError(true));
       }
     } else {
       const userData = {
@@ -70,13 +70,13 @@ const Login = (props) => {
         role: null,
       };
       localStorage.setItem('user', JSON.stringify(userData));
-      props.dispatch(setError(true));
+      props.dispatch(UserActionCreator.setError(true));
     }
   };
 
   const resetData = () => {
     setData({ email: '', password: '' });
-    props.dispatch(setError(false));
+    props.dispatch(UserActionCreator.setError(false));
   };
 
   const handleKeyDown = (event) => {

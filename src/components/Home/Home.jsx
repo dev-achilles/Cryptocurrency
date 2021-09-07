@@ -15,8 +15,8 @@ import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 import { useHistory } from 'react-router-dom';
 import Footer from '../Footer/index';
-import { getHomeData, setHomeData } from '../../actions/Home';
-import { getUser } from '../../actions/User';
+import { HomeActionCreator } from '../../actions/Home/index';
+import { UserActionCreator } from '../../actions/User/index';
 import db from '../../db';
 
 import s from './Home.module.scss';
@@ -80,8 +80,8 @@ const Home = (props) => {
   const [dialogValues, setDialogValues] = useState(null);
 
   useEffect(() => {
-    props.dispatch(getHomeData(db.cryptocurrency));
-    props.dispatch(getUser());
+    props.dispatch(HomeActionCreator.getHomeData(db.cryptocurrency));
+    props.dispatch(UserActionCreator.getUser());
   }, []);
 
   const infoHandle = (event) => {
@@ -109,7 +109,7 @@ const Home = (props) => {
 
   const deleteItemHandle = (name) => {
     const filteredItems = data.filter((item) => item.name !== name);
-    props.dispatch(setHomeData(filteredItems));
+    props.dispatch(HomeActionCreator.setHomeData(filteredItems));
   };
 
   const handleDialogValueChange = (event) => {
@@ -127,12 +127,12 @@ const Home = (props) => {
             const itemsData = [...data];
             const index = itemsData.indexOf(item);
             itemsData[index] = { ...dialogValues };
-            props.dispatch(setHomeData([...itemsData]));
+            props.dispatch(HomeActionCreator.setHomeData([...itemsData]));
           }
         });
       }
       if (dialog.role === 'add') {
-        props.dispatch(setHomeData([...data, dialogValues]));
+        props.dispatch(HomeActionCreator.setHomeData([...data, dialogValues]));
       }
       handleDialogClose();
     } else {

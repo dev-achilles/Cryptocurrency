@@ -18,7 +18,7 @@ import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import Avatar from '@material-ui/core/Avatar';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
-import { getUser, logoutUser } from '../../actions/User';
+import { UserActionCreator } from '../../actions/User/index';
 
 import logo from '../../assets/images/logo.png';
 import s from './Navigation.module.scss';
@@ -55,7 +55,7 @@ const Navigation = (props) => {
   const [activeLink, setActiveLink] = useState();
 
   useEffect(() => {
-    props.dispatch(getUser());
+    props.dispatch(UserActionCreator.getUser());
   }, []);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const Navigation = (props) => {
       error: false,
     };
     localStorage.setItem('user', JSON.stringify(userData));
-    props.dispatch(logoutUser());
+    props.dispatch(UserActionCreator.logoutUser());
   };
 
   return (

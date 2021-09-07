@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Home from '../components/Home/index';
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = (store: any) => ({
   user: store.user,
   homeData: store.home.homeData,
 });

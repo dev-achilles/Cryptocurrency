@@ -1,39 +1,40 @@
-import Moment from 'moment';
+import * as Moment from 'moment';
 import { extendMoment } from 'moment-range';
-import { GET_HOME_DATA, SET_HOME_DATA, GET_INFO_DATA, start, end } from '../constants';
+import { HomeState, HomeAction, HomeEnum, InfoEnum } from '../actions/Home/types';
+import { start, end } from '../constants';
 
 const moment = extendMoment(Moment);
 
-const initialState = {
+const initialState: HomeState = {
   homeData: [],
   tokenInfo: {},
 };
 
-const homeReducer = (state = initialState, action) => {
+const homeReducer = (state = initialState, action: HomeAction) => {
   switch (action.type) {
-    case GET_HOME_DATA: {
+    case HomeEnum.GET_HOME_DATA: {
       const items = [...action.payload];
-      const newItems = [];
+      const newItems: Array<any> = [];
       items.forEach((item) => newItems.push(setCategoryColumn(start, end, item)));
 
       return {
         ...state,
-        homeData: [...newItems],
+        homeData: [...items],
       };
     }
-    case SET_HOME_DATA: {
+    case HomeEnum.SET_HOME_DATA: {
       const items = [...action.payload];
-      const newItems = [];
+      const newItems: Array<any> = [];
       items.forEach((item) => newItems.push(setCategoryColumn(start, end, item)));
 
       return {
         ...state,
-        homeData: [...newItems],
+        homeData: [...items],
       };
     }
-    case GET_INFO_DATA: {
+    case InfoEnum.GET_INFO_DATA: {
       const { info, data } = action.payload;
-      const item = data.find((item) => item.name === info);
+      const item = data.find((item: any) => item.name === info);
 
       return {
         ...state,
@@ -45,7 +46,7 @@ const homeReducer = (state = initialState, action) => {
   }
 };
 
-const setCategoryColumn = (start, end, Data) => {
+const setCategoryColumn = (start: any, end: any, Data: any) => {
   const current = Data.date;
   const nowDate = moment(new Date());
   const result = moment(current).isBetween(start, end, 'minutes');
