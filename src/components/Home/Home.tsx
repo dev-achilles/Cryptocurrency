@@ -11,7 +11,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
-import Moment from 'moment';
+import * as Moment from 'moment';
 import { extendMoment } from 'moment-range';
 import { useHistory } from 'react-router-dom';
 import Footer from '../Footer/index';
@@ -66,25 +66,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = (props) => {
-  const classes = useStyles();
-  const history = useHistory();
+const Home: React.FC = (props: any) => {
+  const classes: any = useStyles();
+  const history: any = useHistory();
   const data = props.homeData;
   const { isLoggedIn } = props.user;
-  const [error, setError] = useState(false);
-  const [dialog, setDialog] = useState({
+  const [error, setError] = useState<boolean>(false);
+  const [dialog, setDialog] = useState<any>({
     open: false,
     role: '',
     name: '',
   });
-  const [dialogValues, setDialogValues] = useState(null);
+  const [dialogValues, setDialogValues] = useState<any>(null);
 
   useEffect(() => {
     props.dispatch(HomeActionCreator.getHomeData(db.cryptocurrency));
     props.dispatch(UserActionCreator.getUser());
   }, []);
 
-  const infoHandle = (event) => {
+  const infoHandle = (event: any) => {
     if (
       event.target.localName !== 'svg' &&
       event.target.localName !== 'path' &&
@@ -101,18 +101,18 @@ const Home = (props) => {
     setDialogValues({ ...dialogValues, date });
   };
 
-  const editItemHandle = (name) => {
+  const editItemHandle = (name: any) => {
     setDialog({ open: true, role: 'edit', name });
-    const items = data.find((item) => item.name === name);
+    const items = data.find((item: any) => item.name === name);
     setDialogValues({ ...items });
   };
 
-  const deleteItemHandle = (name) => {
-    const filteredItems = data.filter((item) => item.name !== name);
+  const deleteItemHandle = (name: string) => {
+    const filteredItems = data.filter((item: any) => item.name !== name);
     props.dispatch(HomeActionCreator.setHomeData(filteredItems));
   };
 
-  const handleDialogValueChange = (event) => {
+  const handleDialogValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setDialogValues({ ...dialogValues, [name]: value });
   };
@@ -122,7 +122,7 @@ const Home = (props) => {
       setError(false);
       if (dialog.role === 'edit') {
         setDialog({ open: false });
-        data.forEach((item) => {
+        data.forEach((item: any) => {
           if (item.name === dialog.name) {
             const itemsData = [...data];
             const index = itemsData.indexOf(item);
@@ -226,7 +226,7 @@ const Home = (props) => {
     );
   };
 
-  const returnColumns = (item) => {
+  const returnColumns = (item: any) => {
     return (
       <React.Fragment key={item.name}>
         <Card id={item.name} className={classes.root} onClick={infoHandle}>
@@ -278,7 +278,9 @@ const Home = (props) => {
                   <div className={s.column_container}>
                     <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
-                      {data.filter((key) => key.column === item).map((item) => returnColumns(item))}
+                      {data
+                        .filter((key: any) => key.column === item)
+                        .map((item: any) => returnColumns(item))}
                     </div>
                   </div>
                 </React.Fragment>
@@ -290,7 +292,9 @@ const Home = (props) => {
                   <div className={s.column_container}>
                     <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
-                      {data.filter((key) => key.column === item).map((item) => returnColumns(item))}
+                      {data
+                        .filter((key: any) => key.column === item)
+                        .map((item: any) => returnColumns(item))}
                     </div>
                   </div>
                 </React.Fragment>
@@ -302,7 +306,9 @@ const Home = (props) => {
                   <div className={s.column_container}>
                     <div className={s.title}>{item}</div>
                     <div className={s.column_content}>
-                      {data.filter((key) => key.column === item).map((item) => returnColumns(item))}
+                      {data
+                        .filter((key: any) => key.column === item)
+                        .map((item: any) => returnColumns(item))}
                     </div>
                   </div>
                 </React.Fragment>

@@ -48,11 +48,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Navigation = (props) => {
+const Navigation: React.FC = (props: any) => {
   const classes = useStyles();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState();
+  const [activeLink, setActiveLink] = useState<any>();
 
   useEffect(() => {
     props.dispatch(UserActionCreator.getUser());

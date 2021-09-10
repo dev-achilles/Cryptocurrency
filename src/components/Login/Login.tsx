@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { UserActionCreator } from '../../actions/User/index';
+import CSS from 'csstype';
 
 import db from '../../db';
 
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = (props) => {
+const Login: React.FC = (props: any) => {
   const classes = useStyles();
   const history = useHistory();
   const [data, setData] = useState({
@@ -33,7 +34,7 @@ const Login = (props) => {
     };
   }, []);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
 
     setData({
@@ -42,8 +43,8 @@ const Login = (props) => {
     });
   };
 
-  const loginHandle = (email, password) => {
-    const user = db.users.find((item) => item.email === email);
+  const loginHandle = (email: string, password: string | number) => {
+    const user = db.users.find((item: any) => item.email === email);
     if (user) {
       if (user.password === password) {
         const userData = {
@@ -79,15 +80,19 @@ const Login = (props) => {
     props.dispatch(UserActionCreator.setError(false));
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 13) {
       loginHandle(data.email, data.password);
     }
   };
 
+  const containerStyle: CSS.Properties = {
+    flexDirection: 'column',
+  };
+
   return (
     <div className={s.wrapper} onKeyDown={handleKeyDown}>
-      <div className="container" style={{ 'flex-direction': 'column' }}>
+      <div className="container" style={containerStyle}>
         <div className={s.title}>Login</div>
         <div className={s.login_container}>
           <form className={classes.root} noValidate>
@@ -99,7 +104,6 @@ const Login = (props) => {
                 type="email"
                 value={data.email}
                 autoComplete="current-email"
-                width="300px"
                 onChange={handleInputChange}
                 error={props.user.error}
                 helperText={props.user.error ? 'Incorrect login' : null}

@@ -1,4 +1,4 @@
-const data: Object = {
+const data: Data = {
   cryptocurrency: [
     {
       name: 'MyCryptoCheckout',
@@ -370,5 +370,10 @@ const data: Object = {
     { name: 'Vladimir', email: 'vova@gmail.com', password: '123456', role: 'user' },
   ],
 };
+
+interface Data {
+  cryptocurrency: Array<any>;
+  users: Array<any>;
+}
 
 export default data;

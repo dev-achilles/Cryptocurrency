@@ -11,20 +11,19 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { TableEnum } from '../../actions/Table/types';
 import { TableActionCreator } from '../../actions/Table/index';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
 import notFoundIcon from '../../assets/images/favourite.svg';
 import s from './Table.module.scss';
 
-const TableOfCurrency = (props) => {
+const TableOfCurrency: React.FC = (props: any) => {
   const classes = useStyles();
   const history = useHistory();
   const { tableData } = props;
 
-  const [open, setOpen] = useState(false);
-  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
-  const [check, setCheck] = useState({
+  const [open, setOpen] = useState<boolean>(false);
+  const [sortConfig, setSortConfig] = useState<any>({ key: '', direction: '' });
+  const [check, setCheck] = useState<any>({
     fields: [
       { name: 'ID', value: 'id', isChecked: true },
       { name: 'Slug', value: 'slug', isChecked: true },
@@ -34,12 +33,12 @@ const TableOfCurrency = (props) => {
   });
 
   useEffect(() => {
-    props.dispatch(TableActionCreator.getTableData({ type: TableEnum.GET_TABLE_DATA }));
+    props.dispatch(TableActionCreator.getTableData());
   }, []);
 
   if (tableData !== null) {
     if (sortConfig.type === 'string') {
-      tableData.sort((a, b) => {
+      tableData.sort((a: any, b: any) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
           return sortConfig.direction === 'ascending' ? -1 : 1;
         }
@@ -51,7 +50,7 @@ const TableOfCurrency = (props) => {
     }
 
     if (sortConfig.type === 'number') {
-      tableData.sort((a, b) => {
+      tableData.sort((a: any, b: any) => {
         if (sortConfig.direction === 'descending') {
           return b[sortConfig.key].market_data.price_usd - a[sortConfig.key].market_data.price_usd;
         }
@@ -62,7 +61,7 @@ const TableOfCurrency = (props) => {
     }
   }
 
-  const handleSort = (event) => {
+  const handleSort = (event: any) => {
     switch (event.target.innerText) {
       case 'ID':
         return requestSort({ key: 'id', type: 'string' });
@@ -75,7 +74,7 @@ const TableOfCurrency = (props) => {
     }
   };
 
-  const requestSort = (data) => {
+  const requestSort = (data: any) => {
     let direction = 'ascending';
     if (sortConfig.key === data.key && sortConfig.direction === 'ascending') {
       direction = 'descending';
@@ -83,7 +82,7 @@ const TableOfCurrency = (props) => {
     setSortConfig({ ...data, direction });
   };
 
-  const setActiveIcon = (name) => {
+  const setActiveIcon = (name: string) => {
     switch (name) {
       case 'ID':
         return 'id';
@@ -96,11 +95,15 @@ const TableOfCurrency = (props) => {
     }
   };
 
-  const checkBoxHandler = (event) => {
+  const checkBoxHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target;
     const name = target.name;
     const checked = target.checked;
-    const favourites = JSON.parse(localStorage.getItem('favourites'));
+    const storedData = localStorage.getItem('favourites');
+    let favourites = null;
+    if (typeof storedData === 'string') {
+      favourites = JSON.parse(storedData);
+    }
 
     props.dispatch(TableActionCreator.setCheckedData(name, checked));
 
@@ -112,17 +115,17 @@ const TableOfCurrency = (props) => {
       localStorage.setItem('favourites', JSON.stringify(data));
     } else {
       const data = favourites;
-      const foundFavourite = data.find((item) => item.id === name);
+      const foundFavourite = data.find((item: any) => item.id === name);
       if (foundFavourite) {
-        const filtered = data.filter((item) => item.id !== foundFavourite.id);
+        const filtered = data.filter((item: any) => item.id !== foundFavourite.id);
         localStorage.setItem('favourites', JSON.stringify(filtered));
       }
     }
   };
 
-  const handleCheckChieldElement = (event) => {
+  const handleCheckChieldElement = (event: any) => {
     const fields = check.fields;
-    fields.forEach((fields) => {
+    fields.forEach((fields: any) => {
       if (fields.value === event.target.value) fields.isChecked = event.target.checked;
     });
     setCheck({ fields });
@@ -131,8 +134,8 @@ const TableOfCurrency = (props) => {
   const setTableCells = () => {
     const cells = check.fields;
     return cells
-      .filter((item) => item.isChecked)
-      .map((item) => (
+      .filter((item: any) => item.isChecked)
+      .map((item: any) => (
         <StyledTableCell key={item.id} align="center" onClick={handleSort}>
           <div className={s.table_cell}>
             {item.name}
@@ -148,7 +151,7 @@ const TableOfCurrency = (props) => {
       ));
   };
 
-  const metricsHandler = (event) => {
+  const metricsHandler = (event: any) => {
     if (!event.target.name) {
       const slug = event.currentTarget.id;
       history.push(`/metrics/${slug}`);
@@ -156,8 +159,8 @@ const TableOfCurrency = (props) => {
   };
 
   const actualCells = () => {
-    const selectColumns = (value) => {
-      const field = check.fields.find((item) => item.value === value);
+    const selectColumns = (value: any) => {
+      const field = check.fields.find((item: any) => item.value === value);
       return field.isChecked;
     };
 
@@ -165,8 +168,8 @@ const TableOfCurrency = (props) => {
       <>
         {props.favourite
           ? tableData
-              .filter((item) => item.checked === true)
-              .map((row, index) => (
+              .filter((item: any) => item.checked === true)
+              .map((row: any, index: number) => (
                 <StyledTableRow key={index} onClick={metricsHandler} id={row.slug}>
                   {row.id && selectColumns('id') ? (
                     <StyledTableCell align="center">
@@ -199,7 +202,7 @@ const TableOfCurrency = (props) => {
                   ) : null}
                 </StyledTableRow>
               ))
-          : tableData.map((row, index) => (
+          : tableData.map((row: any, index: number) => (
               <StyledTableRow key={index} onClick={metricsHandler} id={row.slug}>
                 {row.id && selectColumns('id') ? (
                   <StyledTableCell align="center">
@@ -264,7 +267,7 @@ const TableOfCurrency = (props) => {
             aria-describedby="alert-dialog-description"
             max-width="lg">
             <DialogTitle>Please Select Columns</DialogTitle>
-            {check.fields.map((item) => (
+            {check.fields.map((item: any) => (
               <div key={item.id}>
                 <Checkbox
                   inputProps={{ 'aria-label': 'primary checkbox' }}
@@ -286,7 +289,7 @@ const TableOfCurrency = (props) => {
               <CircularProgress />
             </div>
           ) : props.favourite ? (
-            tableData.filter((item) => item.checked).length !== 0 ? (
+            tableData.filter((item: any) => item.checked).length !== 0 ? (
               <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                   <StyledTableRow>{setTableCells()}</StyledTableRow>

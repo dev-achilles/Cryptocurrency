@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TokenInfo = (props) => {
+const TokenInfo: React.FC = (props: any) => {
   const classes = useStyles();
-  const { info } = useParams();
+  const { info } = useParams<any>();
   const { tokenInfo } = props;
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState<boolean>(true);
 
   useEffect(() => {
     props.dispatch(HomeActionCreator.getInfoData(info, db.cryptocurrency));
@@ -102,7 +102,7 @@ const TokenInfo = (props) => {
                   <div>Links:</div>
                 </div>
                 <div className={s.links}>
-                  {tokenInfo.links.map((item, index) => (
+                  {tokenInfo.links.map((item: any, index: number) => (
                     <a href={item.link} key={index}>
                       {item.name}
                     </a>
