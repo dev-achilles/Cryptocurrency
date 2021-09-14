@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { UserActionCreator } from '../../actions/User/index';
 import CSS from 'csstype';
 
+import { Props, LoginDataType, UserType } from '../../types/LoginTypes';
 import db from '../../db';
 
 import s from './Login.module.scss';
@@ -20,10 +21,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login: React.FC = (props: any) => {
+const Login: React.FC<Props> = (props) => {
   const classes = useStyles();
   const history = useHistory();
-  const [data, setData] = useState({
+  const [data, setData] = useState<LoginDataType>({
     email: '',
     password: '',
   });
@@ -44,7 +45,7 @@ const Login: React.FC = (props: any) => {
   };
 
   const loginHandle = (email: string, password: string | number) => {
-    const user = db.users.find((item: any) => item.email === email);
+    const user = db.users.find((user: UserType) => user.email === email);
     if (user) {
       if (user.password === password) {
         const userData = {

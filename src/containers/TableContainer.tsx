@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import TableOfCurrency from '../components/Table/index';
 
-const mapStateToProps = (store, ownProps) => ({
+const mapStateToProps = (store: any, ownProps: any) => ({
   tableData: store.table.tableData,
   favourite: ownProps.favourite,
 });

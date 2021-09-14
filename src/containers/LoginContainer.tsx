@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Login from '../components/Login/index';
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = (store: any) => ({
   user: store.user,
 });
 

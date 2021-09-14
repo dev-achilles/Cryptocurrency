@@ -8,6 +8,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import Footer from '../Footer/index';
+import { Props, ParamTypes } from '../../types/TokenInfoTypes';
 import db from '../../db';
 
 import s from './TokenInfo.module.scss';
@@ -22,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TokenInfo: React.FC = (props: any) => {
+const TokenInfo: React.FC<Props> = (props) => {
   const classes = useStyles();
-  const { info } = useParams<any>();
+  const { info } = useParams<ParamTypes>();
   const { tokenInfo } = props;
   const [loader, setLoader] = useState<boolean>(true);
 

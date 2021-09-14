@@ -18,7 +18,7 @@ const App = () => (
         </Route>
         <Route path="/table">
           <NavigationContainer />
-          <TableContainer />
+          <TableContainer favourite={false} />
         </Route>
         <Route path="/favourite">
           <NavigationContainer />

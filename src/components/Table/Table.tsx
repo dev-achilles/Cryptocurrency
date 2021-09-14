@@ -13,6 +13,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { TableActionCreator } from '../../actions/Table/index';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
+import { SortConfigType, CheckArray, DataTypes, CheckTypes } from '../../types/TableTypes';
 import notFoundIcon from '../../assets/images/favourite.svg';
 import s from './Table.module.scss';
 
@@ -22,8 +23,12 @@ const TableOfCurrency: React.FC = (props: any) => {
   const { tableData } = props;
 
   const [open, setOpen] = useState<boolean>(false);
-  const [sortConfig, setSortConfig] = useState<any>({ key: '', direction: '' });
-  const [check, setCheck] = useState<any>({
+  const [sortConfig, setSortConfig] = useState<SortConfigType>({
+    key: '',
+    direction: '',
+    type: '',
+  });
+  const [check, setCheck] = useState<CheckArray>({
     fields: [
       { name: 'ID', value: 'id', isChecked: true },
       { name: 'Slug', value: 'slug', isChecked: true },
@@ -31,6 +36,8 @@ const TableOfCurrency: React.FC = (props: any) => {
       { name: 'Price (USD)', value: 'metrics', isChecked: true },
     ],
   });
+
+  console.log(props);
 
   useEffect(() => {
     props.dispatch(TableActionCreator.getTableData());
@@ -74,7 +81,7 @@ const TableOfCurrency: React.FC = (props: any) => {
     }
   };
 
-  const requestSort = (data: any) => {
+  const requestSort = (data: SortConfigType) => {
     let direction = 'ascending';
     if (sortConfig.key === data.key && sortConfig.direction === 'ascending') {
       direction = 'descending';
@@ -115,9 +122,9 @@ const TableOfCurrency: React.FC = (props: any) => {
       localStorage.setItem('favourites', JSON.stringify(data));
     } else {
       const data = favourites;
-      const foundFavourite = data.find((item: any) => item.id === name);
+      const foundFavourite = data.find((item: DataTypes) => item.id === name);
       if (foundFavourite) {
-        const filtered = data.filter((item: any) => item.id !== foundFavourite.id);
+        const filtered = data.filter((item: DataTypes) => item.id !== foundFavourite.id);
         localStorage.setItem('favourites', JSON.stringify(filtered));
       }
     }
@@ -125,7 +132,7 @@ const TableOfCurrency: React.FC = (props: any) => {
 
   const handleCheckChieldElement = (event: any) => {
     const fields = check.fields;
-    fields.forEach((fields: any) => {
+    fields.forEach((fields: CheckTypes) => {
       if (fields.value === event.target.value) fields.isChecked = event.target.checked;
     });
     setCheck({ fields });
@@ -134,9 +141,9 @@ const TableOfCurrency: React.FC = (props: any) => {
   const setTableCells = () => {
     const cells = check.fields;
     return cells
-      .filter((item: any) => item.isChecked)
-      .map((item: any) => (
-        <StyledTableCell key={item.id} align="center" onClick={handleSort}>
+      .filter((item: CheckTypes) => item.isChecked)
+      .map((item: CheckTypes, index: number) => (
+        <StyledTableCell key={index} align="center" onClick={handleSort}>
           <div className={s.table_cell}>
             {item.name}
             {setActiveIcon(item.name) === sortConfig.key ? (
@@ -159,17 +166,17 @@ const TableOfCurrency: React.FC = (props: any) => {
   };
 
   const actualCells = () => {
-    const selectColumns = (value: any) => {
-      const field = check.fields.find((item: any) => item.value === value);
-      return field.isChecked;
+    const selectColumns = (value: string) => {
+      const field = check.fields.find((item: CheckTypes) => item.value === value);
+      if (field !== undefined) return field.isChecked;
     };
 
     return (
       <>
         {props.favourite
           ? tableData
-              .filter((item: any) => item.checked === true)
-              .map((row: any, index: number) => (
+              .filter((item: DataTypes) => item.checked === true)
+              .map((row: DataTypes, index: number) => (
                 <StyledTableRow key={index} onClick={metricsHandler} id={row.slug}>
                   {row.id && selectColumns('id') ? (
                     <StyledTableCell align="center">
@@ -202,7 +209,7 @@ const TableOfCurrency: React.FC = (props: any) => {
                   ) : null}
                 </StyledTableRow>
               ))
-          : tableData.map((row: any, index: number) => (
+          : tableData.map((row: DataTypes, index: number) => (
               <StyledTableRow key={index} onClick={metricsHandler} id={row.slug}>
                 {row.id && selectColumns('id') ? (
                   <StyledTableCell align="center">
@@ -267,8 +274,8 @@ const TableOfCurrency: React.FC = (props: any) => {
             aria-describedby="alert-dialog-description"
             max-width="lg">
             <DialogTitle>Please Select Columns</DialogTitle>
-            {check.fields.map((item: any) => (
-              <div key={item.id}>
+            {check.fields.map((item: CheckTypes, index: number) => (
+              <div key={index}>
                 <Checkbox
                   inputProps={{ 'aria-label': 'primary checkbox' }}
                   onChange={handleCheckChieldElement}
@@ -289,7 +296,7 @@ const TableOfCurrency: React.FC = (props: any) => {
               <CircularProgress />
             </div>
           ) : props.favourite ? (
-            tableData.filter((item: any) => item.checked).length !== 0 ? (
+            tableData.filter((item: DataTypes) => item.checked).length !== 0 ? (
               <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                   <StyledTableRow>{setTableCells()}</StyledTableRow>

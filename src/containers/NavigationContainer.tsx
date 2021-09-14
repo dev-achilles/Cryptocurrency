@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Navigation from '../components/Navigation/index';
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = (store: any) => ({
   user: store.user,
 });
 
