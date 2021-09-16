@@ -28,7 +28,7 @@ export const TableActionCreator = {
       console.log(e);
     }
   },
-  getMetricsData: (slug: any) => async (dispatch: AppDispatch) => {
+  getMetricsData: (slug: String) => async (dispatch: AppDispatch) => {
     try {
       const responce = await axios.get(`https://data.messari.io/api/v1/assets/${slug}/metrics`);
       dispatch(TableActionCreator.setMetricsData(responce.data));
