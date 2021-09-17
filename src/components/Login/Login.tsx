@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Alert from '@material-ui/lab/Alert';
+import AlertTitle from '@material-ui/lab/AlertTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { UserActionCreator } from '../../actions/User/index';
 import CSS from 'csstype';
 
-import { Props, LoginDataType, UserType } from '../../types/LoginTypes';
-import db from '../../db';
+import { LoginDataType } from '../../types/LoginTypes';
 
 import s from './Login.module.scss';
 
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login: React.FC<Props> = (props) => {
+const Login: React.FC = (props: any) => {
   const classes = useStyles();
   const history = useHistory();
   const [data, setData] = useState<LoginDataType>({
@@ -45,35 +47,7 @@ const Login: React.FC<Props> = (props) => {
   };
 
   const loginHandle = (email: string, password: string | number) => {
-    const user = db.users.find((user: UserType) => user.email === email);
-    if (user) {
-      if (user.password === password) {
-        const userData = {
-          name: user.name,
-          isLoggedIn: true,
-          role: user.role,
-        };
-        localStorage.setItem('user', JSON.stringify(userData));
-        props.dispatch(UserActionCreator.setError(false));
-        history.push('/');
-      } else {
-        const userData = {
-          name: null,
-          isLoggedIn: false,
-          role: null,
-        };
-        localStorage.setItem('user', JSON.stringify(userData));
-        props.dispatch(UserActionCreator.setError(true));
-      }
-    } else {
-      const userData = {
-        name: null,
-        isLoggedIn: false,
-        role: null,
-      };
-      localStorage.setItem('user', JSON.stringify(userData));
-      props.dispatch(UserActionCreator.setError(true));
-    }
+    props.dispatch(UserActionCreator.loginUser(email, password));
   };
 
   const resetData = () => {
@@ -85,6 +59,11 @@ const Login: React.FC<Props> = (props) => {
     if (event.keyCode === 13) {
       loginHandle(data.email, data.password);
     }
+  };
+
+  const redirectToHome = () => {
+    setTimeout(() => history.push('/'), 4000);
+    return <div className={s.redirect}>Redirect to home...</div>;
   };
 
   const containerStyle: CSS.Properties = {
@@ -145,6 +124,19 @@ const Login: React.FC<Props> = (props) => {
             </Button>
           </div>
         </div>
+        <div className={s.register_container}>
+          <NavLink to="/register">Create an account</NavLink>
+        </div>
+        {props.user.error && (
+          <div className={s.error_Alert}>
+            <Alert severity="error">
+              <AlertTitle>
+                <strong>You typed incorrect values</strong>
+              </AlertTitle>
+            </Alert>
+          </div>
+        )}
+        {props.user.token && redirectToHome()}
       </div>
     </div>
   );

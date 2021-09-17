@@ -1,4 +1,5 @@
 export interface UserState {
+  token: string | null;
   name: any;
   isLoggedIn: boolean;
   role: any;
@@ -9,6 +10,8 @@ export enum UserEnum {
   GET_USER = 'GET_USER',
   SET_ERROR = 'SET_ERROR',
   EXIT_USER = 'EXIT_USER',
+  LOGIN_USER = 'LOGIN_USER',
+  SET_USER = 'SET_USER',
 }
 
 export interface getUserAction {
@@ -25,4 +28,25 @@ export interface logoutUserAction {
   payload: UserState;
 }
 
-export type UserAction = getUserAction | setErrorAction | logoutUserAction;
+export interface loginUserAction {
+  type: UserEnum.LOGIN_USER;
+  payload: any;
+}
+
+export interface setUserDataAction {
+  type: UserEnum.SET_USER;
+  payload: any;
+}
+
+export interface Request {
+  data: {
+    token: string;
+  };
+}
+
+export type UserAction =
+  | getUserAction
+  | setErrorAction
+  | logoutUserAction
+  | loginUserAction
+  | setUserDataAction;
