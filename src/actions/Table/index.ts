@@ -1,5 +1,5 @@
-import { AppDispatch } from './../../store';
 import axios from 'axios';
+import { AppDispatch } from './../../store';
 import {
   TableEnum,
   setCheckedDataAction,

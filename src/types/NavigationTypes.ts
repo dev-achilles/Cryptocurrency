@@ -7,5 +7,6 @@ export type Props = {
     isLoggedIn: boolean;
     name: string | null;
     role: string | null;
+    token: any;
   };
 };

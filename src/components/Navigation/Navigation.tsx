@@ -19,7 +19,6 @@ import Avatar from '@material-ui/core/Avatar';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
 import { UserActionCreator } from '../../actions/User/index';
-import { Props } from '../../types/NavigationTypes';
 
 import logo from '../../assets/images/logo.png';
 import s from './Navigation.module.scss';
@@ -49,7 +48,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Navigation: React.FC<Props> = (props) => {
+const Navigation: React.FC = (props: any) => {
   const classes = useStyles();
   const location = useLocation();
   const [open, setOpen] = useState<boolean>(false);
@@ -60,17 +59,17 @@ const Navigation: React.FC<Props> = (props) => {
   }, []);
 
   useEffect(() => {
+    if (props.user.token) {
+      props.dispatch(UserActionCreator.getUserData(props.user.token));
+    }
+  }, [props.user.token]);
+
+  useEffect(() => {
     setActiveLink(location.pathname);
   }, [location]);
 
   const logoutHandle = () => {
-    const userData = {
-      name: null,
-      isLoggedIn: false,
-      role: null,
-      error: false,
-    };
-    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('token', '');
     props.dispatch(UserActionCreator.logoutUser());
   };
 
