@@ -7,6 +7,7 @@ import LoginContainer from './containers/LoginContainer';
 import NavigationContainer from './containers/NavigationContainer';
 import HomeContainer from './containers/HomeContainer';
 import TokenInfoContainer from './containers/TokenInfoContainer';
+import RegisterContainer from './containers/RegisterContainer';
 
 const App = () => (
   <div className="wrapper">
@@ -27,6 +28,10 @@ const App = () => (
         <Route path="/login">
           <NavigationContainer />
           <LoginContainer />
+        </Route>
+        <Route path="/register">
+          <NavigationContainer />
+          <RegisterContainer />
         </Route>
         <Route path="/metrics/:slug">
           <NavigationContainer />
