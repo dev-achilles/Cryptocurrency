@@ -6,6 +6,9 @@ import AlertTitle from '@material-ui/lab/AlertTitle';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { RegisterActionCreator } from '../../actions/Register/index';
+
+import { Data } from '../../types/RegisterTypes';
+
 import CSS from 'csstype';
 
 import s from './Register.module.scss';
@@ -23,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const Register: React.FC = (props: any) => {
   const classes = useStyles();
   const history = useHistory();
-  const [data, setData] = useState<any>({
+  const [data, setData] = useState<Data>({
     name: '',
     email: '',
     password: '',
@@ -46,12 +49,8 @@ const Register: React.FC = (props: any) => {
     });
   };
 
-  const registerHandle = (
-    name: string,
-    email: string,
-    password: string | number,
-    password_2: string | number,
-  ) => {
+  const registerHandle = (data: Data) => {
+    const { name, email, password, password_2 } = data;
     if (password === password_2) {
       const user = {
         name,
@@ -153,7 +152,7 @@ const Register: React.FC = (props: any) => {
               variant="contained"
               color="primary"
               className={s.button_login}
-              onClick={() => registerHandle(data.name, data.email, data.password, data.password_2)}>
+              onClick={() => registerHandle(data)}>
               Register
             </Button>
           </div>
@@ -162,7 +161,9 @@ const Register: React.FC = (props: any) => {
           <div className={s.error_Alert}>
             <Alert severity="error">
               <AlertTitle>
-                <strong>{props.register.message}</strong>
+                <strong>
+                  {props.register.message === '' ? 'Passwords incorrect' : props.register.message}
+                </strong>
               </AlertTitle>
             </Alert>
           </div>
