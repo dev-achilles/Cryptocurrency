@@ -49,7 +49,7 @@ const userReducer = (state = initialState, action: UserAction) => {
       return {
         ...state,
         name: action.payload.name,
-        isLoggedIn: true
+        isLoggedIn: true,
       };
     }
     default:

@@ -21,14 +21,13 @@ export const RegisterActionCreator = {
       dispatch(RegisterActionCreator.setError(false));
       dispatch(RegisterActionCreator.setSuccess(true));
     } catch (error) {
-      dispatch(RegisterActionCreator.registerUser({ message: 'You typed incorrect values' }));
-      dispatch(RegisterActionCreator.setError(true));
+      dispatch(RegisterActionCreator.setError(true, 'You typed incorrect values'));
       dispatch(RegisterActionCreator.setSuccess(false));
     }
   },
-  setError: (error: boolean): registerSetError => ({
-    type: RegisterEnum.SET_ERROR,
-    payload: error,
+  setError: (error: boolean, message?: string): registerSetError => ({
+    type: RegisterEnum.SET_REGISTER_ERROR,
+    payload: { error, message },
   }),
   setSuccess: (success: boolean): successRegister => ({
     type: RegisterEnum.SUCCESS_REGISTER,

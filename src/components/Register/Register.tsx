@@ -35,7 +35,7 @@ const Register: React.FC = (props: any) => {
 
   useEffect(() => {
     return () => {
-      props.dispatch(RegisterActionCreator.setError(false));
+      props.dispatch(RegisterActionCreator.setError(false, ''));
       props.dispatch(RegisterActionCreator.setSuccess(false));
     };
   }, []);
@@ -59,7 +59,7 @@ const Register: React.FC = (props: any) => {
       };
       props.dispatch(RegisterActionCreator.setRegisterUser(user));
     } else {
-      props.dispatch(RegisterActionCreator.setError(true));
+      props.dispatch(RegisterActionCreator.setError(true, 'Passwords incorrect'));
     }
   };
 
@@ -85,7 +85,7 @@ const Register: React.FC = (props: any) => {
           <form className={classes.root} noValidate>
             <div className={s.email}>
               <TextField
-                id="standard-password-input"
+                id="Name"
                 label="Name"
                 name="name"
                 type="text"
@@ -98,7 +98,7 @@ const Register: React.FC = (props: any) => {
             </div>
             <div className={s.email}>
               <TextField
-                id="standard-password-input"
+                id="Email"
                 label="Email"
                 name="email"
                 type="email"
@@ -111,7 +111,7 @@ const Register: React.FC = (props: any) => {
             </div>
             <div className={s.password}>
               <TextField
-                id="standard-password-input"
+                id="Password"
                 label="Password"
                 name="password"
                 value={data.password}
@@ -124,7 +124,7 @@ const Register: React.FC = (props: any) => {
             </div>
             <div className={s.password}>
               <TextField
-                id="standard-password-input"
+                id="Password_2"
                 label="Repeat password"
                 name="password_2"
                 value={data.password_2}
@@ -161,9 +161,7 @@ const Register: React.FC = (props: any) => {
           <div className={s.error_Alert}>
             <Alert severity="error">
               <AlertTitle>
-                <strong>
-                  {props.register.message === '' ? 'Passwords incorrect' : props.register.message}
-                </strong>
+                <strong>{props.register.message}</strong>
               </AlertTitle>
             </Alert>
           </div>

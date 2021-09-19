@@ -14,11 +14,21 @@ const registerReducer = (state = initialState, action: RegisterAction) => {
         message: action.payload,
       };
     }
-    case RegisterEnum.SET_ERROR: {
-      return {
-        ...state,
-        error: action.payload,
-      };
+    case RegisterEnum.SET_REGISTER_ERROR: {
+      const { error, message } = action.payload;
+      if (message === undefined) {
+        return {
+          ...state,
+          error: error,
+          message: state.message,
+        };
+      } else {
+        return {
+          ...state,
+          error: error,
+          message: message,
+        };
+      }
     }
     case RegisterEnum.SUCCESS_REGISTER: {
       return {

@@ -6,7 +6,7 @@ export interface RegisterState {
 
 export enum RegisterEnum {
   REGISTER_USER = 'REGISTER_USER',
-  SET_ERROR = 'SET_ERROR',
+  SET_REGISTER_ERROR = 'SET_REGISTER_ERROR',
   SUCCESS_REGISTER = 'SUCCESS_REGISTER',
 }
 
@@ -16,8 +16,11 @@ export interface registerUserAction {
 }
 
 export interface registerSetError {
-  type: RegisterEnum.SET_ERROR;
-  payload: boolean;
+  type: RegisterEnum.SET_REGISTER_ERROR;
+  payload: {
+    error: boolean;
+    message?: string | null;
+  };
 }
 
 export interface successRegister {
