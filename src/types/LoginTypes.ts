@@ -13,7 +13,7 @@ export type Props = {
 
 export type LoginDataType = {
   email: string;
-  password: string | number;
+  password: string;
 };
 
 export type UserType = {

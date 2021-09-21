@@ -37,8 +37,6 @@ const TableOfCurrency: React.FC = (props: any) => {
     ],
   });
 
-  console.log(props);
-
   useEffect(() => {
     props.dispatch(TableActionCreator.getTableData());
   }, []);
