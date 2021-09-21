@@ -23,6 +23,7 @@ export const UserActionCreator = {
         `http://hofenterprise.com/users/login/app?email=${email}&password=${password}`,
       );
       dispatch(UserActionCreator.setUserToken(responce));
+      dispatch(UserActionCreator.setError(false));
     } catch (e) {
       dispatch(UserActionCreator.setError(true));
     }
