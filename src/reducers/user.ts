@@ -4,7 +4,7 @@ const initialState: UserState = {
   token: null,
   name: null,
   isLoggedIn: false,
-  role: 'admin',
+  role: null,
   error: false,
 };
 
@@ -50,6 +50,7 @@ const userReducer = (state = initialState, action: UserAction) => {
         ...state,
         name: action.payload.name,
         isLoggedIn: true,
+        role: 'admin',
       };
     }
     default:

@@ -16,8 +16,8 @@ export const UserActionCreator = {
     type: UserEnum.LOGIN_USER,
     payload: res.data.token,
   }),
-  setUserData: (res: any): setUserDataAction => ({ type: UserEnum.SET_USER, payload: res }),
-  loginUser: (email: any, password: any) => async (dispatch: AppDispatch) => {
+  setUserData: (res: string): setUserDataAction => ({ type: UserEnum.SET_USER, payload: res }),
+  loginUser: (email: string, password: string) => async (dispatch: AppDispatch) => {
     try {
       const responce = await axios.post(
         `http://hofenterprise.com/users/login/app?email=${email}&password=${password}`,
@@ -28,7 +28,7 @@ export const UserActionCreator = {
       dispatch(UserActionCreator.setError(true));
     }
   },
-  getUserData: (token: any) => async (dispatch: AppDispatch) => {
+  getUserData: (token: string) => async (dispatch: AppDispatch) => {
     try {
       const config = {
         headers: {

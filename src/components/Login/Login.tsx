@@ -46,7 +46,7 @@ const Login: React.FC = (props: any) => {
     });
   };
 
-  const loginHandle = (email: string, password: string | number) => {
+  const loginHandle = (email: string, password: string) => {
     props.dispatch(UserActionCreator.loginUser(email, password));
   };
 
