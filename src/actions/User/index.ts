@@ -1,5 +1,5 @@
+import { Dispatch } from 'redux';
 import axios from 'axios';
-import { AppDispatch } from '../../store';
 import {
   UserEnum,
   setErrorAction,
@@ -17,7 +17,7 @@ export const UserActionCreator = {
     payload: res.data.token,
   }),
   setUserData: (res: string): setUserDataAction => ({ type: UserEnum.SET_USER, payload: res }),
-  loginUser: (email: string, password: string) => async (dispatch: AppDispatch) => {
+  loginUser: (email: string, password: string) => async (dispatch: Dispatch<any>) => {
     try {
       const responce = await axios.post(
         `http://hofenterprise.com/users/login/app?email=${email}&password=${password}`,
@@ -28,7 +28,7 @@ export const UserActionCreator = {
       dispatch(UserActionCreator.setError(true));
     }
   },
-  getUserData: (token: string) => async (dispatch: AppDispatch) => {
+  getUserData: (token: string) => async (dispatch: Dispatch<any>) => {
     try {
       const config = {
         headers: {

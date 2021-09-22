@@ -1,5 +1,5 @@
+import { Dispatch } from 'redux';
 import axios from 'axios';
-import { AppDispatch } from './../../store';
 import {
   TableEnum,
   setCheckedDataAction,
@@ -18,7 +18,7 @@ export const TableActionCreator = {
     type: TableEnum.SET_CHECKED_DATA,
     payload: { id, value },
   }),
-  getTableData: () => async (dispatch: AppDispatch) => {
+  getTableData: () => async (dispatch: Dispatch<any>) => {
     try {
       const responce = await axios.get(
         'https://data.messari.io/api/v1/assets?fields=id,slug,symbol,metrics/market_data/price_usd',
@@ -28,7 +28,7 @@ export const TableActionCreator = {
       console.log(e);
     }
   },
-  getMetricsData: (slug: String) => async (dispatch: AppDispatch) => {
+  getMetricsData: (slug: string) => async (dispatch: Dispatch<any>) => {
     try {
       const responce = await axios.get(`https://data.messari.io/api/v1/assets/${slug}/metrics`);
       dispatch(TableActionCreator.setMetricsData(responce.data));

@@ -1,9 +1,9 @@
-import { AppDispatch } from './../store';
+import { Dispatch } from 'redux';
 
 export type SortConfigType = {
   key: string;
   direction?: string;
-  type: string;
+  type?: string;
 };
 
 export type CheckTypes = {
@@ -17,9 +17,9 @@ export type CheckArray = {
 };
 
 export type Props = {
-  dispatch: AppDispatch;
+  dispatch: Dispatch<any>;
   favourite: boolean;
-  tableData: DataTypes[];
+  tableData: Array<any>;
 };
 
 export type DataTypes = {

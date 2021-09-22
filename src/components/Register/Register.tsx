@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { RegisterActionCreator } from '../../actions/Register/index';
 
-import { Data } from '../../types/RegisterTypes';
+import { Data, Props } from '../../types/RegisterTypes';
 
 import CSS from 'csstype';
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register: React.FC = (props: any) => {
+const Register: React.FC<Props> = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const [data, setData] = useState<Data>({

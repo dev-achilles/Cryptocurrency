@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="content"
+    >
+      <div
+        className="column_container"
+      >
+        <div
+          className="title"
+        >
+          Active
+        </div>
+        <div
+          className="column_content"
+        />
+      </div>
+      <div
+        className="column_container"
+      >
+        <div
+          className="title"
+        >
+          Upcoming
+        </div>
+        <div
+          className="column_content"
+        />
+      </div>
+      <div
+        className="column_container"
+      >
+        <div
+          className="title"
+        >
+          Ended
+        </div>
+        <div
+          className="column_content"
+        />
+      </div>
+    </div>
+    <div
+      className="add_button"
+    >
+      Add new column
+      <button
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+    <div
+      className="footer_container"
+    >
+      <div
+        className="footer_row"
+      >
+        <div
+          className="footer_content"
+        >
+          <div
+            className="footer_title"
+          >
+            Name Company
+          </div>
+          <div
+            className="footer_description"
+          >
+            ICO Drops is an independent ICO (Token Sale) database and is not affiliated with any ICO project or company. Our Interest Level does not constitute financial or investment advice.
+          </div>
+          <div
+            className="footer_copyright"
+          >
+            © 2021 ICO Drops.
+          </div>
+        </div>
+        <div
+          className="footer_columnInfo"
+        >
+          <a
+            href="#"
+          >
+            Active ICO
+          </a>
+          <a
+            href="#"
+          >
+            Upcoming ICO
+          </a>
+          <a
+            href="#"
+          >
+            Ended ICO
+          </a>
+          <a
+            href="#"
+          >
+            Bounty List
+          </a>
+          <a
+            href="#"
+          >
+            SandBox 
+          </a>
+        </div>
+        <div
+          className="footer_companyInfo"
+        >
+          <a
+            href="#"
+          >
+            Dropstab
+          </a>
+          <a
+            href="#"
+          >
+            Dropsearn
+          </a>
+          <a
+            href="#"
+          >
+            Portfolio
+          </a>
+          <a
+            href="#"
+          >
+            Ico calendar
+          </a>
+        </div>
+        <div
+          className="footer_mediaLink"
+        >
+          <a
+            href="#"
+          >
+            Email
+          </a>
+          <a
+            href="#"
+          >
+            Twitter
+          </a>
+          <a
+            href="#"
+          >
+            Telegram
+          </a>
+          <a
+            href="#"
+          >
+            Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import Register from '../components/Register/index';
+import { RootState } from '../store';
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: RootState) => ({
   register: store.register,
 });
 

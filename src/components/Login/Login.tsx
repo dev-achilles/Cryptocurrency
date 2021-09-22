@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 import { UserActionCreator } from '../../actions/User/index';
 import CSS from 'csstype';
 
-import { LoginDataType } from '../../types/LoginTypes';
+import { LoginDataType, Props } from '../../types/LoginTypes';
 
 import s from './Login.module.scss';
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login: React.FC = (props: any) => {
+const Login: React.FC<Props> = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const [data, setData] = useState<LoginDataType>({

@@ -9,7 +9,7 @@ import HomeContainer from './containers/HomeContainer';
 import TokenInfoContainer from './containers/TokenInfoContainer';
 import RegisterContainer from './containers/RegisterContainer';
 
-const App = () => (
+const App: React.FC = () => (
   <div className="wrapper">
     <Router>
       <Switch>

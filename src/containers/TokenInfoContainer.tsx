@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import TokenInfo from '../components/TokenInfo/index';
+import { RootState } from '../store';
 
-const mapStateToProps = (store: any) => ({
+const mapStateToProps = (store: RootState) => ({
   tokenInfo: store.home.tokenInfo,
 });
 

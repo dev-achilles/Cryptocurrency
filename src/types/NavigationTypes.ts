@@ -1,7 +1,7 @@
-import { AppDispatch } from '../store';
+import { Dispatch } from 'redux';
 
 export type Props = {
-  dispatch: AppDispatch;
+  dispatch: Dispatch<any>;
   user: {
     error: boolean;
     isLoggedIn: boolean;

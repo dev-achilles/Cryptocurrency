@@ -1,6 +1,6 @@
 export interface HomeState {
-  homeData: Array<any>;
-  tokenInfo: Object;
+  homeData: CryptocurrenciesType[];
+  tokenInfo: CryptocurrenciesType | null;
 }
 
 export enum HomeEnum {
@@ -14,12 +14,12 @@ export enum InfoEnum {
 
 export interface getHomeDataAction {
   type: HomeEnum.GET_HOME_DATA;
-  payload: Array<any>;
+  payload: CryptocurrenciesType[];
 }
 
 export interface setHomeDataAction {
   type: HomeEnum.SET_HOME_DATA;
-  payload: Array<any>;
+  payload: CryptocurrenciesType[];
 }
 
 export interface getInfoDataAction {

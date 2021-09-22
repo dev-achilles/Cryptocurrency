@@ -14,6 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { TableActionCreator } from '../../actions/Table/index';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
 import { SortConfigType, CheckArray, DataTypes, CheckTypes } from '../../types/TableTypes';
+
 import notFoundIcon from '../../assets/images/favourite.svg';
 import s from './Table.module.scss';
 

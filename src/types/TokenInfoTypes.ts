@@ -1,4 +1,4 @@
-import { AppDispatch } from '../store';
+import { Dispatch } from 'redux';
 
 export type CryptocurrenciesType = {
   name: string;
@@ -25,7 +25,7 @@ export type CryptocurrenciesType = {
 };
 
 export type Props = {
-  dispatch: AppDispatch;
+  dispatch: Dispatch<any>;
   tokenInfo: CryptocurrenciesType;
 };
 

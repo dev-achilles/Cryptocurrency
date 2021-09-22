@@ -19,6 +19,7 @@ import Avatar from '@material-ui/core/Avatar';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
 import { UserActionCreator } from '../../actions/User/index';
+import { Props } from '../../types/NavigationTypes';
 
 import logo from '../../assets/images/logo.png';
 import s from './Navigation.module.scss';
@@ -48,7 +49,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Navigation: React.FC = (props: any) => {
+const Navigation: React.FC<Props> = (props) => {
   const classes = useStyles();
   const location = useLocation();
   const [open, setOpen] = useState<boolean>(false);

@@ -1,4 +1,4 @@
-import { AppDispatch } from '../store';
+import { Dispatch } from 'react';
 
 export type DialogTypes = {
   open: boolean;
@@ -55,7 +55,7 @@ export type DialogValuesType = {
 };
 
 export type Props = {
-  dispatch: AppDispatch;
+  dispatch: Dispatch<any>;
   homeData: CryptocurrenciesType[];
   user: {
     error: boolean;

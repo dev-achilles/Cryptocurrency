@@ -1,3 +1,4 @@
+import { Dispatch } from 'redux';
 import axios from 'axios';
 import {
   RegisterEnum,
@@ -7,14 +8,13 @@ import {
   registerSetError,
   successRegister,
 } from './types';
-import { AppDispatch } from './../../store';
 
 export const RegisterActionCreator = {
   registerUser: (res: Request): registerUserAction => ({
     type: RegisterEnum.REGISTER_USER,
     payload: res.message,
   }),
-  setRegisterUser: (user: User) => async (dispatch: AppDispatch) => {
+  setRegisterUser: (user: User) => async (dispatch: Dispatch<any>) => {
     try {
       const responce = await axios.post('http://hofenterprise.com/users/register/app', user);
       dispatch(RegisterActionCreator.registerUser(responce.data));

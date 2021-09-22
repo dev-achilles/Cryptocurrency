@@ -1,20 +1,26 @@
 import * as Moment from 'moment';
 import { extendMoment } from 'moment-range';
-import { HomeState, HomeAction, HomeEnum, InfoEnum } from '../actions/Home/types';
+import {
+  HomeState,
+  HomeAction,
+  HomeEnum,
+  InfoEnum,
+  CryptocurrenciesType,
+} from '../actions/Home/types';
 import { start, end } from '../constants';
 
 const moment = extendMoment(Moment);
 
 const initialState: HomeState = {
   homeData: [],
-  tokenInfo: {},
+  tokenInfo: null,
 };
 
 const homeReducer = (state = initialState, action: HomeAction) => {
   switch (action.type) {
     case HomeEnum.GET_HOME_DATA: {
       const items = [...action.payload];
-      const newItems: Array<any> = [];
+      const newItems: CryptocurrenciesType[] = [];
       items.forEach((item) => newItems.push(setCategoryColumn(start, end, item)));
 
       return {
@@ -24,7 +30,7 @@ const homeReducer = (state = initialState, action: HomeAction) => {
     }
     case HomeEnum.SET_HOME_DATA: {
       const items = [...action.payload];
-      const newItems: Array<any> = [];
+      const newItems: CryptocurrenciesType[] = [];
       items.forEach((item) => newItems.push(setCategoryColumn(start, end, item)));
 
       return {
@@ -34,7 +40,7 @@ const homeReducer = (state = initialState, action: HomeAction) => {
     }
     case InfoEnum.GET_INFO_DATA: {
       const { info, data } = action.payload;
-      const item = data.find((item: any) => item.name === info);
+      const item = data.find((item: CryptocurrenciesType) => item.name === info);
 
       return {
         ...state,
@@ -46,12 +52,12 @@ const homeReducer = (state = initialState, action: HomeAction) => {
   }
 };
 
-const setCategoryColumn = (start: any, end: any, Data: any) => {
+const setCategoryColumn = (start: string, end: string, Data: CryptocurrenciesType) => {
   const current = Data.date;
   const nowDate = moment(new Date());
   const result = moment(current).isBetween(start, end, 'minutes');
 
-  let dataObj = Data;
+  const dataObj = Data;
 
   if (result) {
     dataObj.column = 'Active';
