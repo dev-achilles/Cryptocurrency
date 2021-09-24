@@ -19,7 +19,7 @@
   "rules": {
     "react/prop-types": "off",
     "no-debugger": "off",
-    "ts": "never",
-    "tsx": "never"
+    "ts": "off",
+    "tsx": "off"
   }
 }
