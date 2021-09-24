@@ -2,14 +2,15 @@
   margin-left: 25px !important;
   color: white;
   text-decoration: none;
+  border-bottom: 2px transparent solid;
+  transition: 0.2s;
 }
 
 @mixin activeLinks() {
   margin-left: 25px !important;
   color: white;
-  font-size: 26px;
+  border-bottom: 2px white solid;
   text-decoration: none;
-  transition: 0.2s;
 }
 
 .wrapper {
@@ -24,26 +25,21 @@
   }
 }
 
-.home_link {
-  @include links();
+.home_link:hover,
+.table_link:hover,
+.favourite_link:hover {
+  border-bottom-color: white;
+  transition: 0.2s;
 }
 
-.active_home_link {
-  @include activeLinks();
-}
-
-.active_table_link {
-  @include activeLinks();
-}
-
+.active_home_link,
+.active_table_link,
 .active_favourite_link {
   @include activeLinks();
 }
 
-.table_link {
-  @include links();
-}
-
+.home_link,
+.table_link,
 .favourite_link {
   @include links();
 }
