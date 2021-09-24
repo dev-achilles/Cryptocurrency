@@ -1,5 +1,3 @@
-import { Data } from '../../types/MetricsTypes';
-
 export interface TableState {
   tableData: Array<any>;
   metricsData: Array<any>;
