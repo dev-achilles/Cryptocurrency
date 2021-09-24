@@ -4,18 +4,19 @@ import {
   setHomeDataAction,
   InfoEnum,
   getInfoDataAction,
+  CryptocurrenciesType,
 } from './types';
 
 export const HomeActionCreator = {
-  getHomeData: (data: Array<any>): getHomeDataAction => ({
+  getHomeData: (data: CryptocurrenciesType[]): getHomeDataAction => ({
     type: HomeEnum.GET_HOME_DATA,
     payload: data,
   }),
-  setHomeData: (data: Array<any>): setHomeDataAction => ({
+  setHomeData: (data: CryptocurrenciesType[]): setHomeDataAction => ({
     type: HomeEnum.SET_HOME_DATA,
     payload: data,
   }),
-  getInfoData: (info: string, data: Array<any>): getInfoDataAction => ({
+  getInfoData: (info: string, data: CryptocurrenciesType[]): getInfoDataAction => ({
     type: InfoEnum.GET_INFO_DATA,
     payload: { info, data },
   }),

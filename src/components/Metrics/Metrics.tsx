@@ -6,15 +6,21 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import { TableActionCreator } from '../../actions/Table/index';
 import { StyledTableCell, StyledTableRow, useStyles } from '../../assets/MaterialStyles';
+
+import CSS from 'csstype';
 import s from './Metrics.module.scss';
 
-const Metrics = (props) => {
+const Metrics: React.FC = (props: any) => {
   const classes = useStyles();
-  const { slug } = useParams();
+  const { slug } = useParams<any>();
 
   useEffect(() => {
     props.dispatch(TableActionCreator.getMetricsData(slug));
   }, []);
+
+  const StyleTable: CSS.Properties = {
+    fontSize: '20 px',
+  };
 
   return (
     <div className={s.wrapper}>
@@ -40,7 +46,7 @@ const Metrics = (props) => {
                     <StyledTableCell align="center">{props.metricsData.symbol}</StyledTableCell>
                   </StyledTableRow>
                   <StyledTableRow>
-                    <StyledTableCell styles="font-size: 20px" align="center">
+                    <StyledTableCell style={StyleTable} align="center">
                       Supply liquid
                     </StyledTableCell>
                     <StyledTableCell align="center">

@@ -19,6 +19,7 @@ import Avatar from '@material-ui/core/Avatar';
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { makeStyles } from '@material-ui/core/styles';
 import { UserActionCreator } from '../../actions/User/index';
+import { Props } from '../../types/NavigationTypes';
 
 import logo from '../../assets/images/logo.png';
 import s from './Navigation.module.scss';
@@ -48,28 +49,28 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Navigation = (props) => {
+const Navigation: React.FC<Props> = (props) => {
   const classes = useStyles();
   const location = useLocation();
-  const [open, setOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState();
+  const [open, setOpen] = useState<boolean>(false);
+  const [activeLink, setActiveLink] = useState<string | undefined>();
 
   useEffect(() => {
     props.dispatch(UserActionCreator.getUser());
   }, []);
 
   useEffect(() => {
+    if (props.user.token) {
+      props.dispatch(UserActionCreator.getUserData(props.user.token));
+    }
+  }, [props.user.token]);
+
+  useEffect(() => {
     setActiveLink(location.pathname);
   }, [location]);
 
   const logoutHandle = () => {
-    const userData = {
-      name: null,
-      isLoggedIn: false,
-      role: null,
-      error: false,
-    };
-    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('token', '');
     props.dispatch(UserActionCreator.logoutUser());
   };
 
@@ -141,7 +142,9 @@ const Navigation = (props) => {
                       <ListItem button key="Avatar">
                         <ListItemIcon>
                           <Avatar style={{ backgroundColor: '#3f51b5' }}>
-                            {props.user.name.substr(0, 1).toUpperCase()}
+                            {props.user.name !== null
+                              ? props.user.name.substr(0, 1).toUpperCase()
+                              : ''}
                           </Avatar>
                         </ListItemIcon>
                         <ListItemText primary={props.user.name} />

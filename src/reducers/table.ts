@@ -1,6 +1,6 @@
 import { TableState, TableAction, TableEnum } from '../actions/Table/types';
 
-const initialState : TableState = {
+const initialState: TableState = {
   tableData: [],
   metricsData: [],
 };
@@ -8,13 +8,12 @@ const initialState : TableState = {
 const tableReducer = (state = initialState, action: TableAction) => {
   switch (action.type) {
     case TableEnum.GET_TABLE_DATA: {
-
       const storedData = localStorage.getItem('favourites');
 
       if (typeof storedData === 'string') {
         const favourites = JSON.parse(storedData);
-        const filteredData = action.payload.map((item : any) => {
-          const foundCrypto = favourites.find((favourite : any) => favourite.id === item.id);
+        const filteredData = action.payload.map((item: any) => {
+          const foundCrypto = favourites.find((favourite: any) => favourite.id === item.id);
 
           return {
             ...item,

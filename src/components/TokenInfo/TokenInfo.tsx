@@ -8,6 +8,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import Footer from '../Footer/index';
+import { Props, ParamTypes } from '../../types/TokenInfoTypes';
 import db from '../../db';
 
 import s from './TokenInfo.module.scss';
@@ -22,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TokenInfo = (props) => {
+const TokenInfo: React.FC<Props> = (props) => {
   const classes = useStyles();
-  const { info } = useParams();
+  const { info } = useParams<ParamTypes>();
   const { tokenInfo } = props;
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState<boolean>(true);
 
   useEffect(() => {
     props.dispatch(HomeActionCreator.getInfoData(info, db.cryptocurrency));
@@ -102,7 +103,7 @@ const TokenInfo = (props) => {
                   <div>Links:</div>
                 </div>
                 <div className={s.links}>
-                  {tokenInfo.links.map((item, index) => (
+                  {tokenInfo.links.map((item: any, index: number) => (
                     <a href={item.link} key={index}>
                       {item.name}
                     </a>

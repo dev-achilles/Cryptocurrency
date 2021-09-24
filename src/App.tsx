@@ -7,8 +7,9 @@ import LoginContainer from './containers/LoginContainer';
 import NavigationContainer from './containers/NavigationContainer';
 import HomeContainer from './containers/HomeContainer';
 import TokenInfoContainer from './containers/TokenInfoContainer';
+import RegisterContainer from './containers/RegisterContainer';
 
-const App = () => (
+const App: React.FC = () => (
   <div className="wrapper">
     <Router>
       <Switch>
@@ -18,7 +19,7 @@ const App = () => (
         </Route>
         <Route path="/table">
           <NavigationContainer />
-          <TableContainer />
+          <TableContainer favourite={false} />
         </Route>
         <Route path="/favourite">
           <NavigationContainer />
@@ -27,6 +28,10 @@ const App = () => (
         <Route path="/login">
           <NavigationContainer />
           <LoginContainer />
+        </Route>
+        <Route path="/register">
+          <NavigationContainer />
+          <RegisterContainer />
         </Route>
         <Route path="/metrics/:slug">
           <NavigationContainer />

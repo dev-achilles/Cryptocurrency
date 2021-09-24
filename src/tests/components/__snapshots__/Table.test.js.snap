@@ -1,0 +1,1140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="title"
+  >
+    Cryptocurrency
+  </div>
+  <div
+    className="container"
+  >
+    <div
+      className="MuiTableContainer-root makeStyles-container-2"
+    >
+      <div
+        className="filter_wrapper"
+      >
+        <button
+          aria-controls="customized-menu"
+          aria-haspopup="true"
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Open Filter
+          </span>
+        </button>
+      </div>
+      <table
+        aria-label="customized table"
+        className="MuiTable-root makeStyles-table-1"
+        role={null}
+      >
+        <thead
+          className="MuiTableHead-root"
+          role={null}
+        >
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3 MuiTableRow-head"
+            role={null}
+          >
+            <th
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head WithStyles(ForwardRef(TableCell))-head-4 MuiTableCell-alignCenter"
+              onClick={[Function]}
+              scope="col"
+            >
+              <div
+                className="table_cell"
+              >
+                ID
+              </div>
+            </th>
+            <th
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head WithStyles(ForwardRef(TableCell))-head-4 MuiTableCell-alignCenter"
+              onClick={[Function]}
+              scope="col"
+            >
+              <div
+                className="table_cell"
+              >
+                Slug
+              </div>
+            </th>
+            <th
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head WithStyles(ForwardRef(TableCell))-head-4 MuiTableCell-alignCenter"
+              onClick={[Function]}
+              scope="col"
+            >
+              <div
+                className="table_cell"
+              >
+                Symbol
+              </div>
+            </th>
+            <th
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-head WithStyles(ForwardRef(TableCell))-head-4 MuiTableCell-alignCenter"
+              onClick={[Function]}
+              scope="col"
+            >
+              <div
+                className="table_cell"
+              >
+                Price (USD)
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          className="MuiTableBody-root"
+          role={null}
+        >
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="bitcoin"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="1e31218a-e44e-4285-820c-8282ee222035"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"1e31218a-e44e-4285-820c-8282ee222035\\",\\"slug\\":\\"bitcoin\\",\\"symbol\\":\\"BTC\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":43354.54224946089}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  1e31218a-e44e-4285-820c-8282ee222035
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              bitcoin
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              BTC
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              43354.54224946089
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="ethereum"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="21c795f5-1bfd-40c3-858e-e9d7e820c6d0"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"21c795f5-1bfd-40c3-858e-e9d7e820c6d0\\",\\"slug\\":\\"ethereum\\",\\"symbol\\":\\"ETH\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":2930.652297970865}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  21c795f5-1bfd-40c3-858e-e9d7e820c6d0
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              ethereum
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              ETH
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              2930.652297970865
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="tether"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="51f8ea5e-f426-4f40-939a-db7e05495374"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"51f8ea5e-f426-4f40-939a-db7e05495374\\",\\"slug\\":\\"tether\\",\\"symbol\\":\\"USDT\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":1.0016784294347305}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  51f8ea5e-f426-4f40-939a-db7e05495374
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              tether
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              USDT
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              1.0016784294347305
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="cardano"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="362f0140-ecdd-4205-b8a0-36f0fd5d8167"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"362f0140-ecdd-4205-b8a0-36f0fd5d8167\\",\\"slug\\":\\"cardano\\",\\"symbol\\":\\"ADA\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":2.2184335876840486}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  362f0140-ecdd-4205-b8a0-36f0fd5d8167
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              cardano
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              ADA
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              2.2184335876840486
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="binance-coin"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="7dc551ba-cfed-4437-a027-386044415e3e"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"7dc551ba-cfed-4437-a027-386044415e3e\\",\\"slug\\":\\"binance-coin\\",\\"symbol\\":\\"BNB\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":357.8631966538079}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  7dc551ba-cfed-4437-a027-386044415e3e
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              binance-coin
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              BNB
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              357.8631966538079
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="solana"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="b3d5d66c-26a2-404c-9325-91dc714a722b"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"b3d5d66c-26a2-404c-9325-91dc714a722b\\",\\"slug\\":\\"solana\\",\\"symbol\\":\\"SOL\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":138.07502912670094}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  b3d5d66c-26a2-404c-9325-91dc714a722b
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              solana
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              SOL
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              138.07502912670094
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="xrp"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="97775be0-2608-4720-b7af-f85b24c7eb2d"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"97775be0-2608-4720-b7af-f85b24c7eb2d\\",\\"slug\\":\\"xrp\\",\\"symbol\\":\\"XRP\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":0.9418280571223451}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  97775be0-2608-4720-b7af-f85b24c7eb2d
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              xrp
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              XRP
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              0.9418280571223451
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="polkadot"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="da6a0575-ec95-4c47-855d-5fc6a3e22ada"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"da6a0575-ec95-4c47-855d-5fc6a3e22ada\\",\\"slug\\":\\"polkadot\\",\\"symbol\\":\\"DOT\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":30.632457806550597}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  da6a0575-ec95-4c47-855d-5fc6a3e22ada
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              polkadot
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              DOT
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              30.632457806550597
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="usd-coin"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="4515ba15-2719-4183-b0ca-b9255d55b67e"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"4515ba15-2719-4183-b0ca-b9255d55b67e\\",\\"slug\\":\\"usd-coin\\",\\"symbol\\":\\"USDC\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":0.9991712515245118}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  4515ba15-2719-4183-b0ca-b9255d55b67e
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              usd-coin
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              USDC
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              0.9991712515245118
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="dogecoin"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="7d793fa7-5fc6-432a-b26b-d1b10769d42e"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"7d793fa7-5fc6-432a-b26b-d1b10769d42e\\",\\"slug\\":\\"dogecoin\\",\\"symbol\\":\\"DOGE\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":0.21037053247838558}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  7d793fa7-5fc6-432a-b26b-d1b10769d42e
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              dogecoin
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              DOGE
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              0.21037053247838558
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="avalanche"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="2db6b38a-681a-4514-9d67-691e319597ee"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"2db6b38a-681a-4514-9d67-691e319597ee\\",\\"slug\\":\\"avalanche\\",\\"symbol\\":\\"AVAX\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":70.32856731266206}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  2db6b38a-681a-4514-9d67-691e319597ee
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              avalanche
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              AVAX
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              70.32856731266206
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="terra"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="86da9b7d-922b-4abb-8599-e75c6fa5a138"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"86da9b7d-922b-4abb-8599-e75c6fa5a138\\",\\"slug\\":\\"terra\\",\\"symbol\\":\\"LUNA\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":35.3226851318969}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  86da9b7d-922b-4abb-8599-e75c6fa5a138
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              terra
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              LUNA
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              35.3226851318969
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="binance-usd"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="5da7bde4-61e9-4a6f-9fc3-7ed66effb198"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"5da7bde4-61e9-4a6f-9fc3-7ed66effb198\\",\\"slug\\":\\"binance-usd\\",\\"symbol\\":\\"BUSD\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":1.0006889034659927}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  5da7bde4-61e9-4a6f-9fc3-7ed66effb198
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              binance-usd
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              BUSD
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              1.0006889034659927
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="uniswap"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="1d51479d-68f6-4886-8644-2a55ea9007bf"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"1d51479d-68f6-4886-8644-2a55ea9007bf\\",\\"slug\\":\\"uniswap\\",\\"symbol\\":\\"UNI\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":19.853894471369426}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  1d51479d-68f6-4886-8644-2a55ea9007bf
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              uniswap
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              UNI
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              19.853894471369426
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="chainlink"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="a9c04b71-33e4-4fed-8126-cf1612c7e198"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"a9c04b71-33e4-4fed-8126-cf1612c7e198\\",\\"slug\\":\\"chainlink\\",\\"symbol\\":\\"LINK\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":23.21232844003105}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  a9c04b71-33e4-4fed-8126-cf1612c7e198
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              chainlink
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              LINK
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              23.21232844003105
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="litecoin"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="c7c3697d-1b9c-42bf-9664-a366634ce2b3"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"c7c3697d-1b9c-42bf-9664-a366634ce2b3\\",\\"slug\\":\\"litecoin\\",\\"symbol\\":\\"LTC\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":153.32574160978905}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  c7c3697d-1b9c-42bf-9664-a366634ce2b3
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              litecoin
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              LTC
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              153.32574160978905
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="algorand"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="4fb0d41e-df35-4808-8222-b8077835c976"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"4fb0d41e-df35-4808-8222-b8077835c976\\",\\"slug\\":\\"algorand\\",\\"symbol\\":\\"ALGO\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":1.8027718115289288}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  4fb0d41e-df35-4808-8222-b8077835c976
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              algorand
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              ALGO
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              1.8027718115289288
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="bitcoin-cash"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="c8c7e9a1-844d-4cfd-9dbc-ce85a8a9613f"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"c8c7e9a1-844d-4cfd-9dbc-ce85a8a9613f\\",\\"slug\\":\\"bitcoin-cash\\",\\"symbol\\":\\"BCH\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":517.6805370229556}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  c8c7e9a1-844d-4cfd-9dbc-ce85a8a9613f
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              bitcoin-cash
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              BCH
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              517.6805370229556
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="wrapped-bitcoin"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="81bbf507-29d5-4458-8d42-b81d7c197996"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"81bbf507-29d5-4458-8d42-b81d7c197996\\",\\"slug\\":\\"wrapped-bitcoin\\",\\"symbol\\":\\"WBTC\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":43201.495074179125}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  81bbf507-29d5-4458-8d42-b81d7c197996
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              wrapped-bitcoin
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              WBTC
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              43201.495074179125
+            </td>
+          </tr>
+          <tr
+            className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-3"
+            id="cosmos"
+            onClick={[Function]}
+            role={null}
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              <div
+                className="table_cell"
+              >
+                <div
+                  className="star_checkbox"
+                >
+                  <label>
+                    <input
+                      name="3385649f-7e22-4260-9995-309f05650e47"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value="{\\"id\\":\\"3385649f-7e22-4260-9995-309f05650e47\\",\\"slug\\":\\"cosmos\\",\\"symbol\\":\\"ATOM\\",\\"metrics\\":{\\"market_data\\":{\\"price_usd\\":38.70624820726479}}}"
+                    />
+                  </label>
+                </div>
+                <div
+                  className="table_id"
+                >
+                  3385649f-7e22-4260-9995-309f05650e47
+                </div>
+              </div>
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              cosmos
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              ATOM
+            </td>
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root MuiTableCell-body WithStyles(ForwardRef(TableCell))-body-5 MuiTableCell-alignCenter"
+            >
+              38.70624820726479
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;
