@@ -20,7 +20,7 @@ export const UserActionCreator = {
   loginUser: (email: string, password: string) => async (dispatch: Dispatch<any>) => {
     try {
       const responce = await axios.post(
-        `http://hofenterprise.com/users/login/app?email=${email}&password=${password}`,
+        `http://localhost/users/login/app?email=${email}&password=${password}`,
       );
       dispatch(UserActionCreator.setUserToken(responce));
       dispatch(UserActionCreator.setError(false));
