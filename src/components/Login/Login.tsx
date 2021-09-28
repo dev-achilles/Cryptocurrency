@@ -78,7 +78,7 @@ const Login: React.FC<Props> = (props) => {
           <form className={classes.root} noValidate>
             <div className={s.email}>
               <TextField
-                id="standard-password-input"
+                id="standard-email-input"
                 label="Email"
                 name="email"
                 type="email"
@@ -87,6 +87,7 @@ const Login: React.FC<Props> = (props) => {
                 onChange={handleInputChange}
                 error={props.user.error}
                 helperText={props.user.error ? 'Incorrect login' : null}
+                inputProps={{ 'data-testid': 'login-email' }}
               />
             </div>
             <div className={s.password}>
@@ -100,6 +101,7 @@ const Login: React.FC<Props> = (props) => {
                 onChange={handleInputChange}
                 error={props.user.error}
                 helperText={props.user.error ? 'Incorrect password' : null}
+                inputProps={{ 'data-testid': 'login-password' }}
               />
             </div>
           </form>
@@ -119,7 +121,8 @@ const Login: React.FC<Props> = (props) => {
               variant="contained"
               color="primary"
               className={s.button_login}
-              onClick={() => loginHandle(data.email, data.password)}>
+              onClick={() => loginHandle(data.email, data.password)}
+              data-testid="login-submit">
               Sign In
             </Button>
           </div>

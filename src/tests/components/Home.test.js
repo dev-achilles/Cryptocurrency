@@ -7,9 +7,9 @@ it('renders correctly', () => {
   const props = {
     user: {
       token: null,
-      name: 'Yevhenii',
+      name: null,
       isLoggedIn: true,
-      role: 'admin',
+      role: null,
       error: false,
     },
     homeData: db.cryptocurrency,
